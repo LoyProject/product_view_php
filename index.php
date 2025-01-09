@@ -71,7 +71,7 @@
             </li>
         </ul>
 
-        <script src="../js/script.js"></script>
+        <script src="js/script.js"></script>
 
         <footer class="bg-black text-white py-6">
             <div class="w-[92%] mx-auto text-center">
