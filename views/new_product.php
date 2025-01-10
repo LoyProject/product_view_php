@@ -19,7 +19,78 @@
 
         <div class="flex-1 p-6">
             <div id="product" class="bg-white p-4 rounded shadow-md">
-                <h1 class="text-2xl font-bold mb-4">Product List</h1>
+                <div class="flex justify-between items-center mb-4">
+                    <h1 class="text-2xl font-bold">Product List</h1>
+                    <button onclick="openForm()" class="flex items-center bg-blue-500 text-white px-4 py-2 rounded shadow hover:bg-blue-600">
+                        <svg class="w-5 h-5 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                        </svg>
+                        New
+                    </button>
+
+                    <div id="popupForm" class="hidden fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center z-50">
+                        <div class="bg-white p-6 rounded shadow-lg w-96">
+                            <h2 class="text-xl font-bold mb-4">Create New Product</h2>
+                            <form id="productForm" onsubmit="submitForm(event)">
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium mb-1">Name</label>
+                                    <input type="text" id="name" name="name" required 
+                                        class="w-full border border-gray-300 rounded px-3 py-2">
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium mb-1">Description</label>
+                                    <textarea id="description" name="description" required 
+                                            class="w-full border border-gray-300 rounded px-3 py-2"></textarea>
+                                </div>
+                                <div class="mb-4">
+                                    <label class="block text-sm font-medium mb-1">Image</label>
+                                    <input type="file" id="image" name="image" accept="image/*" class="w-full border border-gray-300 rounded px-3 py-2">
+                                </div>
+                                <div class="flex justify-end">
+                                    <button type="button" onclick="closeForm()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded mr-2 hover:bg-gray-400">Cancel</button>
+                                    <div class="ml-5"></div>
+                                    <button type="submit" onclick="saveData()" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <script>
+                            function saveData() {
+                                const formData = new FormData(document.getElementById('productForm'));
+                                fetch('../database/insert_product.php', {
+                                    method: 'POST',
+                                    body: formData,
+                                })
+                                .then(response => response.json())
+                                .then(data => {
+                                    document.getElementById('productForm').reset();
+                                })
+                                .catch(error => console.error('Error:', error));
+                            }
+                        </script>
+                    </div>
+
+                    <script>
+                        function openForm() {
+                            document.getElementById('popupForm').classList.remove('hidden');
+                        }
+
+                        function closeForm() {
+                            document.getElementById('popupForm').classList.add('hidden');
+                        }
+
+                        function submitForm(event) {
+                            event.preventDefault();
+                            const name = document.getElementById('name').value;
+                            const description = document.getElementById('description').value;
+                            const image = document.getElementById('image').files[0];
+                            
+                            alert("New product inserted successfully!");
+                            closeForm();
+                        }
+                    </script>
+                </div>
+
                 <?php
                     $conn = new mysqli("220.158.232.172", "product_mh01", "cL6sC3iRnWc3APyK", "product_mh01");
                     if ($conn->connect_error) {
@@ -60,52 +131,29 @@
                                     <td class="py-2 px-4 border-b"><img src="../images/<?= $row["image"] ?>" alt="Product Image" class="w-16 h-16"></td>
                                     <td class="py-2 px-4 border-b">
                                         <button class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
-                                        <button class="bg-red-500 text-white px-4 py-2 rounded" onclick="confirmDelete(<?= $row['id'] ?>)">Delete</button>
+                                        <button onclick= 'deleteProduct(<?= $row["id"] ?>)' type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
 
                                         <script>
-                                            function confirmDelete(id) {
-                                                if (confirm('Are you sure you want to delete this product?')) {
-                                                    window.location.href = '../database/delete_product.php?id=' + id;
-                                                    <?php
-                                                        $servername = "220.158.232.172";
-                                                        $username = "product_mh01";
-                                                        $password = "cL6sC3iRnWc3APyK";
-                                                        $dbname = "product_mh01";
-
-                                                        $conn = new mysqli($servername, $username, $password, $dbname);
-
-                                                        if ($conn->connect_error) {
-                                                            die("Connection failed: " . $conn->connect_error);
-                                                        }
-
-                                                        if (isset($_GET['id'])) {
-                                                            $product_id = $_GET['id'];
-
-                                                            $sql = "DELETE FROM products WHERE id = ?";
-
-                                                            if ($stmt = $conn->prepare($sql)) {
-                                                                $stmt->bind_param("i", $product_id);
-
-                                                                if ($stmt->execute()) {
-                                                                    echo "Product deleted successfully.";
-                                                                } else {
-                                                                    echo "Error deleting product: " . $stmt->error;
-                                                                }
-
-                                                                $stmt->close();
-                                                            } else {
-                                                                echo "Error preparing statement: " . $conn->error;
-                                                            }
-
-                                                            $conn->close();
+                                            function deleteProduct(id) {
+                                                if (confirm("Are you sure you want to delete this product?")) {
+                                                    fetch('../database/delete_product.php', {
+                                                        method: 'POST',
+                                                        headers: { 'Content-Type': 'application/json' },
+                                                        body: JSON.stringify({ id: id }),
+                                                    })
+                                                    .then(response => response.json())
+                                                    .then(data => {
+                                                        if (data.success) {
+                                                            alert("Product deleted successfully!");
                                                         } else {
-                                                            echo "No product ID provided.";
-                                                            $conn->close();
+                                                            alert("Error deleting data: " + data.error);
                                                         }
-                                                    ?>
+                                                    })
+                                                    .catch(error => console.error("Error:", error));
                                                 }
                                             }
                                         </script>
+                                        
                                     </td>
                                 </tr>
                             <?php endwhile; ?>

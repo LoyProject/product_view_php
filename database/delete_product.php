@@ -1,4 +1,6 @@
 <?php
+    header('Content-Type: application/json');
+
     $servername = "220.158.232.172";
     $username = "product_mh01";
     $password = "cL6sC3iRnWc3APyK";
@@ -7,31 +9,27 @@
     $conn = new mysqli($servername, $username, $password, $dbname);
 
     if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
+        echo json_encode(['success' => false, 'error' => 'Database connection failed']);
+        exit();
     }
 
-    if (isset($_GET['id'])) {
-        $product_id = $_GET['id'];
+    $data = json_decode(file_get_contents('php://input'), true);
+    $id = $data['id'] ?? null;
 
-        $sql = "DELETE FROM products WHERE id = ?";
-
-        if ($stmt = $conn->prepare($sql)) {
-            $stmt->bind_param("i", $product_id);
-
-            if ($stmt->execute()) {
-                echo "Product deleted successfully.";
-            } else {
-                echo "Error deleting product: " . $stmt->error;
-            }
-
-            $stmt->close();
+    if ($id) {
+        $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
+        $stmt->bind_param("i", $id);
+        
+        if ($stmt->execute()) {
+            echo json_encode(['success' => true]);
         } else {
-            echo "Error preparing statement: " . $conn->error;
+            echo json_encode(['success' => false, 'error' => 'Failed to delete record']);
         }
 
-        $conn->close();
+        $stmt->close();
     } else {
-        echo "No product ID provided.";
-        $conn->close();
+        echo json_encode(['success' => false, 'error' => 'Invalid ID']);
     }
+
+    $conn->close();
 ?>

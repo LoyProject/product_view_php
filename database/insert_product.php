@@ -14,7 +14,7 @@
         $name = $_POST['name'];
         $description = $_POST['description'];
         $image = time() . '-' .$_FILES['image']['name'];
-        $target_dir = "../../public/images/";
+        $target_dir = "../images/";
         $target_file = $target_dir . time() . '-' . basename($_FILES["image"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
 
