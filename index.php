@@ -73,6 +73,7 @@
         <div class="mt-20"></div>
 
         <div class="sm:px-10 lg:px-20 flex flex-col justify-start">
+            <div class="mt-5"></div>
             <h1 class="text-3xl font-bold text-black-900 dark:text-black">Our Products</h1>
             <div class="mt-5"></div>
             <hr class="border-black h-2 w-full">
