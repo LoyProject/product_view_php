@@ -7,7 +7,7 @@
     <title> Admin Dashboard </title>
 </head>
 <body>
-    <div class="flex h-screen bg-gray-200">
+     <div class="flex h-screen bg-gray-200">
         <div class="w-64 bg-white shadow-md">
             <div class="p-4 font-bold text-xl border-b">Menu</div>
             <ul class="mt-4">
