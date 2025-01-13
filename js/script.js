@@ -1,6 +1,6 @@
 
 // Reference to the Product Grid Container
-fetch('databassss/fetch_product.php')
+fetch('database/fetch_product.php')
     .then(response => response.json())
     .then(data => {
         const products = data;
@@ -29,7 +29,7 @@ fetch('databassss/fetch_product.php')
         function displayProducts(products) {
             const productHTML = products.map(product => `
                 <a href="client_site_views/product-detail.php?id=${product.id}" target="_blank" class="block max-w-sm bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105">
-                    <img class="w-full h-80 object-contain" src="../images/${product.image}" alt="${product.name}">
+                    <img class="w-full h-80 object-contain" src="images/${product.image}" alt="${product.name}">
                     <div class="p-5">
                         <h2 class="text-xl font-semibold text-gray-800">${product.name}</h2>
                         <p class="text-gray-600 mt-2">${product.description}</p>
