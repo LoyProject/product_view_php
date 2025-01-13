@@ -1,17 +1,6 @@
 <?php
-    header('Content-Type: application/json');
 
-    $servername = "220.158.232.172";
-    $username = "product_mh01";
-    $password = "cL6sC3iRnWc3APyK";
-    $dbname = "product_mh01";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    if ($conn->connect_error) {
-        echo json_encode(['success' => false, 'error' => 'Database connection failed']);
-        exit();
-    }
+    include 'db_connection.php';
 
     $data = json_decode(file_get_contents('php://input'), true);
     $id = $data['id'] ?? null;
