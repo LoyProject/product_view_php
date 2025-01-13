@@ -130,8 +130,80 @@
                                     <td class="py-2 px-4 border-b"><?= $row["description"] ?></td>
                                     <td class="py-2 px-4 border-b"><img src="../images/<?= $row["image"] ?>" alt="Product Image" class="w-16 h-16"></td>
                                     <td class="py-2 px-4 border-b">
-                                        <button class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
+                                        <button onclick= 'getProductById(<?= $row["id"] ?>)' class="bg-blue-500 text-white px-4 py-2 rounded">Edit</button>
                                         <button onclick= 'deleteProduct(<?= $row["id"] ?>)' type="submit" class="bg-red-500 text-white px-4 py-2 rounded">Delete</button>
+
+                                        <div id="editProductModal" class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+                                        <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
+                                            <h2 class="text-xl font-semibold mb-4">Update Product</h2>
+                                            <form id="updateForm" onsubmit="submitForm(event)">
+                                                <div class="mb-4">
+                                                    <label for="update-name" class="block text-sm font-medium">Name</label>
+                                                    <input type="text" id="update-name" name="update-name" class="w-full border rounded px-3 py-2" required />
+                                                </div>
+                                                <div class="mb-4">
+                                                    <label for="update-description" class="block text-sm font-medium">Description</label>
+                                                    <textarea id="update-description" name="update-description" class="w-full border rounded px-3 py-2" rows="4" required ></textarea>
+                                                </div>
+                                                    <div class="mb-4">
+                                                    <label for="update-image" class="block text-sm font-medium">Image</label>
+                                                    <input type="file" id="update-image" name="update-image" class="w-full border rounded px-3 py-2" accept="image/*" required />
+                                                </div>
+                                                <div class="flex justify-end space-x-2">
+                                                    <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded">Cancel</button>
+                                                    <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <script>
+                                            function getProductById(productId) {
+                                                fetch('../database/fetch_product_by_id.php', {
+                                                    method: 'POST',
+                                                    headers: { 'Content-Type': 'application/json' },
+                                                    body: JSON.stringify({ id: productId }),
+                                                })
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    if (data.error) {
+                                                        alert(data.error);
+                                                        return;
+                                                    }
+
+                                                    document.getElementById('update-name').value = data.name;
+                                                    document.getElementById('update-description').value = data.description;
+                                                    document.getElementById('update-image').filename = data.image;
+
+                                                    document.getElementById('editProductModal').classList.remove('hidden');
+                                                })
+                                                .catch(error => console.error('Error fetching product:', error));
+                                            }
+
+                                            function closeModal() {
+                                                document.getElementById('editProductModal').classList.add('hidden');
+                                            }
+
+                                            function submitForm(event) {
+                                                event.preventDefault();
+                                                
+                                                const formData = new FormData(document.getElementById('updateForm'));
+                                                
+                                                fetch('../database/update_product.php', {
+                                                    method: 'POST',
+                                                    body: formData,
+                                                })
+                                                .then(response => response.json())
+                                                .then(data => {
+                                                    if (data.success) {
+                                                        alert('Product updated successfully!');
+                                                        closeModal();
+                                                    } else {
+                                                        alert('Failed to update product.');
+                                                    }
+                                                })
+                                                .catch(error => console.error('Error:', error));
+                                            }
+                                        </script>
 
                                         <script>
                                             function deleteProduct(id) {
