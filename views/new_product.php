@@ -153,7 +153,6 @@
                                                 }
                                             }
                                         </script>
-                                        
                                     </td>
                                 </tr>
                             <?php endwhile; ?>
