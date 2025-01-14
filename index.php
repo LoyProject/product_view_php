@@ -16,9 +16,6 @@
                     <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
                 </a>
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-                    <!-- <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                        Get started
-                    </button> -->
                     <button
                             data-collapse-toggle="navbar-sticky"
                             type="button"
@@ -38,7 +35,7 @@
                             <a href="#" class="block py-2 px-3 text-red-500 rounded rounded hover:text-red-500 md:p-0 dark:text-white dark:hover:text-red-500" aria-current="page">Home</a>
                         </li>
                         <li>
-                            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:text-red-500 md:p-0 dark:text-white dark:hover:text-red-500">About</a>
+                            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:text-red-500 md:p-0 dark:text-white dark:hover:text-red-500">Dealer</a>
                         </li>
                         <li>
                             <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:text-red-500 md:p-0 dark:text-white dark:hover:text-red-500">Services</a>
@@ -168,22 +165,22 @@
                 </div>
             </div>
 
-        <hr class="mt-10 mb-6 border-gray-300" />
+            <hr class="mt-10 mb-6 border-gray-300" />
 
-        <div class="flex flex-wrap max-md:flex-col gap-4">
-            <ul class="md:flex md:space-x-6 max-md:space-y-2">
-            <li>
-                <a href='javascript:void(0)' class='hover:text-white text-sm'>Terms of Service</a>
-            </li>
-            <li>
-                <a href='javascript:void(0)' class='hover:text-white text-sm'>Privacy Policy</a>
-            </li>
-            <li>
-                <a href='javascript:void(0)' class='hover:text-white text-sm'>Security</a>
-            </li>
-            </ul>
-            <p class='text-sm md:ml-auto'>© 2025 Power by Loy Team. All rights reserved.</p>
-        </div>
+            <div class="flex flex-wrap max-md:flex-col gap-4">
+                <ul class="md:flex md:space-x-6 max-md:space-y-2">
+                <li>
+                    <a href='javascript:void(0)' class='hover:text-white text-sm'>Terms of Service</a>
+                </li>
+                <li>
+                    <a href='javascript:void(0)' class='hover:text-white text-sm'>Privacy Policy</a>
+                </li>
+                <li>
+                    <a href='javascript:void(0)' class='hover:text-white text-sm'>Security</a>
+                </li>
+                </ul>
+                <p class='text-sm md:ml-auto'>© 2025 Power by Loy Team. All rights reserved.</p>
+            </div>
         </footer>
 
     </body>
