@@ -4,7 +4,7 @@ fetch('database/fetch_product.php')
     .then(response => response.json())
     .then(data => {
         const products = data;
-        const productsPerPage = 10;
+        const productsPerPage = 5;
         let currentPage = 1;
 
         const productGrid = document.getElementById('productGrid');
@@ -83,6 +83,8 @@ fetch('database/fetch_product.php')
         function setupPagination() {
             const totalPages = Math.ceil(products.length / productsPerPage);
             let paginationHTML = '';
+
+            // Previous page button
             paginationHTML += `
                 <li class="page-np flex items-center justify-center shrink-0 border hover:bg-red-500 w-9 h-9 rounded-md"
                     onclick="prevPage();">
@@ -91,13 +93,47 @@ fetch('database/fetch_product.php')
                     </svg>
                 </li>`;
 
-            for (let i = 1; i <= totalPages; i++) {
+            if (totalPages <= 5) {
+                // Display all page numbers when totalPages <= 5
+                for (let i = 1; i <= totalPages; i++) {
+                    paginationHTML += `
+                        <li class="page-item flex items-center justify-center shrink-0 border hover:bg-red-500 hover:text-white cursor-pointer text-base font-bold px-[13px] h-9 rounded-md ${i === currentPage ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-800'}"
+                            onclick="goToPage(${i});">
+                            ${i}
+                        </li>`;
+                }
+            } else {
+                // Display limited page numbers with ellipses when totalPages > 5
                 paginationHTML += `
-                    <li class="page-item flex items-center justify-center shrink-0 border hover:bg-red-500 hover:text-white cursor-pointer text-base font-bold px-[13px] h-9 rounded-md ${i === currentPage ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-800'}"
-                        onclick="goToPage(${i});">
-                        ${i}
+                    <li class="page-item flex items-center justify-center shrink-0 border hover:bg-red-500 hover:text-white cursor-pointer text-base font-bold px-[13px] h-9 rounded-md ${1 === currentPage ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-800'}"
+                        onclick="goToPage(1);">
+                        1
+                    </li>`;
+
+                if (currentPage > 3) {
+                    paginationHTML += `<li class="page-item flex items-center justify-center shrink-0 text-base font-bold px-[13px] h-9">...</li>`;
+                }
+
+                for (let i = Math.max(2, currentPage - 1); i <= Math.min(totalPages - 1, currentPage + 1); i++) {
+                    paginationHTML += `
+                        <li class="page-item flex items-center justify-center shrink-0 border hover:bg-red-500 hover:text-white cursor-pointer text-base font-bold px-[13px] h-9 rounded-md ${i === currentPage ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-800'}"
+                            onclick="goToPage(${i});">
+                            ${i}
+                        </li>`;
+                }
+
+                if (currentPage < totalPages - 2) {
+                    paginationHTML += `<li class="page-item flex items-center justify-center shrink-0 text-base font-bold px-[13px] h-9">...</li>`;
+                }
+
+                paginationHTML += `
+                    <li class="page-item flex items-center justify-center shrink-0 border hover:bg-red-500 hover:text-white cursor-pointer text-base font-bold px-[13px] h-9 rounded-md ${totalPages === currentPage ? 'bg-red-500 text-white' : 'bg-gray-100 text-gray-800'}"
+                        onclick="goToPage(${totalPages});">
+                        ${totalPages}
                     </li>`;
             }
+
+            // Next page button
             paginationHTML += `
                 <li class="page-np flex items-center justify-center shrink-0 border hover:bg-red-500 w-9 h-9 rounded-md"
                     onclick="nextPage();">
@@ -105,9 +141,11 @@ fetch('database/fetch_product.php')
                         <path d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z" />
                     </svg>
                 </li>`;
+
             pagination.innerHTML = paginationHTML;
             updatePaginationHighlight(currentPage);
         }
+
     })
     .catch(error => {
         console.error('Error fetching products:', error);
