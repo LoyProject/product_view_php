@@ -13,7 +13,7 @@
     <?php
     include '../database/db_connection.php';
     ?>
-    <script src="script.js"></script>
+    <script src="../js/script-admin.js"></script>
     <div class="relative font-[sans-serif] pt-[70px] h-screen">
         <header class='flex shadow-md py-1 px-4 sm:px-7 bg-white min-h-[70px] tracking-wide z-[110] fixed top-0 w-full'>
       <div class='flex flex-wrap items-center justify-between gap-4 w-full relative'>
@@ -147,7 +147,9 @@
                         <ul class="space-y-2 mb-2">
                             <li>
                                 <a href="javascript:void(0)"
-                                onclick="document.getElementById('Dashboard').style.display='block';document.getElementById('AddProducts').style.display='none';"
+                                onclick="document.getElementById('Dashboard').style.display='block';
+                                document.getElementById('Products').style.display='none';
+                                document.getElementById('AddProducts').style.display='none';"
                                 class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3" viewBox="0 0 24 24">
                                     <path d="M19.56 23.253H4.44a4.051 4.051 0 0 1-4.05-4.05v-9.115c0-1.317.648-2.56 1.728-3.315l7.56-5.292a4.062 4.062 0 0 1 4.644 0l7.56 5.292a4.056 4.056 0 0 1 1.728 3.315v9.115a4.051 4.051 0 0 1-4.05 4.05zM12 2.366a2.45 2.45 0 0 0-1.393.443l-7.56 5.292a2.433 2.433 0 0 0-1.037 1.987v9.115c0 1.34 1.09 2.43 2.43 2.43h15.12c1.34 0 2.43-1.09 2.43-2.43v-9.115c0-.788-.389-1.533-1.037-1.987l-7.56-5.292A2.438 2.438 0 0 0 12 2.377z" data-original="#000000"></path>
@@ -160,7 +162,9 @@
                         <ul class="space-y-2 mb-2">
                             <li>
                                 <a href="javascript:void(0)"
-                                    onclick="document.getElementById('AddProducts').style.display='block';document.getElementById('Dashboard').style.display='none';"
+                                    onclick=" document.getElementById('Products').style.display='block';
+                                    document.getElementById('AddProducts').style.display='none';
+                                    document.getElementById('Dashboard').style.display='none';"
                                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
                                     viewBox="0 0 24 24">
@@ -170,7 +174,26 @@
                                         <path d="M12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0v10a1 1 0 0 1-1 1z" data-original="#000000" />
                                         <path d="M6 12a1 1 0 0 1 1-1h10a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1z" data-original="#000000" />
                                     </svg>
-                                    <span>Posts</span>
+                                    <span>Products</span>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="space-y-2 mb-2">
+                            <li>
+                                <a href="javascript:void(0)"
+                                    onclick="document.getElementById('AddProducts').style.display='block';
+                                    document.getElementById('Dashboard').style.display='none';
+                                    document.getElementById('Products').style.display='none';"
+                                    class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
+                                    viewBox="0 0 24 24">
+                                        <path
+                                            d="M18 2c2.206 0 4 1.794 4 4v12c0 2.206-1.794 4-4 4H6c-2.206 0-4-1.794-4-4V6c0-2.206 1.794-4 4-4zm0-2H6a6 6 0 0 0-6 6v12a6 6 0 0 0 6 6h12a6 6 0 0 0 6-6V6a6 6 0 0 0-6-6z"
+                                            data-original="#000000" />
+                                        <path d="M12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0v10a1 1 0 0 1-1 1z" data-original="#000000" />
+                                        <path d="M6 12a1 1 0 0 1 1-1h10a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1z" data-original="#000000" />
+                                    </svg>
+                                    <span>New Products</span>
                                 </a>
                             </li>
                         </ul>
@@ -285,13 +308,19 @@
                     </div>
                 </section>
 
+                <section class="main-content w-full overflow-auto p-6 hidden" id="Products">
+                    <div class="flex items-center">
+                        <h1>Products</h1>
+                    </div>
+                </section>
+
                 <section class="main-content w-full overflow-auto p-6 hidden" id="AddProducts">
                     <div id="alert-message" class="font-[sans-serif] space-y-6 hidden">
                         <div class="bg-green-100 text-green-800 p-4 rounded-lg relative" role="alert">
                             <strong class="font-bold text-sm">Success!</strong>
                             <span class="block text-sm sm:inline max-sm:mt-2 max-sm:ml-0 ml-4 mr-8">This is a success message that requires your attention.</span>
                             <svg xmlns="http://www.w3.org/2000/svg"
-                                class="w-7 hover:bg-green-200 rounded-lg transition-all p-2 cursor-pointer fill-green-500 absolute right-4 top-1/2 -translate-y-1/2" viewBox="0 0 320.591 320.591">
+                                class="w-7 hover:bg-green-200 rounded-lg transition-all p-2 cursor-pointer fill-green-500 absolute right-4 top-1/2 -translate-y-1/2" viewBox="0 0 320.591 320.591" onclick="document.getElementById('alert-message').classList.add('hidden');">
                                 <path
                                     d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
                                     data-original="#000000" />
@@ -306,13 +335,28 @@
                             <strong class="font-bold text-sm">Error!</strong>
                             <span class="block text-sm sm:inline max-sm:mt-2 max-sm:ml-0 ml-4 mr-8">This is a error message that requires your attention.</span>
                             <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-7 hover:bg-red-200 rounded-lg transition-all p-2 cursor-pointer fill-red-500 absolute right-4 top-1/2 -translate-y-1/2" viewBox="0 0 320.591 320.591">
-                            <path
-                                d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
-                                data-original="#000000" />
-                            <path
-                                d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
-                                data-original="#000000" />
+                                class="w-7 hover:bg-red-200 rounded-lg transition-all p-2 cursor-pointer fill-red-500 absolute right-4 top-1/2 -translate-y-1/2" viewBox="0 0 320.591 320.591" onclick="document.getElementById('alert-message-error').classList.add('hidden');">
+                                <path
+                                    d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+                                    data-original="#000000" />
+                                <path
+                                    d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+                                    data-original="#000000" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div id="alert-message-warning" class="font-[sans-serif] space-y-6 hidden">
+                        <div class="bg-yellow-100 text-yellow-800 p-4 rounded-lg relative" role="alert">
+                            <strong class="font-bold text-sm">Warning!</strong>
+                            <span class="block text-sm sm:inline max-sm:mt-2 max-sm:ml-0 ml-4 mr-8">This is a warning message that requires your attention.</span>
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="w-7 hover:bg-yellow-200 rounded-lg transition-all p-2 cursor-pointer fill-yellow-500 absolute right-4 top-1/2 -translate-y-1/2" viewBox="0 0 320.591 320.591" onclick="document.getElementById('alert-message-warning').classList.add('hidden');">
+                                <path
+                                    d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
+                                    data-original="#000000" />
+                                <path
+                                    d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
+                                    data-original="#000000" />
                             </svg>
                         </div>
                     </div>
@@ -373,7 +417,13 @@
                                 <div class="p-4 space-x-4">
                                     <button
                                         class="text-white bg-red-500 hover:bg-red-700 text-gray-300 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
-                                        type="button">
+                                        type="button" onclick="document.getElementById('productForm').reset();
+                                        document.getElementById('preview-image').classList.add('hidden');
+                                        document.getElementById('alert-message-warning').classList.remove('hidden');
+                                        setTimeout(() => {
+                                            document.getElementById('alert-message-warning').classList.add('hidden');
+                                        }, 6000);
+                                        document.getElementById('file-name').style.display = 'block';">
                                         Cancel
                                     </button>
                                     <button
@@ -419,17 +469,19 @@
                                     method: 'POST',
                                     body: formData,
                                 })
-                                .then(response => {
-                                    if (!response.ok) {
-                                        throw new Error('Server responded with an error');
-                                    }
-                                    return response.json();
-                                })
+                                .then(response => response.json())
                                 .then(data => {
+                                    console.log(data); // Log the response data for debugging
                                     if (data.status === 'success') {
                                         showAlert();
                                         document.getElementById('productForm').reset();
+                                    } else {
+                                        showAlertError(data.message);
                                     }
+                                })
+                                .catch(error => {
+                                    console.error('Error:', error);
+                                    showAlertError('An error occurred while saving the product.');
                                 });
                             }
 
@@ -438,8 +490,9 @@
                                 saveData();
                             }
                         </script>
+                        </script>
                     </div>
-                </section>
+                </section> 
             </div>
     </div>
 </body>
