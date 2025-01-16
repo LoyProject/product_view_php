@@ -92,10 +92,12 @@
                 </div>
 
                 <?php
-                    $conn = new mysqli("220.158.232.172", "product_mh01", "cL6sC3iRnWc3APyK", "product_mh01");
-                    if ($conn->connect_error) {
-                        die("Connection failed: " . $conn->connect_error);
-                    }
+                    // $conn = new mysqli("220.158.232.172", "product_mh01", "cL6sC3iRnWc3APyK", "product_mh01");
+                    // if ($conn->connect_error) {
+                    //     die("Connection failed: " . $conn->connect_error);
+                    // }
+
+                    include '../database/db_connection.php';
 
                     $limit = 5;
                     $page = isset($_GET['page']) ? intval($_GET['page']) : 1;

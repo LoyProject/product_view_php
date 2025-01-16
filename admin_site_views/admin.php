@@ -149,7 +149,11 @@
                                 <a href="javascript:void(0)"
                                 onclick="document.getElementById('Dashboard').style.display='block';
                                 document.getElementById('Products').style.display='none';
-                                document.getElementById('AddProducts').style.display='none';"
+                                document.getElementById('AddProducts').style.display='none';
+                                document.getElementById('Profile').style.display='none';
+                                resetMenuColors();
+                                this.classList.add('text-red-500');
+                                this.querySelector('svg').classList.add('fill-red-500');"
                                 class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3" viewBox="0 0 24 24">
                                     <path d="M19.56 23.253H4.44a4.051 4.051 0 0 1-4.05-4.05v-9.115c0-1.317.648-2.56 1.728-3.315l7.56-5.292a4.062 4.062 0 0 1 4.644 0l7.56 5.292a4.056 4.056 0 0 1 1.728 3.315v9.115a4.051 4.051 0 0 1-4.05 4.05zM12 2.366a2.45 2.45 0 0 0-1.393.443l-7.56 5.292a2.433 2.433 0 0 0-1.037 1.987v9.115c0 1.34 1.09 2.43 2.43 2.43h15.12c1.34 0 2.43-1.09 2.43-2.43v-9.115c0-.788-.389-1.533-1.037-1.987l-7.56-5.292A2.438 2.438 0 0 0 12 2.377z" data-original="#000000"></path>
@@ -164,15 +168,17 @@
                                 <a href="javascript:void(0)"
                                     onclick=" document.getElementById('Products').style.display='block';
                                     document.getElementById('AddProducts').style.display='none';
-                                    document.getElementById('Dashboard').style.display='none';"
+                                    document.getElementById('Dashboard').style.display='none';
+                                    document.getElementById('Profile').style.display='none';
+                                    resetMenuColors();
+                                    this.classList.add('text-red-500');
+                                    this.querySelector('svg').classList.add('fill-red-500');"
                                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
-                                    viewBox="0 0 24 24">
+                                        viewBox="0 0 24 24">
                                         <path
-                                            d="M18 2c2.206 0 4 1.794 4 4v12c0 2.206-1.794 4-4 4H6c-2.206 0-4-1.794-4-4V6c0-2.206 1.794-4 4-4zm0-2H6a6 6 0 0 0-6 6v12a6 6 0 0 0 6 6h12a6 6 0 0 0 6-6V6a6 6 0 0 0-6-6z"
+                                            d="M7 4h14a1 1 0 0 1 .96 1.28l-2.4 8A1 1 0 0 1 18 14H9.42l-.95 3.57a1 1 0 0 1-.97.73H4a1 1 0 1 1 0-2h2.68l3.2-12H4a1 1 0 1 1 0-2h3a1 1 0 0 1 .97.76zM9.38 12H16l1.8-6H9.98zM10 20a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm10 0a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"
                                             data-original="#000000" />
-                                        <path d="M12 18a1 1 0 0 1-1-1V7a1 1 0 0 1 2 0v10a1 1 0 0 1-1 1z" data-original="#000000" />
-                                        <path d="M6 12a1 1 0 0 1 1-1h10a1 1 0 0 1 0 2H7a1 1 0 0 1-1-1z" data-original="#000000" />
                                     </svg>
                                     <span>Products</span>
                                 </a>
@@ -183,10 +189,14 @@
                                 <a href="javascript:void(0)"
                                     onclick="document.getElementById('AddProducts').style.display='block';
                                     document.getElementById('Dashboard').style.display='none';
-                                    document.getElementById('Products').style.display='none';"
+                                    document.getElementById('Products').style.display='none';
+                                    document.getElementById('Profile').style.display='none';
+                                    resetMenuColors();
+                                    this.classList.add('text-red-500');
+                                    this.querySelector('svg').classList.add('fill-red-500');"
                                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
-                                    viewBox="0 0 24 24">
+                                        viewBox="0 0 24 24">
                                         <path
                                             d="M18 2c2.206 0 4 1.794 4 4v12c0 2.206-1.794 4-4 4H6c-2.206 0-4-1.794-4-4V6c0-2.206 1.794-4 4-4zm0-2H6a6 6 0 0 0-6 6v12a6 6 0 0 0 6 6h12a6 6 0 0 0 6-6V6a6 6 0 0 0-6-6z"
                                             data-original="#000000" />
@@ -199,10 +209,17 @@
                         </ul>
                         <ul class="space-y-2 mb-2">
                             <li>
-                                <a href="javascript:void(0)"
+                                <a href="javascript:void(0)" 
+                                    onclick=" document.getElementById('Profile').style.display='block';
+                                    document.getElementById('AddProducts').style.display='none';
+                                    document.getElementById('Dashboard').style.display='none';
+                                    document.getElementById('Products').style.display='none';
+                                    resetMenuColors();
+                                    this.classList.add('text-red-500');
+                                    this.querySelector('svg').classList.add('fill-red-500');"
                                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
-                                    viewBox="0 0 512 512">
+                                        viewBox="0 0 512 512">
                                         <path
                                             d="M437.02 74.98C388.668 26.63 324.379 0 256 0S123.332 26.629 74.98 74.98C26.63 123.332 0 187.621 0 256s26.629 132.668 74.98 181.02C123.332 485.37 187.621 512 256 512s132.668-26.629 181.02-74.98C485.37 388.668 512 324.379 512 256s-26.629-132.668-74.98-181.02zM111.105 429.297c8.454-72.735 70.989-128.89 144.895-128.89 38.96 0 75.598 15.179 103.156 42.734 23.281 23.285 37.965 53.687 41.742 86.152C361.641 462.172 311.094 482 256 482s-105.637-19.824-144.895-52.703zM256 269.507c-42.871 0-77.754-34.882-77.754-77.753C178.246 148.879 213.13 114 256 114s77.754 34.879 77.754 77.754c0 42.871-34.883 77.754-77.754 77.754zm170.719 134.427a175.9 175.9 0 0 0-46.352-82.004c-18.437-18.438-40.25-32.27-64.039-40.938 28.598-19.394 47.426-52.16 47.426-89.238C363.754 132.34 315.414 84 256 84s-107.754 48.34-107.754 107.754c0 37.098 18.844 69.875 47.465 89.266-21.887 7.976-42.14 20.308-59.566 36.542-25.235 23.5-42.758 53.465-50.883 86.348C50.852 364.242 30 312.512 30 256 30 131.383 131.383 30 256 30s226 101.383 226 226c0 56.523-20.86 108.266-55.281 147.934zm0 0"
                                             data-original="#000000" />
@@ -211,12 +228,24 @@
                                 </a>
                             </li>
                         </ul>
+                        <script>
+                            function resetMenuColors() {
+                                const menuItems = document.querySelectorAll('nav#sidebar a');
+                                menuItems.forEach(item => {
+                                    item.classList.remove('text-red-500');
+                                    const svg = item.querySelector('svg');
+                                    if (svg) {
+                                        svg.classList.remove('fill-red-500');
+                                    }
+                                });
+                            }
+                        </script>
                         <ul class="space-y-2 mb-2">
                             <li>
                                 <a href="javascript:void(0)"
                                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
-                                    viewBox="0 0 6.35 6.35">
+                                        viewBox="0 0 6.35 6.35">
                                         <path
                                             d="M3.172.53a.265.266 0 0 0-.262.268v2.127a.265.266 0 0 0 .53 0V.798A.265.266 0 0 0 3.172.53zm1.544.532a.265.266 0 0 0-.026 0 .265.266 0 0 0-.147.47c.459.391.749.973.749 1.626 0 1.18-.944 2.131-2.116 2.131A2.12 2.12 0 0 1 1.06 3.16c0-.65.286-1.228.74-1.62a.265.266 0 1 0-.344-.404A2.667 2.667 0 0 0 .53 3.158a2.66 2.66 0 0 0 2.647 2.663 2.657 2.657 0 0 0 2.645-2.663c0-.812-.363-1.542-.936-2.03a.265.266 0 0 0-.17-.066z"
                                             data-original="#000000" />
@@ -309,8 +338,151 @@
                 </section>
 
                 <section class="main-content w-full overflow-auto p-6 hidden" id="Products">
-                    <div class="flex items-center">
-                        <h1>Products</h1>
+                    <div class="p-8">
+                        <div class=" font-[sans-serif] overflow-x-auto">
+                            <h1 class="text-left">Products</h1>
+                        </div>
+                        <div class="container p-8 font-[sans-serif] overflow-x-auto">
+                            <table class="min-w-full bg-white">
+                                <thead class="whitespace-nowrap">
+                                    <tr class="font-bold bg-red-500 text-white">
+                                        <th class="pl-4 w-8">
+                                            <input id="checkbox" type="checkbox" class="hidden peer" />
+                                            <label for="checkbox"
+                                                class="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-blue-500 border border-gray-400 rounded overflow-hidden">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-full fill-white" viewBox="0 0 520 520">
+                                                    <path
+                                                    d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
+                                                    data-name="7-Check" data-original="#000000" />
+                                                </svg>
+                                            </label>
+                                        </th>
+                                        <th class="p-4 text-left text-sm font-semibold">
+                                            Name
+                                        </th>
+                                        <th class="p-4 text-left text-sm font-semibold">
+                                            Role
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-gray-400 inline cursor-pointer ml-2"
+                                                viewBox="0 0 401.998 401.998">
+                                                <path
+                                                    d="M73.092 164.452h255.813c4.949 0 9.233-1.807 12.848-5.424 3.613-3.616 5.427-7.898 5.427-12.847s-1.813-9.229-5.427-12.85L213.846 5.424C210.232 1.812 205.951 0 200.999 0s-9.233 1.812-12.85 5.424L60.242 133.331c-3.617 3.617-5.424 7.901-5.424 12.85 0 4.948 1.807 9.231 5.424 12.847 3.621 3.617 7.902 5.424 12.85 5.424zm255.813 73.097H73.092c-4.952 0-9.233 1.808-12.85 5.421-3.617 3.617-5.424 7.898-5.424 12.847s1.807 9.233 5.424 12.848L188.149 396.57c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428l127.907-127.906c3.613-3.614 5.427-7.898 5.427-12.848 0-4.948-1.813-9.229-5.427-12.847-3.614-3.616-7.899-5.42-12.848-5.42z"
+                                                    data-original="#000000" />
+                                            </svg>
+                                        </th>
+                                        <th class="p-4 text-left text-sm font-semibold">
+                                            Active
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-3 h-3 fill-gray-400 inline cursor-pointer ml-2"
+                                                viewBox="0 0 401.998 401.998">
+                                                <path
+                                                    d="M73.092 164.452h255.813c4.949 0 9.233-1.807 12.848-5.424 3.613-3.616 5.427-7.898 5.427-12.847s-1.813-9.229-5.427-12.85L213.846 5.424C210.232 1.812 205.951 0 200.999 0s-9.233 1.812-12.85 5.424L60.242 133.331c-3.617 3.617-5.424 7.901-5.424 12.85 0 4.948 1.807 9.231 5.424 12.847 3.621 3.617 7.902 5.424 12.85 5.424zm255.813 73.097H73.092c-4.952 0-9.233 1.808-12.85 5.421-3.617 3.617-5.424 7.898-5.424 12.847s1.807 9.233 5.424 12.848L188.149 396.57c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428l127.907-127.906c3.613-3.614 5.427-7.898 5.427-12.848 0-4.948-1.813-9.229-5.427-12.847-3.614-3.616-7.899-5.42-12.848-5.42z"
+                                                    data-original="#000000" />
+                                            </svg>
+                                        </th>
+                                        <th class="p-4 text-left text-sm font-semibold">
+                                            Action
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="whitespace-nowrap">
+                                    <tr class="odd:bg-blue-50">
+                                        <td class="pl-4 w-8">
+                                            <input id="checkbox1" type="checkbox" class="hidden peer" />
+                                            <label for="checkbox1"
+                                                class="relative flex items-center justify-center p-0.5 peer-checked:before:hidden before:block before:absolute before:w-full before:h-full before:bg-white w-5 h-5 cursor-pointer bg-blue-500 border border-gray-400 rounded overflow-hidden">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-full fill-white" viewBox="0 0 520 520">
+                                                    <path
+                                                    d="M79.423 240.755a47.529 47.529 0 0 0-36.737 77.522l120.73 147.894a43.136 43.136 0 0 0 36.066 16.009c14.654-.787 27.884-8.626 36.319-21.515L486.588 56.773a6.13 6.13 0 0 1 .128-.2c2.353-3.613 1.59-10.773-3.267-15.271a13.321 13.321 0 0 0-19.362 1.343q-.135.166-.278.327L210.887 328.736a10.961 10.961 0 0 1-15.585.843l-83.94-76.386a47.319 47.319 0 0 0-31.939-12.438z"
+                                                    data-name="7-Check" data-original="#000000" />
+                                                </svg>
+                                            </label>
+                                        </td>
+                                        <td class="p-4 text-sm">
+                                            <div class="flex items-center cursor-pointer w-max">
+                                                <img src='https://readymadeui.com/profile_4.webp' class="w-9 h-9 rounded-full shrink-0" />
+                                                <div class="ml-4">
+                                                    <p class="text-sm text-black">Gladys Jones</p>
+                                                    <p class="text-xs text-gray-500 mt-0.5">gladys@example.com</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="p-4 text-sm text-black">
+                                            Admin
+                                        </td>
+                                        <td class="p-4">
+                                            <label class="relative cursor-pointer">
+                                                <input type="checkbox" class="sr-only peer" checked />
+                                                <div
+                                                    class="w-11 h-6 flex items-center bg-gray-300 rounded-full peer peer-checked:after:translate-x-full after:absolute after:left-[2px] peer-checked:after:border-white after:bg-white after:border after:border-gray-300 after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#007bff]">
+                                                </div>
+                                            </label>
+                                        </td>
+                                        <td class="p-4">
+                                            <button class="mr-4" title="Edit">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-blue-500 hover:fill-blue-700"
+                                                    viewBox="0 0 348.882 348.882">
+                                                    <path
+                                                    d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
+                                                    data-original="#000000" />
+                                                    <path
+                                                    d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
+                                                    data-original="#000000" />
+                                                </svg>
+                                            </button>
+                                            <button title="Delete">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
+                                                    <path
+                                                    d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
+                                                    data-original="#000000" />
+                                                    <path d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
+                                                    data-original="#000000" />
+                                                </svg>
+                                            </button>
+                                        </td>                                       
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="md:flex m-4">
+                                <p class="text-sm text-gray-500 flex-1">Showind 1 to 5 of 100 entries</p>
+                                <div class="flex items-center max-md:mt-4">
+                                    <p class="text-sm text-gray-500">Display</p>
+                                    <select class="text-sm text-gray-500 border border-gray-400 rounded h-7 mx-4 px-1 outline-none">
+                                    <option>5</option>
+                                    <option>10</option>
+                                    <option>20</option>
+                                    <option>50</option>
+                                    <option>100</option>
+                                    </select>
+                                    <ul class="flex space-x-1 ml-2">
+                                    <li class="flex items-center justify-center cursor-pointer bg-blue-100 w-7 h-7 rounded">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500" viewBox="0 0 55.753 55.753">
+                                            <path
+                                                d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
+                                                data-original="#000000" />
+                                        </svg>
+                                    </li>
+                                    <li class="flex items-center justify-center cursor-pointer text-sm w-7 h-7 text-gray-500 rounded">
+                                        1
+                                    </li>
+                                    <li class="flex items-center justify-center cursor-pointer text-sm bg-[#007bff] text-white w-7 h-7 rounded">
+                                        2
+                                    </li>
+                                    <li class="flex items-center justify-center cursor-pointer text-sm w-7 h-7 text-gray-500 rounded">
+                                        3
+                                    </li>
+                                    <li class="flex items-center justify-center cursor-pointer text-sm w-7 h-7 text-gray-500 rounded">
+                                        4
+                                    </li>
+                                    <li class="flex items-center justify-center cursor-pointer bg-blue-100 w-7 h-7 rounded">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-3 fill-gray-500 rotate-180" viewBox="0 0 55.753 55.753">
+                                            <path
+                                                d="M12.745 23.915c.283-.282.59-.52.913-.727L35.266 1.581a5.4 5.4 0 0 1 7.637 7.638L24.294 27.828l18.705 18.706a5.4 5.4 0 0 1-7.636 7.637L13.658 32.464a5.367 5.367 0 0 1-.913-.727 5.367 5.367 0 0 1-1.572-3.911 5.369 5.369 0 0 1 1.572-3.911z"
+                                                data-original="#000000" />
+                                        </svg>
+                                    </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </section>
 
@@ -492,7 +664,13 @@
                         </script>
                         </script>
                     </div>
-                </section> 
+                </section>
+                
+                <section class="main-content w-full overflow-auto p-6 hidden" id="Profile">
+                    <div class="flex items-center">
+                        <h1>Profile</h1>
+                    </div>
+                </section>
             </div>
     </div>
 </body>
