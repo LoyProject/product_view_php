@@ -1,39 +1,53 @@
 <?php
-    header('Content-Type: application/json');
+header('Content-Type: application/json');
 
-    $input = json_decode(file_get_contents('php://input'), true);
+// Get JSON input and validate
+$input = json_decode(file_get_contents('php://input'), true);
 
-    if (!isset($input['id']) || !is_numeric($input['id'])) {
-        echo json_encode(['error' => 'Invalid product ID.']);
-        exit;
-    }
+if (!isset($input['id']) || !is_numeric($input['id'])) {
+    echo json_encode(['error' => 'Invalid product ID.']);
+    exit;
+}
 
-    $productId = intval($input['id']);
+$productId = intval($input['id']);
 
-    $servername = "220.158.232.172";
-    $username = "product_mh01";
-    $password = "cL6sC3iRnWc3APyK";
-    $dbname = "product_mh01";
 
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    
-    if ($conn->connect_error) {
-        echo json_encode(['error' => 'Database connection failed.']);
-        exit;
-    }
+include 'db_connection.php';
 
-    $stmt = $conn->prepare("SELECT name, description, image FROM products WHERE id = ?");
-    $stmt->bind_param("i", $productId);
-    $stmt->execute();
-    $stmt->bind_result($name, $description, $image);
-    $stmt->fetch();
+if ($conn->connect_error) {
+    echo json_encode(['error' => 'Database connection failed: ' . $conn->connect_error]);
+    exit;
+}
 
-    if ($name) {
-        echo json_encode(['name' => $name, 'description' => $description, 'image' => $image]);
-    } else {
-        echo json_encode(['error' => 'Product not found.']);
-    }
+// Prepare and execute the query
+$stmt = $conn->prepare("SELECT name, description, image FROM products WHERE id = ?");
+if (!$stmt) {
+    echo json_encode(['error' => 'Failed to prepare statement: ' . $conn->error]);
+    exit;
+}
 
-    $stmt->close();
-    $conn->close();
+$stmt->bind_param("i", $productId);
+if (!$stmt->execute()) {
+    echo json_encode(['error' => 'Query execution failed: ' . $stmt->error]);
+    exit;
+}
+
+$stmt->bind_result($name, $description, $image);
+$stmt->fetch();
+
+if ($name) {
+    // Return the fetched data
+    echo json_encode([
+        'name' => $name,
+        'description' => $description,
+        'image' => $image
+    ]);
+} else {
+    echo json_encode(['error' => 'Product not found.']);
+}
+
+// Clean up
+$stmt->close();
+$conn->close();
 ?>
+
