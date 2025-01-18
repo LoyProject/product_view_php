@@ -633,43 +633,47 @@
                         <div class="container mx-auto p-2 rounded-lg">
                             <h1 class="p-4 text-2xl font-bold mb-4">Add New Product</h1>
                             <form id="productForm" onsubmit="submitForm(event)">
-                                <div class="p-4">
-                                    <label class="block text-black-500 text-sm font-bold mb-2 font-[sans-serif]"
+                                <div class="p-4 space-y-2">
+                                    <label class=" font-md text-slate-500"
                                         for="product-name">
-                                        <h6 class="text-sm font-bold">Product Name</h6>
+                                        Product Name
                                     </label>
                                     <input
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                                        class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                         type="text" id="name" name="name" required>
                                     </input>
                                 </div>
-                                <div class="p-4">
-                                    <label class="block text-black-500 text-sm font-bold mb-2" for="product-description">
-                                        <h6 class="text-sm font-bold">Product Description</h6>
+                                <div class="p-4 space-y-2">
+                                    <label class=" font-md text-slate-500"
+                                        for="product-name">
+                                        Product Description
                                     </label>
                                     <textarea
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                                        class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                         id="description" name="description" required 
                                         rows="5">
                                     </textarea>
                                 </div>
-                                <div class="p-4">
-                                    <label class="block text-black-500 text-sm font-bold mb-2" for="product-category">
-                                        <h6 class="text-sm font-bold">Product Category</h6>
+                                <div class="p-4 space-y-2">
+                                    <label class=" font-md text-slate-500"
+                                        for="product-name">
+                                        Product Category
                                     </label>
                                     <input
-                                        class="shadow appearance-none border rounded w-full py-2 px-3 text-black leading-tight focus:outline-none focus:shadow-outline"
+                                        class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                         id="product-category" type="text">
                                     </input>
                                 </div>
-                                <div class="p-4">
-                                    <label class="block text-black-500 text-sm font-bold mb-2" for="product-image">
-                                        <h6 class="text-sm font-bold">Product Image</h6>
+                                <div class="p-4 space-y-2">
+                                    <label class=" font-md text-slate-500"
+                                        for="product-name">
+                                        Product Image
                                     </label>
                                     <label id="lable-image"
-                                        class="bg-gray-300 text-black font-semibold text-base rounded h-52 flex flex-col items-center justify-center cursor-pointer border-2 border-gray-300 border-dashed mx-auto font-[sans-serif]">
+                                        class="block hover:border-red-500 border-2 border-dashed border-slate-100 shadow-sm w-full px-2 h-52 rounded-md text-slate-500 cursor-pointer flex flex-col justify-center items-center">
+                                        <div  id="upload-icon" class="flex justify-center">
                                         <svg xmlns="http://www.w3.org/2000/svg" class="w-11 mb-2 fill-gray-500"
-                                            viewBox="0 0 32 32" id="upload-icon">
+                                            viewBox="0 0 32 32">
                                             <path
                                                 d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
                                                 data-original="#000000" />
@@ -677,15 +681,16 @@
                                                 d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
                                                 data-original="#000000" />
                                         </svg>
+                                        </div>
                                         <span id="file-name" class="text-xs font-medium text-gray-400 mt-2">Only .png, .jpeg, .jpg are allowed.</span>
                                         <input type="file" id="image" name="image" accept="image/*" class="hidden" accept=".jpg, .jpeg, .png"
-                                            onchange="displayFileName(this); if(this.files.length > 0) document.getElementById('file-name').style.display = 'none';"/>
+                                            onchange="displayFileName(this); if(this.files.length > 0); document.getElementById('file-name').style.display = 'none'; document.getElementById('upload-icon').style.display = 'none';"/>
                                         <img id="preview-image" class="hidden w-full h-52 object-contain rounded" />
                                     </label>
                                 </div>
-                                <div class="p-4 space-x-4">
+                                <div class="p-4 space-x-4 flex justify-end">
                                     <button
-                                        class="text-white bg-red-500 hover:bg-red-700 text-gray-300 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
+                                        class="text-white bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
                                         type="button" onclick="document.getElementById('productForm').reset();
                                         document.getElementById('preview-image').classList.add('hidden');
                                         document.getElementById('alert-message-warning').classList.remove('hidden');
@@ -696,7 +701,7 @@
                                         Cancel
                                     </button>
                                     <button
-                                        class="text-white bg-green-500 hover:bg-green-700 text-gray-300 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
+                                        class="text-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
                                         type="submit" onclick="saveData()">
                                         Submit
                                     </button>

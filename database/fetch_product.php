@@ -1,5 +1,4 @@
 <?php
-
     include 'db_connection.php';
 
     $sql = "SELECT * FROM products";

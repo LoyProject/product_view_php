@@ -11,8 +11,8 @@
         <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-                    <img src="https://flowbite.com/docs/images/logo.svg" class="h-8" alt="Flowbite Logo">
-                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span>
+                    <img src="https://readymadeui.com/readymadeui.svg" class="h-8" alt="Flowbite Logo">
+                    <!-- <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> -->
                 </a>
                 <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
                     <button
@@ -34,7 +34,7 @@
                             <a href="../index.php" class="block py-2 px-3 text-red-500 rounded rounded hover:text-red-500 md:p-0 dark:text-white dark:hover:text-red-500" aria-current="page">Home</a>
                         </li>
                         <li>
-                            <a href="#" class="block py-2 px-3 text-gray-900 rounded hover:text-red-500 md:p-0 dark:text-white dark:hover:text-red-500">Dealer</a>
+                            <a href="../product_view_php/client_site_views/dealer.php" class="block py-2 px-3 text-gray-900 rounded hover:text-red-500 md:p-0 dark:text-white dark:hover:text-red-500">Dealer</a>
                         </li>
                         <li>
                             <a id="open-modal-service-btn" href="#" class="block py-2 px-3 text-gray-900 rounded hover:text-red-500 md:p-0 dark:text-white dark:hover:text-red-500">Services</a>
@@ -151,19 +151,49 @@
         });
     </script>
 
-        <div class="mt-20"></div>
-
-        <div class="sm:px-10 lg:px-20 flex flex-col justify-start">
-            <div class="mt-5"></div>
-            <h1 class="text-3xl font-bold text-black-900 dark:text-black">Our Products</h1>
-            <div class="mt-5"></div>
-            <hr class="border-black h-2 w-full">
+        <div class="p-16 container mx-auto">
+            <div class="p-8 rounded-lg">
+                <div class="flex rounded-md border-2 border-gray-100 focus:border-red-500 hover:border-red-500 overflow-hidden w-full font-[sans-serif]">
+                    <input 
+                        type="email" 
+                        placeholder="Search Something..." 
+                        class="w-full h-16 outline-none bg-white text-gray-600 text-sm px-4 py-3 border-transparent "/>
+                    <button 
+                        type="button" 
+                        class="w-52 flex items-center justify-center bg-red-500 px-5 hover:bg-red-600">
+                        <svg 
+                            xmlns="http://www.w3.org/2000/svg" 
+                            viewBox="0 0 192.904 192.904" 
+                            width="16px" 
+                            class="fill-white">
+                            <path
+                                d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-semibold mt-8">Products</h3>
+                </div>
+                <hr class="mt-4 border-gray-200" />
+                <div class="mt-8">
+                    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-3 w-full">
+                        <!-- <div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4">
+                            <div>
+                                <img src="https://readymadeui.com/cardImg.webp" class="w-full rounded-lg" />
+                            </div>
+                            <div class="pt-6 text-center">
+                                <h3 class="text-xl font-bold">Heading</h3>
+                            </div>
+                            <div class="text-start">
+                                <p class="mt-3 text-sm text-gray-500 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor auctor arcu, at fermentum dui. Maecenas</p>
+                                <button type="button" class="mt-6 px-5 py-2.5 w-full rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-red-300 outline-none hover:border-red-500 hover:text-red-500">View</button>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <!-- This is the main section where the products will be displayed -->
-        <section class="py-10 px-5 sm:px-10 lg:px-20 flex justify-center items-center">
-            <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-3 w-full"></div>
-        </section>
         
         <!-- This is the pagination section -->
         <ul id="pagination" class="py-10 px-5 flex space-x-5 justify-center font-[sans-serif]"></ul>
