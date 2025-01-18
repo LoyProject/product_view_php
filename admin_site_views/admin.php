@@ -11,7 +11,7 @@
 
 <body>
     <?php
-    include '../database/db_connection.php';
+        include '../database/db_connection.php';
     ?>
     <script src="../js/script-admin.js"></script>
     <div class="relative font-[sans-serif] pt-[70px] h-screen">
@@ -645,7 +645,7 @@
                                 </div>
                                 <div class="p-4 space-y-2">
                                     <label class=" font-md text-slate-500"
-                                        for="product-name">
+                                        for="product-description">
                                         Product Description
                                     </label>
                                     <textarea
@@ -656,7 +656,7 @@
                                 </div>
                                 <div class="p-4 space-y-2">
                                     <label class=" font-md text-slate-500"
-                                        for="product-name">
+                                        for="product-category">
                                         Product Category
                                     </label>
                                     <input
@@ -666,21 +666,21 @@
                                 </div>
                                 <div class="p-4 space-y-2">
                                     <label class=" font-md text-slate-500"
-                                        for="product-name">
+                                        for="product-image">
                                         Product Image
                                     </label>
                                     <label id="lable-image"
                                         class="block hover:border-red-500 border-2 border-dashed border-slate-100 shadow-sm w-full px-2 h-52 rounded-md text-slate-500 cursor-pointer flex flex-col justify-center items-center">
                                         <div  id="upload-icon" class="flex justify-center">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-11 mb-2 fill-gray-500"
-                                            viewBox="0 0 32 32">
-                                            <path
-                                                d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
-                                                data-original="#000000" />
-                                            <path
-                                                d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
-                                                data-original="#000000" />
-                                        </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-11 mb-2 fill-gray-500"
+                                                viewBox="0 0 32 32">
+                                                <path
+                                                    d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
+                                                    data-original="#000000" />
+                                                <path
+                                                    d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
+                                                    data-original="#000000" />
+                                            </svg>
                                         </div>
                                         <span id="file-name" class="text-xs font-medium text-gray-400 mt-2">Only .png, .jpeg, .jpg are allowed.</span>
                                         <input type="file" id="image" name="image" accept="image/*" class="hidden" accept=".jpg, .jpeg, .png"
@@ -763,7 +763,6 @@
                                 event.preventDefault();
                                 saveData();
                             }
-                        </script>
                         </script>
                     </div>
                 </section>

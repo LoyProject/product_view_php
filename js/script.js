@@ -28,7 +28,18 @@ fetch('database/fetch_product.php')
         }
 
         // Function to display products in the grid
-        
+        function displayProducts(products) {
+            const productHTML = products.map(product => `
+                <a href="client_site_views/product-detail.php?id=${product.id}" target="_blank" class="block max-w-sm bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105">
+                    <img class="w-full h-80 object-contain" src="images/${product.image}" alt="${product.name}">
+                    <div class="p-5">
+                        <h2 class="text-xl font-semibold text-gray-800">${product.name}</h2>
+                        <p class="text-gray-600 mt-2">${product.description}</p>
+                    </div>
+                </a>
+            `).join('');
+            productGrid.innerHTML = productHTML;
+        }
 
         // Function to navigate to the next or previous page
         window.goToPage = function (page) {
