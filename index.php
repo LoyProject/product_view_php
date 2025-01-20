@@ -47,6 +47,7 @@
                 </div>
             </div>
         </nav>
+
         <script>
             function toggleMenu() {
                 const navLinks = document.getElementById('navbar-sticky');
@@ -239,9 +240,8 @@
                     </div>
                 </div>
                 <script>
-                    // JavaScript for handling the "Load More" functionality
-                    let offset = 10; // Initial offset
-                    const limit = 10; // Number of products to load per click
+                    let offset = 10;
+                    const limit = 10;
 
                     document.addEventListener("DOMContentLoaded", () => {
                         const loadMoreButton = document.getElementById('load-more');
@@ -254,12 +254,12 @@
                             fetch(`<?php echo $_SERVER['PHP_SELF']; ?>?offset=${offset}&limit=${limit}`)
                                 .then(response => response.text())
                                 .then(data => {
-                                    if (data.trim() === "end") {
+                                    if (data.trim() === "") {
                                         button.innerText = "No More Products";
                                         button.disabled = true;
                                     } else {
                                         document.getElementById('product-grid').innerHTML += data;
-                                        document.getElementById("load-more").style.display = "none";
+                                        button.innerText = "Load More";
                                         button.disabled = false;
                                         offset += limit;
                                     }
