@@ -163,7 +163,7 @@
 
             </div>
             <div>
-              <a href="../index.php"
+              <a href="../"
                 class="block px-4 max-w-[200px] py-3 bg-red-500 hover:bg-red-600 text-white text-md font-semibold rounded text-center">Back
                 to Product List</a>
             </div>

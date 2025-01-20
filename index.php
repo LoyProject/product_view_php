@@ -8,6 +8,7 @@
     </head>
 
     <body class="bg-gray-100 white:bg-gray-900"> 
+        <script src ="js/script.js"></script>
         <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -131,25 +132,59 @@
             </div>
         </div>
   
-    <script>
-        document.getElementById("open-modal-service-btn").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default link behavior
-        document.getElementById("open-modal-service").classList.remove("hidden");
-        });
+        <script>
+            document.getElementById("open-modal-service-btn").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default link behavior
+            document.getElementById("open-modal-service").classList.remove("hidden");
+            });
 
-        document.getElementById("close-modal-service-btn").addEventListener("click", function () {
-            document.getElementById("open-modal-service").classList.add("hidden");
-        });
+            document.getElementById("close-modal-service-btn").addEventListener("click", function () {
+                document.getElementById("open-modal-service").classList.add("hidden");
+            });
 
-        document.getElementById("open-modal-contact-btn").addEventListener("click", function (event) {
-        event.preventDefault(); // Prevent default link behavior
-        document.getElementById("open-modal-contact").classList.remove("hidden");
-        });
+            document.getElementById("open-modal-contact-btn").addEventListener("click", function (event) {
+            event.preventDefault(); // Prevent default link behavior
+            document.getElementById("open-modal-contact").classList.remove("hidden");
+            });
 
-        document.getElementById("close-modal-contact-btn").addEventListener("click", function () {
-            document.getElementById("open-modal-contact").classList.add("hidden");
-        });
-    </script>
+            document.getElementById("close-modal-contact-btn").addEventListener("click", function () {
+                document.getElementById("open-modal-contact").classList.add("hidden");
+            });
+        </script>
+
+        <?php
+            include('database/db_connection.php');
+
+                if (isset($_GET['offset']) && isset($_GET['limit'])) {
+                    $offset = intval($_GET['offset']);
+                    $limit = intval($_GET['limit']);
+
+                    $sql = "SELECT id, name, description, image FROM products LIMIT $offset, $limit";
+                    $result = $conn->query($sql);
+
+                    if ($result->num_rows > 0) {
+                        while ($row = $result->fetch_assoc()) {
+                            echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2">';
+                                echo '<div>';
+                                    echo '<img src="images/' . $row["image"] . '" class="w-full rounded-lg" />';
+                                echo '</div>';
+                                echo '<div class="pt-6 text-center">';
+                                    echo '<h3 class="text-xl font-bold">' . $row["name"] . '</h3>';
+                                echo '</div>';
+                                echo '<div class="text-start">';
+                                    echo '<article class="text-wrap">';
+                                        echo '<p class="mt-3 text-sm text-gray-500 leading-relaxed break-words">' . $row["description"] . '</p>';
+                                    echo '</article>';
+                                    echo '<a href="client_site_views/product-detail.php?id=' . $row["id"] . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-red-300 outline-none hover:border-red-500 hover:text-red-500">View</a>';
+                                echo '</div>';
+                            echo '</div>';
+                        }
+                    } else {
+                        echo '<script>document.getElementById("load-more").style.display = "none";</script>'; // Hide the button
+                    }
+                    exit(); // Prevent further output
+                }
+        ?>
 
         <div class="p-16 container mx-auto">
             <div class="p-8 rounded-lg">
@@ -176,30 +211,78 @@
                     <h3 class="text-2xl font-semibold mt-8">Products</h3>
                 </div>
                 <hr class="mt-4 border-gray-200" />
-                <div class="mt-8">
-                    <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-3 w-full">
-                        <!-- <div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4">
-                            <div>
-                                <img src="https://readymadeui.com/cardImg.webp" class="w-full rounded-lg" />
-                            </div>
-                            <div class="pt-6 text-center">
-                                <h3 class="text-xl font-bold">Heading</h3>
-                            </div>
-                            <div class="text-start">
-                                <p class="mt-3 text-sm text-gray-500 leading-relaxed">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor auctor arcu, at fermentum dui. Maecenas</p>
-                                <button type="button" class="mt-6 px-5 py-2.5 w-full rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-red-300 outline-none hover:border-red-500 hover:text-red-500">View</button>
-                            </div>
-                        </div> -->
+                <div class="mt-2">
+                    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-2 w-full">
+                        <?php
+                            $sql = "SELECT id, name, description, image FROM products LIMIT 10";
+                            $result = $conn->query($sql);
+
+                            if ($result->num_rows > 0) {
+                                while ($row = $result->fetch_assoc()) {
+                                    echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2">';
+                                        echo '<div>';
+                                            echo '<img src="images/' . $row["image"] . '" class="w-full rounded-lg" />';
+                                        echo '</div>';
+                                        echo '<div class="pt-6 text-center">';
+                                            echo '<h3 class="text-xl font-bold">' . $row["name"] . '</h3>';
+                                        echo '</div>';
+                                        echo '<div class="text-start">';
+                                            echo '<article class="text-wrap">';
+                                            echo '<p class="mt-3 text-sm text-gray-500 leading-relaxed break-words">' . $row["description"] . '</p>';
+                                            echo '</article>';
+                                            echo '<a href="client_site_views/product-detail.php?id=' . $row["id"] . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-red-300 outline-none hover:border-red-500 hover:text-red-500">View</a>';
+                                        echo '</div>';
+                                    echo '</div>';
+                                }
+                            }
+                        ?>
                     </div>
+                </div>
+                <script>
+                    // JavaScript for handling the "Load More" functionality
+                    let offset = 10; // Initial offset
+                    const limit = 10; // Number of products to load per click
+
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const loadMoreButton = document.getElementById('load-more');
+
+                        loadMoreButton.addEventListener('click', function () {
+                            const button = this;
+                            button.disabled = true; // Temporarily disable the button
+                            button.innerText = "Loading...";
+
+                            fetch(`<?php echo $_SERVER['PHP_SELF']; ?>?offset=${offset}&limit=${limit}`)
+                                .then(response => response.text())
+                                .then(data => {
+                                    if (data.trim() === "end") {
+                                        button.innerText = "No More Products";
+                                        button.disabled = true;
+                                    } else {
+                                        document.getElementById('product-grid').innerHTML += data;
+                                        document.getElementById("load-more").style.display = "none";
+                                        button.disabled = false;
+                                        offset += limit;
+                                    }
+                                })
+                                .catch(error => {
+                                    console.error("Error loading products:", error);
+                                    button.innerText = "Load More";
+                                    button.disabled = false;
+                                });
+                        });
+                    });
+                </script>
+                <div class="mt-8">
+                <div class="container mx-auto">
+                    <div class="flex justify-center">
+                        <button id="load-more" type="button" class="px-5 py-2.5 w-52 rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-none outline-none hover:border-red-500 hover:text-red-500">
+                            Load More
+                        </button>
+                    </div>
+                </div>
                 </div>
             </div>
         </div>
-        
-        <!-- This is the pagination section -->
-        <ul id="pagination" class="py-10 px-5 flex space-x-5 justify-center font-[sans-serif]"></ul>
-
-        <script src="js/script.js"></script>
-        
         <!-- This is the footer section -->
         <footer class="font-sans tracking-wide bg-black text-white px-10 pt-12 pb-6">
             <div class="flex flex-wrap justify-between gap-10">
