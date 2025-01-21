@@ -148,9 +148,8 @@
   ?>
 
     <div class="p-16 mt-8 container mx-auto">
-        <h3 class="text-2xl font-semibold mt-8">Product Drtail</h3>
-        <hr>
-        <div class="p-8 flex justify-center items-center rounded-lg bg-white">
+        <h3 class="text-2xl font-semibold mt-8">Product Detail</h3>
+        <div class="p-8 mt-4 flex justify-center items-center rounded-lg bg-white">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div class="col-span-1 h-auto">
                     <div class="w-full h-[540px] flex justify-center items-center rounded-lg">
@@ -224,7 +223,7 @@
                             while ($row = $result->fetch_assoc()) {
                                 echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2 flex flex-col">';
                                     echo '<div>';
-                                        echo '<img src="images/' . $row["image"] . '" class="w-full h-52 object-cover rounded-lg" />';
+                                        echo '<img src="../images/' . $row["image"] . '" class="w-full h-52 object-cover rounded-lg" />';
                                     echo '</div>';
                                     echo '<div class="pt-6 text-center">';
                                         echo '<h3 class="text-xl font-bold">' . $row["name"] . '</h3>';
@@ -235,7 +234,7 @@
                                         echo '</article>';
                                     echo '</div>';
                                     echo '<div class="mt-4">';
-                                        echo '<a href="client_site_views/product-detail.php?id=' . $row["id"] . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-red-300 outline-none hover:border-red-500 hover:text-red-500">View</a>';
+                                        echo '<a href="product-detail.php?id=' . $row["id"] . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-red-300 outline-none hover:border-red-500 hover:text-red-500">View</a>';
                                     echo '</div>';
                                 echo '</div>';
                             }
