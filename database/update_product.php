@@ -1,56 +1,52 @@
 <?php
-    header('Content-Type: application/json');
-
     include 'db_connection.php';
 
-    $data = json_decode(file_get_contents('php://input'), true);
-    $id = $data['id'] ?? null;
-    $name = $data['name'] ?? null;
-    $description = $data['description'] ?? null;
-    $newImageName = $data['image'] ?? null;
-    $uploadDir = "../images/";
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $id = $_POST['id'];
+        $name = $_POST['name'];
+        $description = $_POST['description'];
+        $image = $_FILES['image']['name'];
+        $target_dir = "../images/";
+        $target_file = $target_dir . time() . '-' . basename($image);
 
-    if ($id && $name && $description) {
-        $stmt = $conn->prepare("SELECT image FROM products WHERE id = ?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $product = $result->fetch_assoc();
-        $stmt->close();
-
-        if (!$product) {
-            echo json_encode(['success' => false, 'error' => 'Product not found']);
-            exit();
-        }
-
-        $currentImageName = $product['image'];
-        if ($newImageName) {
-            $oldImagePath = $uploadDir . $currentImageName;
-            if (file_exists($oldImagePath)) {
-                unlink($oldImagePath);
-            }
-
-            $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, image = ? WHERE id = ?");
-            $stmt->bind_param("sdsi", $name, $description, $newImageName, $id);
-        } else {
-            $stmt = $conn->prepare("UPDATE products SET name = ?, description = ? WHERE id = ?");
-            $stmt->bind_param("sdi", $name, $description, $id);
-        }
-
-        if ($stmt->execute()) {
-            $stmt = $conn->prepare("SELECT * FROM products WHERE id = ?");
+        if (move_uploaded_file($_FILES['image']['tmp_name'], $target_file)) {
+            $sql = "SELECT image FROM products WHERE id=?";
+            $stmt = $conn->prepare($sql);
             $stmt->bind_param("i", $id);
             $stmt->execute();
-            $result = $stmt->get_result();
-            $updatedProduct = $result->fetch_assoc();
+            $stmt->bind_result($old_image);
+            $stmt->fetch();
             $stmt->close();
 
-            echo json_encode(['success' => true, 'data' => $updatedProduct]);
+            if (!empty($old_image) && file_exists($old_image)) {
+                unlink($old_image);
+            }
+
+            $sql = "UPDATE products SET name=?, description=?, image=? WHERE id=?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sssi", $name, $description, $target_file, $id);
+
+            if ($stmt->execute()) {
+                echo "Product updated successfully.";
+            } else {
+                echo "Error updating product: " . $stmt->error;
+            }
+
+            $stmt->close();
         } else {
-            echo json_encode(['success' => false, 'error' => 'Failed to update product']);
+            $sql = "UPDATE products SET name=?, description=? WHERE id=?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssi", $name, $description, $id);
+
+            if ($stmt->execute()) {
+                echo "Product updated successfully.";
+            } else {
+                echo "Error updating product: " . $stmt->error;
+            }
+
+            $stmt->close();
+
         }
-    } else {
-        echo json_encode(['success' => false, 'error' => 'Invalid input']);
     }
 
     $conn->close();

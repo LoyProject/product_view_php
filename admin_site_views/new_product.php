@@ -18,6 +18,7 @@
                         title: file.name,
                         imageUrl: e.target.result,
                         imageAlt: 'Product Image',
+                        imageHeight: 300,
                         confirmButtonText: 'Close'
                     });
                 }
@@ -47,7 +48,7 @@
                         title: 'Product Added',
                         text: 'The product has been added successfully!',
                     });
-                    document.getElementById('productForm').reset();
+                    document.getElementById('addProductForm').reset();
                 })
                 .catch(error => {
                     Swal.fire({

@@ -1,9 +1,8 @@
 <?php
 
-    include 'db_connection.php';
+    include '../database/db_connection.php';
 
-    $data = json_decode(file_get_contents('php://input'), true);
-    $id = $data['id'] ?? null;
+    $id = $_GET['id'];
 
     if ($id) {
         $stmt = $conn->prepare("SELECT image FROM products WHERE id = ?");
@@ -40,3 +39,9 @@
 
     $conn->close();
 ?>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        window.location.href = '../admin_site_views/list_product.php';
+    });
+</script>

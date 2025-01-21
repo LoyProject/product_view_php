@@ -28,8 +28,15 @@
 <body>
     <div class="p-8">
         <div class="px-8 font-[sans-serif] overflow-x-auto">
-            <div class="mb-4">
+            <div class="mb-4 flex justify-between">
                 <h2 class="text-2xl font-bold">Products List</h2>
+                <a href="new_product.php" class="text-sm text-white bg-green-500 hover:bg-green-700 py-2 px-4 rounded">Add Product</a>
+            </div>
+            <div class="mb-4 flex justify-start">
+                <form method="GET" action="" class="flex items-center">
+                    <input type="text" name="search" placeholder="Search..." class="text-sm text-gray-500 border border-gray-400 rounded h-7 px-2 outline-none">
+                    <button type="submit" class="text-sm text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded ml-2">Search</button>
+                </form>
             </div>
             <div class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
                 <table class="w-full text-left table-auto min-w-max">
@@ -83,7 +90,7 @@
                 </table>
             </div>
             <div class="md:flex mt-4">
-                <p class="text-sm text-gray-500 flex-1">Showing <?= $offset + 1 ?> to <?= min($offset + $limit, $total_records) ?>of<?= $total_records ?>entries</p>
+                <p class="text-sm text-gray-500 flex-1">Showing <?= $offset + 1 ?> to <?= min($offset + $limit, $total_records) ?> of <?= $total_records ?> entries</p>
                 <div class="flex items-center max-md:mt-4">
                     <p class="text-sm text-gray-500">Display</p>
                     <select class="text-sm text-gray-500 border border-gray-400 rounded h-7 mx-4 px-1 outline-none" onchange="window.location.href='?page=1&limit=' + this.value;">
