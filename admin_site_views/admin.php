@@ -7,6 +7,8 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 
 <header class='flex shadow-md py-1 px-4 sm:px-7 bg-white min-h-[70px] tracking-wide z-[110] fixed top-0 w-full'>
@@ -150,8 +152,6 @@
     <?php include '../database/db_connection.php'; ?>
     <script src="../js/script-admin.js"></script>
     <div class="relative font-[sans-serif] pt-[70px] h-screen">
-
-
         <div class="flex items-start">
             <nav id="sidebar" class="lg:min-w-[250px] w-max max-lg:min-w-8">
                 <div id="sidebar-collapse-menu" style="height: calc(100vh - 72px)"
@@ -625,90 +625,21 @@
             </section>
 
             <section class="main-content w-full overflow-auto p-6 hidden" id="AddProducts">
-                <div id="alert-message" class="font-[sans-serif] space-y-6 hidden">
-                    <div class="bg-green-100 text-green-800 p-4 rounded-lg relative" role="alert">
-                        <strong class="font-bold text-sm">Success!</strong>
-                        <span class="block text-sm sm:inline max-sm:mt-2 max-sm:ml-0 ml-4 mr-8">Products is created
-                            successfully!</span>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-7 hover:bg-green-200 rounded-lg transition-all p-2 cursor-pointer fill-green-500 absolute right-4 top-1/2 -translate-y-1/2"
-                            viewBox="0 0 320.591 320.591"
-                            onclick="document.getElementById('alert-message').classList.add('hidden');">
-                            <path
-                                d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
-                                data-original="#000000" />
-                            <path
-                                d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
-                                data-original="#000000" />
-                        </svg>
-                    </div>
-                </div>
-                <div id="alert-message-error" class="font-[sans-serif] space-y-6 hidden">
-                    <div class="bg-red-100 text-red-800  p-4 rounded-lg relative" role="alert">
-                        <strong class="font-bold text-sm">Error!</strong>
-                        <span class="block text-sm sm:inline max-sm:mt-2 max-sm:ml-0 ml-4 mr-8">Failed to created
-                            products! Please try again later...</span>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-7 hover:bg-red-200 rounded-lg transition-all p-2 cursor-pointer fill-red-500 absolute right-4 top-1/2 -translate-y-1/2"
-                            viewBox="0 0 320.591 320.591"
-                            onclick="document.getElementById('alert-message-error').classList.add('hidden');">
-                            <path
-                                d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
-                                data-original="#000000" />
-                            <path
-                                d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
-                                data-original="#000000" />
-                        </svg>
-                    </div>
-                </div>
-                <div id="alert-message-warning" class="font-[sans-serif] space-y-6 hidden">
-                    <div class="bg-yellow-100 text-yellow-800 p-4 rounded-lg relative" role="alert">
-                        <strong class="font-bold text-sm">Warning!</strong>
-                        <span class="block text-sm sm:inline max-sm:mt-2 max-sm:ml-0 ml-4 mr-8">The textbox is clear all
-                            data that your input!</span>
-                        <svg xmlns="http://www.w3.org/2000/svg"
-                            class="w-7 hover:bg-yellow-200 rounded-lg transition-all p-2 cursor-pointer fill-yellow-500 absolute right-4 top-1/2 -translate-y-1/2"
-                            viewBox="0 0 320.591 320.591"
-                            onclick="document.getElementById('alert-message-warning').classList.add('hidden');">
-                            <path
-                                d="M30.391 318.583a30.37 30.37 0 0 1-21.56-7.288c-11.774-11.844-11.774-30.973 0-42.817L266.643 10.665c12.246-11.459 31.462-10.822 42.921 1.424 10.362 11.074 10.966 28.095 1.414 39.875L51.647 311.295a30.366 30.366 0 0 1-21.256 7.288z"
-                                data-original="#000000" />
-                            <path
-                                d="M287.9 318.583a30.37 30.37 0 0 1-21.257-8.806L8.83 51.963C-2.078 39.225-.595 20.055 12.143 9.146c11.369-9.736 28.136-9.736 39.504 0l259.331 257.813c12.243 11.462 12.876 30.679 1.414 42.922-.456.487-.927.958-1.414 1.414a30.368 30.368 0 0 1-23.078 7.288z"
-                                data-original="#000000" />
-                        </svg>
-                    </div>
-                </div>
                 <div class="flex items-center">
                     <div class="container mx-auto p-2 rounded-lg">
                         <h2 class="p-4 text-2xl font-bold mb-4">Add New Product</h2>
-                        <form id="productForm" onsubmit="submitForm(event)">
+                        <form id="addProductForm" onsubmit="addProductBtn(event)">
                             <div class="p-4 space-y-2">
                                 <label class=" font-md text-slate-500" for="product-name">
                                     Product Name
                                 </label>
-                                <input
-                                    class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    type="text" id="name" name="name" required>
-                                </input>
+                                <input class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500" type="text" id="name" name="name" autocomplete="off" required></input>
                             </div>
                             <div class="p-4 space-y-2">
                                 <label class=" font-md text-slate-500" for="product-description">
                                     Product Description
                                 </label>
-                                <textarea
-                                    class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    id="description" name="description" required rows="5">
-                                    </textarea>
-                            </div>
-                            <div class="p-4 space-y-2">
-                                <label class=" font-md text-slate-500" for="product-category">
-                                    Product Category
-                                </label>
-                                <input
-                                    class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    id="product-category" type="text">
-                                </input>
+                                <textarea class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500" id="description" name="description" autocomplete="off" required></textarea>
                             </div>
                             <div class="p-4 space-y-2">
                                 <label class=" font-md text-slate-500" for="product-image">
@@ -727,89 +658,96 @@
                                                 data-original="#000000" />
                                         </svg>
                                     </div>
-                                    <span id="file-name" class="text-xs font-medium text-gray-400 mt-2">Only .png,
-                                        .jpeg, .jpg are allowed.</span>
-                                    <input type="file" id="image" name="image" accept="image/*" class="hidden"
-                                        accept=".jpg, .jpeg, .png"
-                                        onchange="displayFileName(this); if(this.files.length > 0); document.getElementById('file-name').style.display = 'none'; document.getElementById('upload-icon').style.display = 'none';" />
+                                    <span id="file-name" class="text-xs font-medium text-gray-400 mt-2">Only .png, .jpeg, .jpg are allowed.</span>
+                                    <input type="file" id="image" name="image" accept="image/*" autocomplete="off" class="hidden" accept=".jpg, .jpeg, .png" required onchange="displayFileName(this); if(this.files.length > 0); document.getElementById('file-name').style.display = 'none'; document.getElementById('upload-icon').style.display = 'none';"/>
                                     <img id="preview-image" class="hidden w-full h-52 object-contain rounded" />
                                 </label>
                             </div>
                             <div class="p-4 space-x-4 flex justify-end">
                                 <button
-                                    class="text-white bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
-                                    type="button" onclick="document.getElementById('productForm').reset();
-                                        document.getElementById('preview-image').classList.add('hidden');
-                                        document.getElementById('alert-message-warning').classList.remove('hidden');
-                                        setTimeout(() => {
-                                            document.getElementById('alert-message-warning').classList.add('hidden');
-                                        }, 6000);
-                                        document.getElementById('file-name').style.display = 'block';">
+                                    class="text-white bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
+                                    type="button" onclick="document.getElementById('addProductForm').reset();
+                                        document.getElementById('preview-image').classList.add('hidden');" >
                                     Cancel
                                 </button>
                                 <button
+                                    class="text-white bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
+                                    type="button" onclick="viewImage()">
+                                    View Image
+                                </button>
+                                <button
+                                    class="text-white bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
+                                    type="button" onclick="removeImage()">
+                                    Delete Image
+                                </button>
+                                <button
                                     class="text-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
-                                    type="submit" onclick="saveData()">
+                                    type="submit">
                                     Submit
                                 </button>
                             </div>
                         </form>
                     </div>
                     <script>
-                    function displayFileName(input) {
-                        const file = input.files[0];
-                        const previewImage = document.getElementById('preview-image');
+                        function displayFileName(input) {
+                            const file = input.files[0];
+                            const previewImage = document.getElementById('preview-image');
 
-                        const reader = new FileReader();
-                        reader.onload = function(e) {
-                            previewImage.src = e.target.result;
-                            previewImage.classList.remove('hidden');
-                        };
-                        reader.readAsDataURL(file);
-                    }
-
-                    function showAlert(message, type) {
-                        const alertBox = document.getElementById('alert-message');
-                        alertBox.classList.remove('hidden');
-                        setTimeout(() => {
-                            alertBox.classList.add('hidden');
-                        }, 6000);
-                    }
-
-                    function showAlertError(message, type) {
-                        const alertBox = document.getElementById('alert-message-error');
-                        alertBox.classList.remove('hidden');
-                        setTimeout(() => {
-                            alertBox.classList.add('hidden');
-                        }, 6000);
-                    }
-
-                    function saveData() {
-                        const formData = new FormData(document.getElementById('productForm'));
-                        fetch('../database/insert_product.php', {
-                                method: 'POST',
-                                body: formData,
-                            })
-                            .then(response => response.json())
-                            .then(data => {
-                                console.log(data); // Log the response data for debugging
-                                if (data.status === 'success') {
-                                    showAlert();
-                                    document.getElementById('productForm').reset();
-                                } else {
-                                    showAlertError(data.message);
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                previewImage.src = e.target.result;
+                                previewImage.classList.remove('hidden');
+                            };
+                            reader.readAsDataURL(file);
+                        }
+                        function viewImage() {
+                            const imageInput = document.getElementById('image');
+                            const file = imageInput.files[0];
+                            if (file) {
+                                const reader = new FileReader();
+                                reader.onload = function(e) {
+                                    Swal.fire({
+                                        title: file.name,
+                                        imageUrl: e.target.result,
+                                        imageAlt: 'Product Image',
+                                        confirmButtonText: 'Close'
+                                    });
                                 }
-                            })
-                            .catch(error => {
-                                console.error('Error:', error);
-                                showAlertError('An error occurred while saving the product.');
-                            });
-                    }
+                                reader.readAsDataURL(file);
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'No image selected!',
+                                });
+                            }
+                        }
+                        function removeImage() {
+                            const imageInput = document.getElementById('preview-image');
+                            imageInput.classList.add('hidden');
+                        }
 
-                    function submitForm(event) {
-                        event.preventDefault();
-                        saveData();
-                    }
+                        function addProductBtn(event) {
+                            event.preventDefault();
+                            const formData = new FormData(document.getElementById('addProductForm'));
+
+                            axios.post('../database/insert_product.php', formData)
+                                .then(response => {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Product Added',
+                                        text: 'The product has been added successfully!',
+                                    });
+                                    document.getElementById('productForm').reset();
+                                })
+                                .catch(error => {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Error',
+                                        text: 'There was an error adding the product.',
+                                    });
+                                });
+                        }
                     </script>
                 </div>
             </section>
