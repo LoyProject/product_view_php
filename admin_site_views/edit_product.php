@@ -69,7 +69,7 @@
                         title: 'Product Updated',
                         text: response.data.message,
                     }).then(() => {
-                        window.location.href = '../admin_site_views/list_product.php';
+                        window.location.href = '../admin_site_views/index.php';
                     });
                 })
                 .catch(error => {
