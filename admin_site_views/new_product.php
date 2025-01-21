@@ -83,7 +83,6 @@
                 <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md">Add Product</button>
             </div>
         </form>
-
     </div>
 </body>
 </html>
