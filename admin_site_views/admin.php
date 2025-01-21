@@ -154,6 +154,7 @@
                 </button>
             </div>
         </header>
+
         <div class="flex items-start">
             <nav id="sidebar" class="lg:min-w-[250px] w-max max-lg:min-w-8">
                 <div id="sidebar-collapse-menu" style="height: calc(100vh - 72px)"
@@ -164,6 +165,7 @@
                                 document.getElementById('Products').style.display='none';
                                 document.getElementById('AddProducts').style.display='none';
                                 document.getElementById('Profile').style.display='none';
+                                document.getElementById('Setting').style.display='none';
                                 resetMenuColors();
                                 this.classList.add('text-red-500');
                                 this.querySelector('svg').classList.add('fill-red-500');"
@@ -187,6 +189,7 @@
                                     document.getElementById('AddProducts').style.display='none';
                                     document.getElementById('Dashboard').style.display='none';
                                     document.getElementById('Profile').style.display='none';
+                                    document.getElementById('Setting').style.display='none';
                                     resetMenuColors();
                                     this.classList.add('text-red-500');
                                     this.querySelector('svg').classList.add('fill-red-500');"
@@ -207,6 +210,7 @@
                                     document.getElementById('Dashboard').style.display='none';
                                     document.getElementById('Products').style.display='none';
                                     document.getElementById('Profile').style.display='none';
+                                    document.getElementById('Setting').style.display='none';
                                     resetMenuColors();
                                     this.classList.add('text-red-500');
                                     this.querySelector('svg').classList.add('fill-red-500');"
@@ -227,10 +231,32 @@
                     </ul>
                     <ul class="space-y-2 mb-2">
                         <li>
+                            <a href="javascript:void(0)" onclick="document.getElementById('Setting').style.display='block';
+                                    document.getElementById('AddProducts').style.display='none';
+                                    document.getElementById('Dashboard').style.display='none';
+                                    document.getElementById('Products').style.display='none';
+                                    document.getElementById('Profile').style.display='none';
+                                    resetMenuColors();
+                                    this.classList.add('text-red-500');
+                                    this.querySelector('svg').classList.add('fill-red-500');"
+                                class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                    class="w-[20px] h-[20px] mr-3" viewBox="0 0 24 24">
+                                    <path
+                                        d="M8.82501 20C8.37501 20 7.98751 19.85 7.66251 19.55C7.33751 19.25 7.14168 18.8833 7.07501 18.45L6.85001 16.8C6.63334 16.7167 6.42918 16.6167 6.23751 16.5C6.04584 16.3833 5.85834 16.2583 5.67501 16.125L4.12501 16.775C3.70834 16.9583 3.29168 16.975 2.87501 16.825C2.45834 16.675 2.13334 16.4083 1.90001 16.025L0.725011 13.975C0.491678 13.5917 0.425011 13.1833 0.525011 12.75C0.625011 12.3167 0.850011 11.9583 1.20001 11.675L2.52501 10.675C2.50834 10.5583 2.50001 10.4458 2.50001 10.3375V9.6625C2.50001 9.55417 2.50834 9.44167 2.52501 9.325L1.20001 8.325C0.850011 8.04167 0.625011 7.68333 0.525011 7.25C0.425011 6.81667 0.491678 6.40833 0.725011 6.025L1.90001 3.975C2.13334 3.59167 2.45834 3.325 2.87501 3.175C3.29168 3.025 3.70834 3.04167 4.12501 3.225L5.67501 3.875C5.85834 3.74167 6.05001 3.61667 6.25001 3.5C6.45001 3.38333 6.65001 3.28333 6.85001 3.2L7.07501 1.55C7.14168 1.11667 7.33751 0.75 7.66251 0.45C7.98751 0.15 8.37501 0 8.82501 0H11.175C11.625 0 12.0125 0.15 12.3375 0.45C12.6625 0.75 12.8583 1.11667 12.925 1.55L13.15 3.2C13.3667 3.28333 13.5708 3.38333 13.7625 3.5C13.9542 3.61667 14.1417 3.74167 14.325 3.875L15.875 3.225C16.2917 3.04167 16.7083 3.025 17.125 3.175C17.5417 3.325 17.8667 3.59167 18.1 3.975L19.275 6.025C19.5083 6.40833 19.575 6.81667 19.475 7.25C19.375 7.68333 19.15 8.04167 18.8 8.325L17.475 9.325C17.4917 9.44167 17.5 9.55417 17.5 9.6625V10.3375C17.5 10.4458 17.4833 10.5583 17.45 10.675L18.775 11.675C19.125 11.9583 19.35 12.3167 19.45 12.75C19.55 13.1833 19.4833 13.5917 19.25 13.975L18.05 16.025C17.8167 16.4083 17.4917 16.675 17.075 16.825C16.6583 16.975 16.2417 16.9583 15.825 16.775L14.325 16.125C14.1417 16.2583 13.95 16.3833 13.75 16.5C13.55 16.6167 13.35 16.7167 13.15 16.8L12.925 18.45C12.8583 18.8833 12.6625 19.25 12.3375 19.55C12.0125 19.85 11.625 20 11.175 20H8.82501ZM9.00001 18H10.975L11.325 15.35C11.8417 15.2167 12.3208 15.0208 12.7625 14.7625C13.2042 14.5042 13.6083 14.1917 13.975 13.825L16.45 14.85L17.425 13.15L15.275 11.525C15.3583 11.2917 15.4167 11.0458 15.45 10.7875C15.4833 10.5292 15.5 10.2667 15.5 10C15.5 9.73333 15.4833 9.47083 15.45 9.2125C15.4167 8.95417 15.3583 8.70833 15.275 8.475L17.425 6.85L16.45 5.15L13.975 6.2C13.6083 5.81667 13.2042 5.49583 12.7625 5.2375C12.3208 4.97917 11.8417 4.78333 11.325 4.65L11 2H9.02501L8.67501 4.65C8.15834 4.78333 7.67918 4.97917 7.23751 5.2375C6.79584 5.49583 6.39168 5.80833 6.02501 6.175L3.55001 5.15L2.57501 6.85L4.72501 8.45C4.64168 8.7 4.58334 8.95 4.55001 9.2C4.51668 9.45 4.50001 9.71667 4.50001 10C4.50001 10.2667 4.51668 10.525 4.55001 10.775C4.58334 11.025 4.64168 11.275 4.72501 11.525L2.57501 13.15L3.55001 14.85L6.02501 13.8C6.39168 14.1833 6.79584 14.5042 7.23751 14.7625C7.67918 15.0208 8.15834 15.2167 8.67501 15.35L9.00001 18ZM10.05 13.5C11.0167 13.5 11.8417 13.1583 12.525 12.475C13.2083 11.7917 13.55 10.9667 13.55 10C13.55 9.03333 13.2083 8.20833 12.525 7.525C11.8417 6.84167 11.0167 6.5 10.05 6.5C9.06668 6.5 8.23751 6.84167 7.56251 7.525C6.88751 8.20833 6.55001 9.03333 6.55001 10C6.55001 10.9667 6.88751 11.7917 7.56251 12.475C8.23751 13.1583 9.06668 13.5 10.05 13.5Z"
+                                        data-original="#000000" />
+                                </svg>
+                                <span>Setting</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="space-y-2 mb-2">
+                        <li>
                             <a href="javascript:void(0)" onclick=" document.getElementById('Profile').style.display='block';
                                     document.getElementById('AddProducts').style.display='none';
                                     document.getElementById('Dashboard').style.display='none';
                                     document.getElementById('Products').style.display='none';
+                                    document.getElementById('Setting').style.display='none';
                                     resetMenuColors();
                                     this.classList.add('text-red-500');
                                     this.querySelector('svg').classList.add('fill-red-500');"
@@ -245,18 +271,6 @@
                             </a>
                         </li>
                     </ul>
-                    <script>
-                        function resetMenuColors() {
-                            const menuItems = document.querySelectorAll('nav#sidebar a');
-                            menuItems.forEach(item => {
-                                item.classList.remove('text-red-500');
-                                const svg = item.querySelector('svg');
-                                if (svg) {
-                                    svg.classList.remove('fill-red-500');
-                                }
-                            });
-                        }
-                    </script>
                     <ul class="space-y-2 mb-2">
                         <li>
                             <a href="javascript:void(0)" onclick="document.getElementById('popup-modal').style.display='block';
@@ -278,6 +292,18 @@
                             </a>
                         </li>
                     </ul>
+                    <script>
+                    function resetMenuColors() {
+                        const menuItems = document.querySelectorAll('nav#sidebar a');
+                        menuItems.forEach(item => {
+                            item.classList.remove('text-red-500');
+                            const svg = item.querySelector('svg');
+                            if (svg) {
+                                svg.classList.remove('fill-red-500');
+                            }
+                        });
+                    }
+                    </script>
                 </div>
             </nav>
 
@@ -300,14 +326,14 @@
 
             <section class="main-content w-full overflow-auto p-6 hidden" id="Products">
                 <div class="p-8">
-                    <div class=" font-[sans-serif] overflow-x-auto">
-                        <h1 class="text-left">Products</h1>
-                    </div>
-                    <div class="container px-8 font-[sans-serif] overflow-x-auto">
+                    <div class="px-8 font-[sans-serif] overflow-x-auto">
+                        <div class="mb-4">
+                            <h2 class="text-2xl font-bold">Products List</h2>
+                        </div>
                         <?php
                         include '../database/db_connection.php';
 
-                        $limit = 90;
+                        $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 10;
                         $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
                         $offset = ($page - 1) * $limit;
 
@@ -320,166 +346,71 @@
                         $sql = "SELECT id, name, description, image FROM products ORDER BY id DESC LIMIT $limit OFFSET $offset";
                         $result = $conn->query($sql);
                         ?>
-                        <table class="min-w-full bg-gray-50 rounded-lg">
-                            <thead class="whitespace-nowrap">
-                                <tr class="font-bold bg-red-50">
-                                    <th class="p-4 text-left text-sm font-semibold">
-                                        ID
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="w-3 h-3 fill-gray-400 inline cursor-pointer ml-2"
-                                            viewBox="0 0 401.998 401.998">
-                                            <path
-                                                d="M73.092 164.452h255.813c4.949 0 9.233-1.807 12.848-5.424 3.613-3.616 5.427-7.898 5.427-12.847s-1.813-9.229-5.427-12.85L213.846 5.424C210.232 1.812 205.951 0 200.999 0s-9.233 1.812-12.85 5.424L60.242 133.331c-3.617 3.617-5.424 7.901-5.424 12.85 0 4.948 1.807 9.231 5.424 12.847 3.621 3.617 7.902 5.424 12.85 5.424zm255.813 73.097H73.092c-4.952 0-9.233 1.808-12.85 5.421-3.617 3.617-5.424 7.898-5.424 12.847s1.807 9.233 5.424 12.848L188.149 396.57c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428l127.907-127.906c3.613-3.614 5.427-7.898 5.427-12.848 0-4.948-1.813-9.229-5.427-12.847-3.614-3.616-7.899-5.42-12.848-5.42z"
-                                                data-original="#000000" />
-                                        </svg>
-                                    </th>
-                                    <th class="p-4 text-left text-sm font-semibold">
-                                        Name
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="w-3 h-3 fill-gray-400 inline cursor-pointer ml-2"
-                                            viewBox="0 0 401.998 401.998">
-                                            <path
-                                                d="M73.092 164.452h255.813c4.949 0 9.233-1.807 12.848-5.424 3.613-3.616 5.427-7.898 5.427-12.847s-1.813-9.229-5.427-12.85L213.846 5.424C210.232 1.812 205.951 0 200.999 0s-9.233 1.812-12.85 5.424L60.242 133.331c-3.617 3.617-5.424 7.901-5.424 12.85 0 4.948 1.807 9.231 5.424 12.847 3.621 3.617 7.902 5.424 12.85 5.424zm255.813 73.097H73.092c-4.952 0-9.233 1.808-12.85 5.421-3.617 3.617-5.424 7.898-5.424 12.847s1.807 9.233 5.424 12.848L188.149 396.57c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428l127.907-127.906c3.613-3.614 5.427-7.898 5.427-12.848 0-4.948-1.813-9.229-5.427-12.847-3.614-3.616-7.899-5.42-12.848-5.42z"
-                                                data-original="#000000" />
-                                        </svg>
-                                    </th>
-                                    <th class="p-4 text-left text-sm font-semibold">
-                                        Description
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="w-3 h-3 fill-gray-400 inline cursor-pointer ml-2"
-                                            viewBox="0 0 401.998 401.998">
-                                            <path
-                                                d="M73.092 164.452h255.813c4.949 0 9.233-1.807 12.848-5.424 3.613-3.616 5.427-7.898 5.427-12.847s-1.813-9.229-5.427-12.85L213.846 5.424C210.232 1.812 205.951 0 200.999 0s-9.233 1.812-12.85 5.424L60.242 133.331c-3.617 3.617-5.424 7.901-5.424 12.85 0 4.948 1.807 9.231 5.424 12.847 3.621 3.617 7.902 5.424 12.85 5.424zm255.813 73.097H73.092c-4.952 0-9.233 1.808-12.85 5.421-3.617 3.617-5.424 7.898-5.424 12.847s1.807 9.233 5.424 12.848L188.149 396.57c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428l127.907-127.906c3.613-3.614 5.427-7.898 5.427-12.848 0-4.948-1.813-9.229-5.427-12.847-3.614-3.616-7.899-5.42-12.848-5.42z"
-                                                data-original="#000000" />
-                                        </svg>
-                                    </th>
-                                    <th class="p-4 text-left text-sm font-semibold">
-                                        Image
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="w-3 h-3 fill-gray-400 inline cursor-pointer ml-2"
-                                            viewBox="0 0 401.998 401.998">
-                                            <path
-                                                d="M73.092 164.452h255.813c4.949 0 9.233-1.807 12.848-5.424 3.613-3.616 5.427-7.898 5.427-12.847s-1.813-9.229-5.427-12.85L213.846 5.424C210.232 1.812 205.951 0 200.999 0s-9.233 1.812-12.85 5.424L60.242 133.331c-3.617 3.617-5.424 7.901-5.424 12.85 0 4.948 1.807 9.231 5.424 12.847 3.621 3.617 7.902 5.424 12.85 5.424zm255.813 73.097H73.092c-4.952 0-9.233 1.808-12.85 5.421-3.617 3.617-5.424 7.898-5.424 12.847s1.807 9.233 5.424 12.848L188.149 396.57c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428l127.907-127.906c3.613-3.614 5.427-7.898 5.427-12.848 0-4.948-1.813-9.229-5.427-12.847-3.614-3.616-7.899-5.42-12.848-5.42z"
-                                                data-original="#000000" />
-                                        </svg>
-                                    </th>
-                                    <th class="p-4 text-left text-sm font-semibold">
-                                        Action
-                                        <svg xmlns="http://www.w3.org/2000/svg"
-                                            class="w-3 h-3 fill-gray-400 inline cursor-pointer ml-2"
-                                            viewBox="0 0 401.998 401.998">
-                                            <path
-                                                d="M73.092 164.452h255.813c4.949 0 9.233-1.807 12.848-5.424 3.613-3.616 5.427-7.898 5.427-12.847s-1.813-9.229-5.427-12.85L213.846 5.424C210.232 1.812 205.951 0 200.999 0s-9.233 1.812-12.85 5.424L60.242 133.331c-3.617 3.617-5.424 7.901-5.424 12.85 0 4.948 1.807 9.231 5.424 12.847 3.621 3.617 7.902 5.424 12.85 5.424zm255.813 73.097H73.092c-4.952 0-9.233 1.808-12.85 5.421-3.617 3.617-5.424 7.898-5.424 12.847s1.807 9.233 5.424 12.848L188.149 396.57c3.621 3.617 7.902 5.428 12.85 5.428s9.233-1.811 12.847-5.428l127.907-127.906c3.613-3.614 5.427-7.898 5.427-12.848 0-4.948-1.813-9.229-5.427-12.847-3.614-3.616-7.899-5.42-12.848-5.42z"
-                                                data-original="#000000" />
-                                        </svg>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="whitespace-nowrap">
-                                <?php if ($result->num_rows > 0): ?>
-                                    <?php while ($row = $result->fetch_assoc()): ?>
-                                        <tr class="text-sm">
-                                            <td class="px-4 border-b w-0.5/5"><?= $row["id"] ?></td>
-                                            <td class="px-4 border-b w-1/5"><?= $row["name"] ?></td>
-                                            <td class="px-4 border-b w-2/5 break-words whitespace-normal">
-                                                <?= $row["description"] ?>
-                                            </td>
-                                            <td class="px-4 border-b w-1/5"><img src="../images/<?= $row["image"] ?>"
-                                                    alt="Product Image" class="w-16 h-16"></td>
-                                            <td class="px-4 border-b w-0.5/5">
-                                                <button onclick='getProductById(<?= $row["id"] ?>)' class="mr-4" title="Edit">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="w-5 fill-blue-500 hover:fill-blue-700"
-                                                        viewBox="0 0 348.882 348.882">
-                                                        <path
-                                                            d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
-                                                            data-original="#000000" />
-                                                        <path
-                                                            d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
-                                                            data-original="#000000" />
-                                                    </svg>
-                                                </button>
-                                                <button onclick='deleteProduct(<?= $row["id"] ?>)' type="submit" title="Delete">
-                                                    <svg xmlns="http://www.w3.org/2000/svg"
-                                                        class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
-                                                            data-original="#000000" />
-                                                        <path
-                                                            d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
-                                                            data-original="#000000" />
-                                                    </svg>
-                                                </button>
-
-                                                <script>
-                                                    function getProductById(productId) {
-                                                        fetch('../database/fetch_product_by_id.php', {
-                                                            method: 'POST',
-                                                            headers: { 'Content-Type': 'application/json' },
-                                                            body: JSON.stringify({ id: productId }),
-                                                        })
-                                                            .then(response => {
-                                                                if (!response.ok) {
-                                                                    throw new Error(`HTTP error! Status: ${response.status}`);
-                                                                }
-                                                                return response.json();
-                                                            })
-                                                            .then(data => {
-                                                                if (data.error) {
-                                                                    alert(data.error);
-                                                                    return;
-                                                                }
-
-                                                                // Populate the form with fetched product details
-                                                                document.getElementById('update-name').value = data.name;
-                                                                document.getElementById('update-description').value = data.description;
-
-                                                                // Display the current product image as a preview
-                                                                const imagePreview = document.getElementById('update-image-preview');
-                                                                imagePreview.src = `../images/${data.image}`;
-                                                                imagePreview.alt = 'Product Image';
-
-                                                                // Show the modal
-                                                                document.getElementById('editProductModal').classList.remove('hidden');
-                                                            })
-                                                            .catch(error => {
-                                                                console.error('Error fetching product:', error);
-                                                                alert('An error occurred while fetching product details.');
-                                                            });
-                                                    }
-                                                    function deleteProduct(id) {
-                                                        if (confirm("Are you sure you want to delete this product?")) {
-                                                            fetch('../database/delete_product.php', {
-                                                                method: 'POST',
-                                                                headers: { 'Content-Type': 'application/json' },
-                                                                body: JSON.stringify({ id: id }),
-                                                            })
-                                                                .then(response => response.json())
-                                                                .then(data => {
-                                                                    if (data.success) {
-                                                                        alert("Product deleted successfully!");
-                                                                    } else {
-                                                                        alert("Error deleting data: " + data.error);
-                                                                    }
-                                                                })
-                                                                .catch(error => console.error("Error:", error));
-                                                        }
-                                                    }
-                                                </script>
-                                            </td>
-                                        </tr>
-                                    <?php endwhile; ?>
-                                <?php else: ?>
-                                    <tr>
-                                        <td colspan="5" class="py-2 px-4 border-b text-center">No products found</td>
+                        <div class="overflow-auto max-h-[700px]">
+                            <table class="min-w-full bg-gray-50">
+                                <thead>
+                                    <tr class="font-bold bg-red-50 border-2">
+                                        <th class="p-4 text-left text-sm font-semibold">ID</th>
+                                        <th class="p-4 text-left text-sm font-semibold">Name</th>
+                                        <th class="p-4 text-left text-sm font-semibold">Description</th>
+                                        <th class="p-4 text-left text-sm font-semibold">Image</th>
+                                        <th class="p-4 text-left text-sm font-semibold">Action</th>
                                     </tr>
-                                <?php endif; ?>
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody class="overflow-y-auto">
+                                    <?php if ($result->num_rows > 0): ?>
+                                    <?php while ($row = $result->fetch_assoc()): ?>
+                                    <tr class="text-sm">
+                                        <td class="px-4 border-b w-0.5/5"><?= $row["id"] ?></td>
+                                        <td class="px-4 border-b w-1/5"><?= $row["name"] ?></td>
+                                        <td class="px-4 border-b w-2/5 text-justify">
+                                            <?= $row["description"] ?>
+                                        </td>
+                                        <td class="px-4 border-b w-1/5"><img src="../images/<?= $row["image"] ?>"
+                                                alt="Product Image" class="w-16 h-16"></td>
+                                        <td class="px-4 border-b w-0.5/5">
+                                            <button onclick='getProductById(<?= $row["id"] ?>)' class="mr-4"
+                                                title="Edit">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="w-5 fill-blue-500 hover:fill-blue-700"
+                                                    viewBox="0 0 348.882 348.882">
+                                                    <path
+                                                        d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
+                                                        data-original="#000000" />
+                                                    <path
+                                                        d="M303.85 138.388c-8.284 0-15 6.716-15 15v127.347c0 21.034-17.113 38.147-38.147 38.147H68.904c-21.035 0-38.147-17.113-38.147-38.147V100.413c0-21.034 17.113-38.147 38.147-38.147h131.587c8.284 0 15-6.716 15-15s-6.716-15-15-15H68.904C31.327 32.266.757 62.837.757 100.413v180.321c0 37.576 30.571 68.147 68.147 68.147h181.798c37.576 0 68.147-30.571 68.147-68.147V153.388c.001-8.284-6.715-15-14.999-15z"
+                                                        data-original="#000000" />
+                                                </svg>
+                                            </button>
+                                            <button onclick='deleteProduct(<?= $row["id"] ?>)' type="submit"
+                                                title="Delete">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                    class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
+                                                    <path
+                                                        d="M19 7a1 1 0 0 0-1 1v11.191A1.92 1.92 0 0 1 15.99 21H8.01A1.92 1.92 0 0 1 6 19.191V8a1 1 0 0 0-2 0v11.191A3.918 3.918 0 0 0 8.01 23h7.98A3.918 3.918 0 0 0 20 19.191V8a1 1 0 0 0-1-1Zm1-3h-4V2a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v2H4a1 1 0 0 0 0 2h16a1 1 0 0 0 0-2ZM10 4V3h4v1Z"
+                                                        data-original="#000000" />
+                                                    <path
+                                                        d="M11 17v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Zm4 0v-7a1 1 0 0 0-2 0v7a1 1 0 0 0 2 0Z"
+                                                        data-original="#000000" />
+                                                </svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <?php endwhile; ?>
+                                    <?php else: ?>
+                                    <tr>
+                                        <td colspan="5" class="py-2 px-4 border-b text-center">No products found
+                                        </td>
+                                    </tr>
+                                    <?php endif; ?>
+                                </tbody>
+                            </table>
+                        </div>
 
-                        <div class="md:flex m-4">
-                            <p class="text-sm text-gray-500 flex-1">Showing <?= $offset + 1 ?> to
-                                <?= min($offset + $limit, $total_records) ?> of <?= $total_records ?> entries
+                        <div class="md:flex mt-4">
+                            <p class="text-sm text-gray-500 flex-1">
+                                Showing <?= $offset + 1 ?> to <?= min($offset + $limit, $total_records) ?> of
+                                <?= $total_records ?> entries
                             </p>
                             <div class="flex items-center max-md:mt-4">
                                 <p class="text-sm text-gray-500">Display</p>
@@ -494,59 +425,127 @@
                                 </select>
                                 <ul class="flex space-x-1 ml-2">
                                     <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                                        <li class="flex items-center justify-center cursor-pointer text-sm w-7 h-7 <?= $page == $i ? 'bg-[#007bff] text-white' : 'text-gray-500' ?> rounded"
-                                            onclick="window.location.href='?page=<?= $i ?>&limit=<?= $limit ?>'">
-                                            <?= $i ?>
-                                        </li>
+                                    <li
+                                        class="flex items-center justify-center cursor-pointer text-sm w-7 h-7 <?= $page == $i ? 'bg-[#007bff] text-white' : 'text-gray-500' ?> rounded">
+                                        <a href="<?= $_SERVER['PHP_SELF'] ?>?page=<?= $i ?>&limit=<?= $limit ?>"
+                                            class="block w-full h-full text-center leading-7"><?= $i ?></a>
+                                    </li>
                                     <?php endfor; ?>
                                 </ul>
                             </div>
                         </div>
-                    </div>
 
-                    <div id="editProductModal"
-                        class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
-                        <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
-                            <h2 class="text-xl font-semibold mb-4">Update Product</h2>
-                            <form id="updateForm" onsubmit="submitForm(event)">
-                                <input type="hidden" id="update-id" name="update-id">
-                                <div class="mb-4">
-                                    <label for="update-name" class="block text-sm font-medium">Name</label>
-                                    <input type="text" id="update-name" name="update-name"
-                                        class="w-full border rounded px-3 py-2" required>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="update-description"
-                                        class="block text-sm font-medium">Description</label>
-                                    <textarea id="update-description" name="update-description"
-                                        class="w-full border rounded px-3 py-2" rows="4" required></textarea>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="update-image-preview" class="block text-sm font-medium">Current
-                                        Image</label>
-                                    <img id="update-image-preview" class="w-32 h-32 object-cover mb-2">
-                                    <input type="file" id="update-image" name="update-image"
-                                        class="w-full border rounded px-3 py-2" accept="image/*">
-                                </div>
-                                <div class="flex justify-end space-x-2">
-                                    <button type="button" onclick="closeModal()"
-                                        class="bg-gray-300 text-gray-700 px-4 py-2 rounded">Cancel</button>
-                                    <button type="submit"
-                                        class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
-                                </div>
-                            </form>
+                        <div id=" editProductModal"
+                            class="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center hidden">
+                            <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
+                                <h2 class="text-xl font-semibold mb-4">Update Product</h2>
+                                <form id="updateForm" onsubmit="submitForm(event)">
+                                    <input type="hidden" id="update-id" name="update-id">
+                                    <div class="mb-4">
+                                        <label for="update-name" class="block text-sm font-medium">Name</label>
+                                        <input type="text" id="update-name" name="update-name"
+                                            class="w-full border rounded px-3 py-2" required>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="update-description"
+                                            class="block text-sm font-medium">Description</label>
+                                        <textarea id="update-description" name="update-description"
+                                            class="w-full border rounded px-3 py-2" rows="4" required></textarea>
+                                    </div>
+                                    <div class="mb-4">
+                                        <label for="update-image-preview" class="block text-sm font-medium">Current
+                                            Image</label>
+                                        <img id="update-image-preview" class="w-32 h-32 object-cover mb-2">
+                                        <input type="file" id="update-image" name="update-image"
+                                            class="w-full border rounded px-3 py-2" accept="image/*">
+                                    </div>
+                                    <div class="flex justify-end space-x-2">
+                                        <button type="button" onclick="closeModal()"
+                                            class="bg-gray-300 text-gray-700 px-4 py-2 rounded">Cancel</button>
+                                        <button type="submit"
+                                            class="bg-blue-500 text-white px-4 py-2 rounded">Update</button>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                    </div>
 
-                    <script>
+                        <script>
+                        function getProductById(productId) {
+                            fetch('../database/fetch_product_by_id.php', {
+                                    method: 'POST',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    },
+                                    body: JSON.stringify({
+                                        id: productId
+                                    }),
+                                })
+                                .then(response => {
+                                    if (!response.ok) {
+                                        throw new Error(`HTTP error! Status: ${response.status}`);
+                                    }
+                                    return response.json();
+                                })
+                                .then(data => {
+                                    if (data.error) {
+                                        alert(data.error);
+                                        return;
+                                    }
+
+                                    // Populate the form with fetched product details
+                                    document.getElementById('update-name').value = data.name;
+                                    document.getElementById('update-description').value = data
+                                        .description;
+
+                                    // Display the current product image as a preview
+                                    const imagePreview = document.getElementById(
+                                        'update-image-preview');
+                                    imagePreview.src = `../images/${data.image}`;
+                                    imagePreview.alt = 'Product Image';
+
+                                    // Show the modal
+                                    document.getElementById('editProductModal').classList.remove(
+                                        'hidden');
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching product:', error);
+                                    alert('An error occurred while fetching product details.');
+                                });
+                        }
+
+                        function deleteProduct(id) {
+                            if (confirm("Are you sure you want to delete this product?")) {
+                                fetch('../database/delete_product.php', {
+                                        method: 'POST',
+                                        headers: {
+                                            'Content-Type': 'application/json'
+                                        },
+                                        body: JSON.stringify({
+                                            id: id
+                                        }),
+                                    })
+                                    .then(response => response.json())
+                                    .then(data => {
+                                        if (data.success) {
+                                            alert("Product deleted successfully!");
+                                        } else {
+                                            alert("Error deleting data: " + data.error);
+                                        }
+                                    })
+                                    .catch(error => console.error("Error:", error));
+                            }
+                        }
+                        </script>
+
+                        <script>
                         function submitForm(event) {
                             event.preventDefault();
                             const formData = new FormData(document.getElementById('updateForm'));
 
                             fetch('../database/update_product.php', {
-                                method: 'POST',
-                                body: formData,
-                            })
+                                    method: 'POST',
+                                    body: formData,
+                                })
                                 .then(response => response.json())
                                 .then(data => {
                                     if (data.success) {
@@ -562,8 +561,9 @@
                         function closeModal() {
                             document.getElementById('editProductModal').classList.add('hidden');
                         }
+                        </script>
 
-                    </script>
+                    </div>
                 </div>
             </section>
 
@@ -624,7 +624,7 @@
                 </div>
                 <div class="flex items-center">
                     <div class="container mx-auto p-2 rounded-lg">
-                        <h1 class="p-4 text-2xl font-bold mb-4">Add New Product</h1>
+                        <h2 class="p-4 text-2xl font-bold mb-4">Add New Product</h2>
                         <form id="productForm" onsubmit="submitForm(event)">
                             <div class="p-4 space-y-2">
                                 <label class=" font-md text-slate-500" for="product-name">
@@ -699,61 +699,67 @@
                         </form>
                     </div>
                     <script>
-                        function displayFileName(input) {
-                            const file = input.files[0];
-                            const previewImage = document.getElementById('preview-image');
+                    function displayFileName(input) {
+                        const file = input.files[0];
+                        const previewImage = document.getElementById('preview-image');
 
-                            const reader = new FileReader();
-                            reader.onload = function (e) {
-                                previewImage.src = e.target.result;
-                                previewImage.classList.remove('hidden');
-                            };
-                            reader.readAsDataURL(file);
-                        }
+                        const reader = new FileReader();
+                        reader.onload = function(e) {
+                            previewImage.src = e.target.result;
+                            previewImage.classList.remove('hidden');
+                        };
+                        reader.readAsDataURL(file);
+                    }
 
-                        function showAlert(message, type) {
-                            const alertBox = document.getElementById('alert-message');
-                            alertBox.classList.remove('hidden');
-                            setTimeout(() => {
-                                alertBox.classList.add('hidden');
-                            }, 6000);
-                        }
+                    function showAlert(message, type) {
+                        const alertBox = document.getElementById('alert-message');
+                        alertBox.classList.remove('hidden');
+                        setTimeout(() => {
+                            alertBox.classList.add('hidden');
+                        }, 6000);
+                    }
 
-                        function showAlertError(message, type) {
-                            const alertBox = document.getElementById('alert-message-error');
-                            alertBox.classList.remove('hidden');
-                            setTimeout(() => {
-                                alertBox.classList.add('hidden');
-                            }, 6000);
-                        }
+                    function showAlertError(message, type) {
+                        const alertBox = document.getElementById('alert-message-error');
+                        alertBox.classList.remove('hidden');
+                        setTimeout(() => {
+                            alertBox.classList.add('hidden');
+                        }, 6000);
+                    }
 
-                        function saveData() {
-                            const formData = new FormData(document.getElementById('productForm'));
-                            fetch('../database/insert_product.php', {
+                    function saveData() {
+                        const formData = new FormData(document.getElementById('productForm'));
+                        fetch('../database/insert_product.php', {
                                 method: 'POST',
                                 body: formData,
                             })
-                                .then(response => response.json())
-                                .then(data => {
-                                    console.log(data); // Log the response data for debugging
-                                    if (data.status === 'success') {
-                                        showAlert();
-                                        document.getElementById('productForm').reset();
-                                    } else {
-                                        showAlertError(data.message);
-                                    }
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    showAlertError('An error occurred while saving the product.');
-                                });
-                        }
+                            .then(response => response.json())
+                            .then(data => {
+                                console.log(data); // Log the response data for debugging
+                                if (data.status === 'success') {
+                                    showAlert();
+                                    document.getElementById('productForm').reset();
+                                } else {
+                                    showAlertError(data.message);
+                                }
+                            })
+                            .catch(error => {
+                                console.error('Error:', error);
+                                showAlertError('An error occurred while saving the product.');
+                            });
+                    }
 
-                        function submitForm(event) {
-                            event.preventDefault();
-                            saveData();
-                        }
+                    function submitForm(event) {
+                        event.preventDefault();
+                        saveData();
+                    }
                     </script>
+                </div>
+            </section>
+
+            <section class="main-content w-full overflow-auto p-6 hidden" id="Setting">
+                <div class="flex items-center">
+                    <h1>Setting</h1>
                 </div>
             </section>
 
