@@ -738,7 +738,7 @@
                                         title: 'Product Added',
                                         text: 'The product has been added successfully!',
                                     });
-                                    document.getElementById('productForm').reset();
+                                    document.getElementById('addProductForm').reset();
                                 })
                                 .catch(error => {
                                     Swal.fire({
