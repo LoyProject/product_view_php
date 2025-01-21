@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Product</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script>
         function viewImage() {
             const imageInput = document.getElementById('image');
@@ -35,8 +35,7 @@
             const imageInput = document.getElementById('image');
             imageInput.value = '';
         }
-    </script>
-    <script>
+
         function addProductBtn(event) {
             event.preventDefault();
             const formData = new FormData(document.getElementById('productForm'));
@@ -79,6 +78,7 @@
                 <button type="button" class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md" onclick="removeImage()">Delete Image</button>
             </div>
             <div class="p-4 space-y-2 text-right">
+                <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded-md" onclick="document.getElementById('productForm').reset()">Cancel</button>
                 <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md">Add Product</button>
             </div>
         </form>
