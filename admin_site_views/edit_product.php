@@ -3,66 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Product</title>
+    <title>Edit Product</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        function viewImage() {
-            const imageInput = document.getElementById('image');
-            const file = imageInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    Swal.fire({
-                        title: file.name,
-                        imageUrl: e.target.result,
-                        imageAlt: 'Product Image',
-                        confirmButtonText: 'Close'
-                    });
-                }
-                reader.readAsDataURL(file);
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'No image selected!',
-                });
-            }
-        }
-
-        function removeImage() {
-            const imageInput = document.getElementById('image');
-            imageInput.value = '';
-        }
-
-        function addProductBtn(event) {
-            event.preventDefault();
-            const formData = new FormData(document.getElementById('addProductForm'));
-
-            axios.post('../database/insert_product.php', formData)
-                .then(response => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Product Added',
-                        text: 'The product has been added successfully!',
-                    });
-                    document.getElementById('productForm').reset();
-                })
-                .catch(error => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'There was an error adding the product.',
-                    });
-                });
-        }
-    </script>
 </head>
 <body>
-    <div class="container mx-auto p-2 rounded-lg">
-        <h1 class="px-4 pt-4 text-2xl font-bold">Add New Product</h1>
-        <form id="addProductForm" onsubmit="addProductBtn(event)">
+    <div class="container mx-auto p-4">
+        <h1 class="text-2xl font-bold mb-4">Edit Product</h1>
+        <form id="editProductForm" onsubmit="addProductBtn(event)">
             <div class="p-4 space-y-2">
                 <label class="font-md text-slate-500" for="name">Product Name</label>
                 <input class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500" type="text" id="name" name="name" autocomplete="off" required>
@@ -82,7 +31,6 @@
                 <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md">Add Product</button>
             </div>
         </form>
-
     </div>
 </body>
 </html>
