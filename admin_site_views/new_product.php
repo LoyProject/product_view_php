@@ -79,7 +79,7 @@
                 <button type="button" class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md" onclick="removeImage()">Delete Image</button>
             </div>
             <div class="p-4 space-y-2 text-right">
-                <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded-md" onclick="document.getElementById('productForm').reset()">Cancel</button>
+                <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded-md" onclick="window.location.href = '../admin_site_views/admin.php';">Cancel</button>
                 <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md">Add Product</button>
             </div>
         </form>

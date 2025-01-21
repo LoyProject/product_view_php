@@ -351,8 +351,15 @@
             <section class="main-content w-full overflow-auto p-6 hidden" id="Products">
                 <div class="p-8">
                     <div class="px-8 font-[sans-serif] overflow-x-auto">
-                        <div class="mb-4">
+                        <div class="mb-4 flex justify-between">
                             <h2 class="text-2xl font-bold">Products List</h2>
+                            <a href="new_product.php" class="text-sm text-white bg-green-500 hover:bg-green-700 py-2 px-4 rounded">Add Product</a>
+                        </div>
+                        <div class="mb-4 flex justify-start">
+                            <form method="GET" action="" class="flex items-center">
+                                <input type="text" name="search" placeholder="Search..." class="text-sm text-gray-500 border border-gray-400 rounded h-7 px-2 outline-none">
+                                <button type="submit" class="text-sm text-white bg-blue-500 hover:bg-blue-700 py-1 px-2 rounded ml-2">Search</button>
+                            </form>
                         </div>
                         <?php
                         include '../database/db_connection.php';
