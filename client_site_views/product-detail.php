@@ -148,11 +148,13 @@
   ?>
 
     <div class="p-16 mt-8 container mx-auto">
+        <h3 class="text-2xl font-semibold mt-8">Product Drtail</h3>
+        <hr>
         <div class="p-8 flex justify-center items-center rounded-lg bg-white">
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
                 <div class="col-span-1 h-auto">
-                    <div class="bg-gray-100 w-full h-[540px] flex justify-center items-center rounded-lg">
-                        <img src="../images/<?php echo($data['image'])?>" alt="logo" class="w-fit" />
+                    <div class="w-full h-[540px] flex justify-center items-center rounded-lg">
+                        <img src="../images/<?php echo($data['image'])?>" alt="logo" class="w-fit h-[540px]" />
                     </div>
                 </div>
                 <div class="col-span-1 h-auto">
@@ -212,7 +214,34 @@
         <h3 class="text-2xl font-semibold mt-8">Related Products</h3>
         <hr>
 
-        <div class="bg-blue-500 mt-4 h-56 flex justify-center items-center rounded-lg">
+        <div class="rounded-lg">
+            <div class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-2 w-full">
+                <?php
+                    $sql = "SELECT id, name, description, image FROM products WHERE id != $product_id ORDER BY RAND() LIMIT 5";
+                    $result = $conn->query($sql);
+
+                        if ($result->num_rows > 0) {
+                            while ($row = $result->fetch_assoc()) {
+                                echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2 flex flex-col">';
+                                    echo '<div>';
+                                        echo '<img src="images/' . $row["image"] . '" class="w-full h-52 object-cover rounded-lg" />';
+                                    echo '</div>';
+                                    echo '<div class="pt-6 text-center">';
+                                        echo '<h3 class="text-xl font-bold">' . $row["name"] . '</h3>';
+                                    echo '</div>';
+                                    echo '<div class="text-start flex-grow">';
+                                        echo '<article class="text-wrap">';
+                                        echo '<p class="mt-3 text-sm text-gray-500 leading-relaxed break-words">' . $row["description"] . '</p>';
+                                        echo '</article>';
+                                    echo '</div>';
+                                    echo '<div class="mt-4">';
+                                        echo '<a href="client_site_views/product-detail.php?id=' . $row["id"] . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-red-300 outline-none hover:border-red-500 hover:text-red-500">View</a>';
+                                    echo '</div>';
+                                echo '</div>';
+                            }
+                        }
+                    ?>
+            </div>
         </div>
     </div>
 
@@ -244,7 +273,8 @@
                     <img src="https://readymadeui.com/readymadeui.svg" alt="logo" class='w-36' />
                 </a>
                 <div class="mt-6">
-                    <p class="leading-relaxed text-sm">ReadymadeUI is a library of pre-designed UI components built for
+                    <p class="leading-relaxed text-sm">ReadymadeUI is a library of pre-designed UI components
+                        built for
                         Tailwind
                         CSS. It offers a collection of versatile, ready-to-use components that streamline the
                         development process by

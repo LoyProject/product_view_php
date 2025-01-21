@@ -162,6 +162,7 @@
                     <ul class="space-y-2 mb-2">
                         <li>
                             <a href="javascript:void(0)" onclick="document.getElementById('Dashboard').style.display='block';
+                                document.getElementById('UserManagement').style.display='none';
                                 document.getElementById('Products').style.display='none';
                                 document.getElementById('AddProducts').style.display='none';
                                 document.getElementById('Profile').style.display='none';
@@ -186,6 +187,7 @@
                     <ul class="space-y-2 mb-2">
                         <li>
                             <a href="javascript:void(0)" onclick=" document.getElementById('Products').style.display='block';
+                                    document.getElementById('UserManagement').style.display='none';
                                     document.getElementById('AddProducts').style.display='none';
                                     document.getElementById('Dashboard').style.display='none';
                                     document.getElementById('Profile').style.display='none';
@@ -207,6 +209,7 @@
                     <ul class="space-y-2 mb-2">
                         <li>
                             <a href="javascript:void(0)" onclick="document.getElementById('AddProducts').style.display='block';
+                                    document.getElementById('UserManagement').style.display='none';
                                     document.getElementById('Dashboard').style.display='none';
                                     document.getElementById('Products').style.display='none';
                                     document.getElementById('Profile').style.display='none';
@@ -232,6 +235,7 @@
                     <ul class="space-y-2 mb-2">
                         <li>
                             <a href="javascript:void(0)" onclick="document.getElementById('Setting').style.display='block';
+                                    document.getElementById('UserManagement').style.display='none';
                                     document.getElementById('AddProducts').style.display='none';
                                     document.getElementById('Dashboard').style.display='none';
                                     document.getElementById('Products').style.display='none';
@@ -252,7 +256,29 @@
                     </ul>
                     <ul class="space-y-2 mb-2">
                         <li>
-                            <a href="javascript:void(0)" onclick=" document.getElementById('Profile').style.display='block';
+                            <a href="javascript:void(0)" onclick="document.getElementById('UserManagement').style.display='block';
+                                    document.getElementById('Setting').style.display='none';
+                                    document.getElementById('AddProducts').style.display='none';
+                                    document.getElementById('Dashboard').style.display='none';
+                                    document.getElementById('Products').style.display='none';
+                                    document.getElementById('Profile').style.display='none';
+                                    resetMenuColors();
+                                    this.classList.add('text-red-500');
+                                    this.querySelector('svg').classList.add('fill-red-500');"
+                                class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                    class="w-[20px] h-[20px] mr-3" viewBox="0 0 24 24">
+                                    <path
+                                        d="M8.3 17.8C9.05 16.2833 10.05 15.2708 11.3 14.7625C12.55 14.2542 13.6167 14 14.5 14C14.8833 14 15.2583 14.0333 15.625 14.1C15.9917 14.1667 16.35 14.25 16.7 14.35C17.1 13.7167 17.4167 13.0333 17.65 12.3C17.8833 11.5667 18 10.8 18 10C18 7.76667 17.225 5.875 15.675 4.325C14.125 2.775 12.2333 2 10 2C7.76667 2 5.875 2.775 4.325 4.325C2.775 5.875 2 7.76667 2 10C2 10.75 2.09583 11.4667 2.2875 12.15C2.47917 12.8333 2.76667 13.4667 3.15 14.05C3.83333 13.7167 4.54167 13.4583 5.275 13.275C6.00833 13.0917 6.75 13 7.5 13C8.03333 13 8.54583 13.0458 9.0375 13.1375C9.52917 13.2292 10.0167 13.35 10.5 13.5C10.1167 13.7 9.75417 13.9333 9.4125 14.2C9.07083 14.4667 8.75 14.75 8.45 15.05C8.25 15.0167 8.07917 15 7.9375 15H7.5C6.96667 15 6.4375 15.0583 5.9125 15.175C5.3875 15.2917 4.88333 15.4667 4.4 15.7C4.93333 16.2333 5.52917 16.6792 6.1875 17.0375C6.84583 17.3958 7.55 17.65 8.3 17.8ZM10 20C8.61667 20 7.31667 19.7375 6.1 19.2125C4.88333 18.6875 3.825 17.975 2.925 17.075C2.025 16.175 1.3125 15.1167 0.7875 13.9C0.2625 12.6833 0 11.3833 0 10C0 8.61667 0.2625 7.31667 0.7875 6.1C1.3125 4.88333 2.025 3.825 2.925 2.925C3.825 2.025 4.88333 1.3125 6.1 0.7875C7.31667 0.2625 8.61667 0 10 0C11.3833 0 12.6833 0.2625 13.9 0.7875C15.1167 1.3125 16.175 2.025 17.075 2.925C17.975 3.825 18.6875 4.88333 19.2125 6.1C19.7375 7.31667 20 8.61667 20 10C20 11.3833 19.7375 12.6833 19.2125 13.9C18.6875 15.1167 17.975 16.175 17.075 17.075C16.175 17.975 15.1167 18.6875 13.9 19.2125C12.6833 19.7375 11.3833 20 10 20ZM7.5 11.5C6.53333 11.5 5.70833 11.1583 5.025 10.475C4.34167 9.79167 4 8.96667 4 8C4 7.03333 4.34167 6.20833 5.025 5.525C5.70833 4.84167 6.53333 4.5 7.5 4.5C8.46667 4.5 9.29167 4.84167 9.975 5.525C10.6583 6.20833 11 7.03333 11 8C11 8.96667 10.6583 9.79167 9.975 10.475C9.29167 11.1583 8.46667 11.5 7.5 11.5ZM7.5 9.5C7.91667 9.5 8.27083 9.35417 8.5625 9.0625C8.85417 8.77083 9 8.41667 9 8C9 7.58333 8.85417 7.22917 8.5625 6.9375C8.27083 6.64583 7.91667 6.5 7.5 6.5C7.08333 6.5 6.72917 6.64583 6.4375 6.9375C6.14583 7.22917 6 7.58333 6 8C6 8.41667 6.14583 8.77083 6.4375 9.0625C6.72917 9.35417 7.08333 9.5 7.5 9.5ZM14.5 12.5C13.8 12.5 13.2083 12.2583 12.725 11.775C12.2417 11.2917 12 10.7 12 10C12 9.3 12.2417 8.70833 12.725 8.225C13.2083 7.74167 13.8 7.5 14.5 7.5C15.2 7.5 15.7917 7.74167 16.275 8.225C16.7583 8.70833 17 9.3 17 10C17 10.7 16.7583 11.2917 16.275 11.775C15.7917 12.2583 15.2 12.5 14.5 12.5Z" />
+                                </svg>
+                                <span>User Management</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="space-y-2 mb-2">
+                        <li>
+                            <a href="javascript:void(0)" onclick=" document.getElementById('UserManagement').style.display='block';
+                                    document.getElementById('UserManagement').style.display='none';
                                     document.getElementById('AddProducts').style.display='none';
                                     document.getElementById('Dashboard').style.display='none';
                                     document.getElementById('Products').style.display='none';
@@ -274,6 +300,7 @@
                     <ul class="space-y-2 mb-2">
                         <li>
                             <a href="javascript:void(0)" onclick="document.getElementById('popup-modal').style.display='block';
+                                    document.getElementById('UserManagement').style.display='none';
                                     document.getElementById('Profile').style.display='none';
                                     document.getElementById('AddProducts').style.display='none';
                                     document.getElementById('Dashboard').style.display='none';
@@ -346,29 +373,62 @@
                         $sql = "SELECT id, name, description, image FROM products ORDER BY id DESC LIMIT $limit OFFSET $offset";
                         $result = $conn->query($sql);
                         ?>
-                        <div class="overflow-auto max-h-[700px]">
-                            <table class="min-w-full bg-gray-50">
+                        <div
+                            class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+                            <table class="w-full text-left table-auto min-w-max">
                                 <thead>
-                                    <tr class="font-bold bg-red-50 border-2">
-                                        <th class="p-4 text-left text-sm font-semibold">ID</th>
-                                        <th class="p-4 text-left text-sm font-semibold">Name</th>
-                                        <th class="p-4 text-left text-sm font-semibold">Description</th>
-                                        <th class="p-4 text-left text-sm font-semibold">Image</th>
-                                        <th class="p-4 text-left text-sm font-semibold">Action</th>
+                                    <tr>
+                                        <th class="p-4 border-b border-slate-300 bg-slate-50">
+                                            <p class="block text-sm font-normal leading-none text-slate-500">
+                                                ID
+                                            </p>
+                                        </th>
+                                        <th class="p-4 border-b border-slate-300 bg-slate-50">
+                                            <p class="block text-sm font-normal leading-none text-slate-500">
+                                                Name
+                                            </p>
+                                        </th>
+                                        <th class="p-4 border-b border-slate-300 bg-slate-50">
+                                            <p class="block text-sm font-normal leading-none text-slate-500">
+                                                Description
+                                            </p>
+                                        </th>
+                                        <th class="p-4 border-b border-slate-300 bg-slate-50">
+                                            <p class="block text-sm font-normal leading-none text-slate-500">
+                                                Image
+                                            </p>
+                                        </th>
+                                        <th class="p-4 border-b border-slate-300 bg-slate-50">
+                                            <p class="block text-sm font-normal leading-none text-slate-500">
+                                                Action
+                                            </p>
+                                        </th>
                                     </tr>
                                 </thead>
-                                <tbody class="overflow-y-auto">
+                                <tbody>
                                     <?php if ($result->num_rows > 0): ?>
                                     <?php while ($row = $result->fetch_assoc()): ?>
-                                    <tr class="text-sm">
-                                        <td class="px-4 border-b w-0.5/5"><?= $row["id"] ?></td>
-                                        <td class="px-4 border-b w-1/5"><?= $row["name"] ?></td>
-                                        <td class="px-4 border-b w-2/5 text-justify">
-                                            <?= $row["description"] ?>
+                                    <tr class="hover:bg-slate-50">
+                                        <td class="px-4 border-b border-slate-200">
+                                            <p class="block text-sm text-slate-800">
+                                                <?= $row["id"] ?>
+                                            </p>
                                         </td>
-                                        <td class="px-4 border-b w-1/5"><img src="../images/<?= $row["image"] ?>"
-                                                alt="Product Image" class="w-16 h-16"></td>
-                                        <td class="px-4 border-b w-0.5/5">
+                                        <td class="px-4 border-b border-slate-200">
+                                            <p class="block text-sm text-slate-800">
+                                                <?= $row["name"] ?>
+                                            </p>
+                                        </td>
+                                        <td class="px-4 border-b border-slate-200">
+                                            <p class="block text-sm text-slate-800">
+                                                <?= $row["description"] ?>
+                                            </p>
+                                        </td>
+                                        <td class="px-4 border-b border-slate-200">
+                                            <img src="../images/<?= $row["image"] ?>" alt="Product Image"
+                                                class="w-16 h-16">
+                                        </td>
+                                        <td class="px-4 border-b border-slate-200">
                                             <button onclick='getProductById(<?= $row["id"] ?>)' class="mr-4"
                                                 title="Edit">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -757,6 +817,12 @@
                 </div>
             </section>
 
+            <section class="main-content w-full overflow-auto p-6 hidden" id="UserManagement">
+                <div class="flex items-center">
+                    <h1>User Management</h1>
+                </div>
+            </section>
+
             <section class="main-content w-full overflow-auto p-6 hidden" id="Setting">
                 <div class="flex items-center">
                     <h1>Setting</h1>
@@ -768,13 +834,12 @@
                     <h1>Profile</h1>
                 </div>
             </section>
-        </div>
-        <!-- <div class="flex items-center space-x-2">
-            <div id="popup-modal" tabindex="-1"
-                class="hidden fixed inset-0 z-50 flex items-center justify-center w-full h-full bg-gray-900 bg-opacity-50">
-                <div class="relative p-4 w-full max-w-md max-h-full">
+
+            <section id="popup-modal"
+                class="hidden py-[350px] px-[500px] flex items-center justify-center w-sreen h-screen z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
+                <div class="relative w-full max-w-md max-h-full">
                     <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                        <button type="button"
+                        <button type="button" onclick="document.getElementById('popup-modal').classList.add('hidden')"
                             class="absolute top-3 end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
                             data-modal-hide="popup-modal">
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
@@ -790,21 +855,22 @@
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                     stroke-width="2" d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                             </svg>
-                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you
-                                want to
-                                delete this product?</h3>
+                            <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you want to log
+                                out?
+                            </h3>
                             <button data-modal-hide="popup-modal" type="button"
                                 class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center">
                                 Yes, I'm sure
                             </button>
                             <button data-modal-hide="popup-modal" type="button"
-                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No,
-                                cancel</button>
+                                class="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                                No, cancel
+                            </button>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div> -->
+            </section>
+        </div>
     </div>
 </body>
 
