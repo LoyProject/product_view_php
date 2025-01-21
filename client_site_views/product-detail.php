@@ -10,6 +10,7 @@
 </head>
 
 <body class="bg-gray-100 white:bg-gray-900">
+
   <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
       <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -51,6 +52,7 @@
       </div>
     </div>
   </nav>
+
   <script>
     function toggleMenu() {
       const navLinks = document.getElementById('navbar-sticky');
@@ -72,6 +74,34 @@
     });
   </script>
 
+  <div id="open-modal-contact" aria-hidden="true"
+    class="hidden fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+      <!-- Modal content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Contact Us</h3>
+          <button id="close-modal-contact-btn" type="button"
+            class="text-gray-400 bg-transparent hover:bg-red-500 hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+        <!-- Modal body -->
+        <div class="p-4 md:p-5 space-y-4">
+          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+            With less than a month to go before the European Union enacts new
+            consumer privacy laws for its citizens, companies around the world
+            are updating their terms of service agreements to comply.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div id="open-modal-service" aria-hidden="true"
     class="hidden fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
@@ -115,57 +145,58 @@
   ?>
 
   <div class="p-16 mt-8 container mx-auto">
-    <div class="p-8 h-[600px] flex justify-center items-center rounded-lg bg-white">
+    <div class="p-8 flex justify-center items-center rounded-lg bg-white">
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
-        <div class="col-span-1">
+        <div class="col-span-1 h-auto">
           <div class="bg-gray-100 w-full h-[540px] flex justify-center items-center rounded-lg">
             <img src="../images/<?php echo($data['image'])?>" alt="logo" class="w-fit" />
           </div>
         </div>
-        <div class="col-span-1">
+        <div class="col-span-1 h-auto">
           <div class="h-full flex flex-col justify-between">
-            <div class="w-full flex flex-col gap-6">
+            <div class="w-full flex flex-col gap-6 h-full">
               <div>
-                <h1 class="text-4xl font-bold text-black text-bold"><?php echo($data['name'])?></h1>
-                <div class="mt-4"></div>
-                <div class="flex items-center space-x-1 mt-2">
-                  <svg class="w-4 h-4 fill-red-500" viewBox="0 0 14 13" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-4 h-4 fill-red-500" viewBox="0 0 14 13" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-4 h-4 fill-red-500" viewBox="0 0 14 13" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-4 h-4 fill-red-500" viewBox="0 0 14 13" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                  <svg class="w-4 h-4 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
-                  </svg>
-                </div>
+              <h1 class="text-4xl font-bold text-black text-bold"><?php echo($data['name'])?></h1>
+              <div class="mt-4"></div>
+              <div class="flex items-center space-x-1 mt-2">
+                <svg class="w-4 h-4 fill-red-500" viewBox="0 0 14 13" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                </svg>
+                <svg class="w-4 h-4 fill-red-500" viewBox="0 0 14 13" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                </svg>
+                <svg class="w-4 h-4 fill-red-500" viewBox="0 0 14 13" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                </svg>
+                <svg class="w-4 h-4 fill-red-500" viewBox="0 0 14 13" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                </svg>
+                <svg class="w-4 h-4 fill-[#CED5D8]" viewBox="0 0 14 13" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M7 0L9.4687 3.60213L13.6574 4.83688L10.9944 8.29787L11.1145 12.6631L7 11.2L2.8855 12.6631L3.00556 8.29787L0.342604 4.83688L4.5313 3.60213L7 0Z" />
+                </svg>
+              </div>
               </div>
               <div>
-                <h2 class="font-bold">Description</h2>
-                <p class="text-gray-500"><?php echo($data['description'])?></p>
+              <h2 class="font-bold">Description</h2>
+              <article class="text-wrap">
+                <p class="mt-3 text-sm text-gray-500 leading-relaxed break-words"><?php echo($data['description'])?></p>
+              </article>
               </div>
-
-            </div>
-            <div>
+              <div class="mt-auto">
               <a href="../"
                 class="block px-4 max-w-[200px] py-3 bg-red-500 hover:bg-red-600 text-white text-md font-semibold rounded text-center">Back
                 to Product List</a>
+              </div>
             </div>
           </div>
         </div>
@@ -173,36 +204,13 @@
     </div>
   </div>
 
-  <div id="open-modal-contact" aria-hidden="true"
-    class="hidden fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
-    <div class="relative p-4 w-full max-w-2xl max-h-full">
-      <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <!-- Modal header -->
-        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-          <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Contact Us</h3>
-          <button id="close-modal-contact-btn" type="button"
-            class="text-gray-400 bg-transparent hover:bg-red-500 hover:text-white rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-            </svg>
-            <span class="sr-only">Close modal</span>
-          </button>
-        </div>
-        <!-- Modal body -->
-        <div class="p-4 md:p-5 space-y-4">
-          <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-            With less than a month to go before the European Union enacts new
-            consumer privacy laws for its citizens, companies around the world
-            are updating their terms of service agreements to comply.
-          </p>
-        </div>
-      </div>
-    </div>
+  <div class="px-8 mb-8 container-md mx-auto">
+    <h3 class="text-2xl font-semibold mt-8">Related Products</h3>
+    <hr>
+
+    <!-- <div class="bg-blue-500 mt-4 h-56 flex justify-center items-center rounded-lg">
+    </div> -->  
   </div>
-
-
 
   <script>
     document.getElementById("open-modal-service-btn").addEventListener("click", function (event) {

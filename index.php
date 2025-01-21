@@ -9,6 +9,7 @@
 
     <body class="bg-gray-100 white:bg-gray-900"> 
         <script src ="js/script.js"></script>
+
         <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
             <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
                 <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
@@ -165,17 +166,19 @@
 
                     if ($result->num_rows > 0) {
                         while ($row = $result->fetch_assoc()) {
-                            echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2">';
+                            echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2 flex flex-col">';
                                 echo '<div>';
-                                    echo '<img src="images/' . $row["image"] . '" class="w-full rounded-lg" />';
+                                    echo '<img src="images/' . $row["image"] . '" class="w-full h-52 object-cover rounded-lg" />';
                                 echo '</div>';
                                 echo '<div class="pt-6 text-center">';
                                     echo '<h3 class="text-xl font-bold">' . $row["name"] . '</h3>';
                                 echo '</div>';
-                                echo '<div class="text-start">';
+                                echo '<div class="text-start flex-grow">';
                                     echo '<article class="text-wrap">';
                                         echo '<p class="mt-3 text-sm text-gray-500 leading-relaxed break-words">' . $row["description"] . '</p>';
                                     echo '</article>';
+                                echo '</div>';
+                                echo '<div class="mt-4">';
                                     echo '<a href="client_site_views/product-detail.php?id=' . $row["id"] . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-red-300 outline-none hover:border-red-500 hover:text-red-500">View</a>';
                                 echo '</div>';
                             echo '</div>';
@@ -187,7 +190,7 @@
                 }
         ?>
 
-        <div class="p-16 container mx-auto">
+        <div class="p-16 container-xl mx-auto">
             <div class="p-8 rounded-lg">
                 <div class="flex rounded-md border-2 border-gray-100 focus:border-red-500 hover:border-red-500 overflow-hidden w-full font-[sans-serif]">
                     <input 
@@ -220,17 +223,19 @@
 
                             if ($result->num_rows > 0) {
                                 while ($row = $result->fetch_assoc()) {
-                                    echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2">';
+                                    echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2 flex flex-col">';
                                         echo '<div>';
-                                            echo '<img src="images/' . $row["image"] . '" class="w-full rounded-lg" />';
+                                            echo '<img src="images/' . $row["image"] . '" class="w-full h-52 object-cover rounded-lg" />';
                                         echo '</div>';
                                         echo '<div class="pt-6 text-center">';
                                             echo '<h3 class="text-xl font-bold">' . $row["name"] . '</h3>';
                                         echo '</div>';
-                                        echo '<div class="text-start">';
+                                        echo '<div class="text-start flex-grow">';
                                             echo '<article class="text-wrap">';
                                             echo '<p class="mt-3 text-sm text-gray-500 leading-relaxed break-words">' . $row["description"] . '</p>';
                                             echo '</article>';
+                                        echo '</div>';
+                                        echo '<div class="mt-4">';
                                             echo '<a href="client_site_views/product-detail.php?id=' . $row["id"] . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-red-300 outline-none hover:border-red-500 hover:text-red-500">View</a>';
                                         echo '</div>';
                                     echo '</div>';
