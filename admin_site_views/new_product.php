@@ -132,7 +132,8 @@ include 'header.php';
                             <button
                                 class="text-white bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
                                 type="button" onclick="document.getElementById('addProductForm').reset();
-                                        document.getElementById('preview-image').classList.add('hidden');">
+                                        document.getElementById('preview-image').classList.add('hidden');
+                                        window.location.href = 'list_product.php';">
                                 Cancel
                             </button>
                             <button
