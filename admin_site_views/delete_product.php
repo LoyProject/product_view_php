@@ -41,7 +41,7 @@
 ?>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        window.location.href = '../admin_site_views/admin.php';
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    window.location.href = '../admin_site_views/admin.php';
+});
 </script>
