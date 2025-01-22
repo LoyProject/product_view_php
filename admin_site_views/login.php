@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <title>Log In Page</title>
 </head>
 
@@ -17,7 +19,7 @@
                 </a>
                 <div class="p-8 rounded-2xl bg-white shadow">
                     <h2 class="text-gray-800 text-center text-2xl font-bold">Sign in</h2>
-                    <form class="mt-8 space-y-4">
+                    <form class="mt-8 space-y-4" id="loginForm" onsubmit="loginFormBtn(event)">
                         <div>
                             <label class="text-gray-800 text-sm mb-2 block">User name</label>
                             <div class="relative flex items-center">
@@ -63,7 +65,7 @@
                             </div>
                         </div>
                         <div class="!mt-8">
-                            <button type="button"
+                            <button type="submit"
                                 class="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-red-500 hover:bg-red-600 focus:outline-none">
                                 Sign in
                             </button>
