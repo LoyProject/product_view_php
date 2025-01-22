@@ -14,6 +14,7 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,89 +23,104 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('name').value = "<?php echo $name; ?>";
-            document.getElementById('description').value = "<?php echo $description; ?>";
-        });
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('name').value = "<?php echo $name; ?>";
+        document.getElementById('description').value = "<?php echo $description; ?>";
+        document.getElementById('image').value = "<?php echo $image; ?>";
+    });
 
-        function viewImage() {
-            const imageInput = document.getElementById('image');
-            const file = imageInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    Swal.fire({
-                        title: file.name,
-                        imageUrl: e.target.result,
-                        imageAlt: 'Product Image',
-                        imageHeight: 300,
-                        confirmButtonText: 'Close'
-                    });
-                }
-                reader.readAsDataURL(file);
-            } else {
+    function displayFileName(input) {
+        const file = input.files[0];
+        const previewImage = document.getElementById('preview-image');
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            previewImage.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function editProductBtn(event) {
+        event.preventDefault();
+
+        const formData = new FormData(document.getElementById('editProductForm'));
+        formData.append('id', "<?php echo $productId; ?>");
+
+        axios.post('../database/update_product.php', formData)
+            .then(response => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Product Updated',
+                    text: response.data.message,
+                }).then(() => {
+                    window.location.href = '../admin_site_views/admin.php';
+                });
+            })
+            .catch(error => {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Oops...',
-                    text: 'No image selected!',
+                    title: 'Error',
+                    text: error.response.data.message,
                 });
-            }
-        }
-
-        function removeImage() {
-            const imageInput = document.getElementById('image');
-            imageInput.value = '';
-        }
-
-        function editProductBtn(event) {
-            event.preventDefault();
-            
-            const formData = new FormData(document.getElementById('editProductForm'));
-            formData.append('id', "<?php echo $productId; ?>");
-
-            axios.post('../database/update_product.php', formData)
-                .then(response => {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Product Updated',
-                        text: response.data.message,
-                    }).then(() => {
-                        window.location.href = '../admin_site_views/admin.php';
-                    });
-                })
-                .catch(error => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: error.response.data.message,
-                    });
-                });
-        }
+            });
+    }
     </script>
 </head>
+
+<?php
+include 'header.php';
+?>
+
 <body>
-    <div class="container mx-auto p-4">
-        <h1 class="text-2xl font-bold mb-4">Edit Product</h1>
-        <form id="editProductForm" onsubmit="editProductBtn(event)">
-            <div class="p-4 space-y-2">
-                <label class="font-md text-slate-500" for="name">Product Name</label>
-                <input class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500" type="text" id="name" name="name" autocomplete="off" required>
+    <div class="relative font-[sans-serif] pt-[70px] h-screen">
+        <div class="flex items-start">
+            <?php include 'sidebar.php'; ?>
+            <div class="main-content w-full overflow-auto p-6">
+                <div class="container mx-auto p-2 rounded-lg">
+                    <h1 class="p-4 text-2xl font-bold mb-4">Edit Product</h1>
+                    <form id="editProductForm" onsubmit="editProductBtn(event)">
+                        <div class="p-4 space-y-2">
+                            <label class=" font-md text-slate-500" for="name">
+                                Product Name
+                            </label>
+                            <input
+                                class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
+                                type="text" id="name" name="name" autocomplete="off" required></input>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <label class=" font-md text-slate-500" for="description">
+                                Product Description
+                            </label>
+                            <textarea
+                                class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
+                                id="description" name="description" autocomplete="off" required>
+                </textarea>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <label class=" font-md text-slate-500" for="image">
+                                Product Image
+                            </label>
+                            <label id="label-image"
+                                class="block hover:border-red-500 border-2 border-dashed border-slate-100 shadow-sm w-full px-2 h-52 rounded-md text-slate-500 cursor-pointer flex flex-col justify-center items-center">
+                                <input type="file" id="image" name="image" accept="image/*" autocomplete="off"
+                                    class="hidden" onchange="displayFileName(this)" required />
+                                <img id="preview-image" src="<?php echo '../images/' . $image; ?>"
+                                    class="w-full h-48 object-contain rounded <?php echo empty($image) ? 'hidden' : ''; ?>" />
+                            </label>
+                        </div>
+                        <div class="p-4 space-y-2 text-right">
+                            <button type="button"
+                                class="text-white bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
+                                onclick="window.location.href = '../admin_site_views/list_product.php';">Cancel</button>
+                            <button type="submit"
+                                class="text-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]">Update</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="p-4 space-y-2">
-                <label class="font-md text-slate-500" for="description">Product Description</label>
-                <textarea class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500" id="description" name="description" autocomplete="off" required></textarea>
-            </div>
-            <div class="p-4 space-y-2">
-                <label class="font-md text-slate-500" for="image">Product Image</label>
-                <input class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500" type="file" id="image" name="image" accept="image/*" autocomplete="off">
-                <button type="button" class="mt-2 px-4 py-2 bg-blue-500 text-white rounded-md" onclick="viewImage()">View Image</button>
-                <button type="button" class="mt-2 px-4 py-2 bg-red-500 text-white rounded-md" onclick="removeImage()">Delete Image</button>
-            </div>
-            <div class="p-4 space-y-2 text-right">
-                <button type="button" class="px-4 py-2 bg-gray-500 text-white rounded-md" onclick="window.location.href = '../admin_site_views/admin.php';">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded-md">Edit Product</button>
-            </div>
-        </form>
+        </div>
     </div>
 </body>
+
 </html>
