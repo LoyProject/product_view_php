@@ -9,52 +9,82 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-    function loginFormBtn(event) {
-        event.preventDefault();
-        const form = new FormData(event.target);
+    async function loginFormBtn(event) {
+        event.preventDefault(); // Prevent the default form submission behavior
 
-        Swal.fire({
-            title: 'Logging in...',
-            text: 'Please wait while we process your request.',
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
+        // Fetch form values
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
 
-        axios.post('../database/login_process.php', form)
-            .then(response => {
-                Swal.close();
-                if (response.data.success) {
-                    window.location.href = 'admin.php';
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Login Failed',
-                        text: response.data.message,
-                        timer: 1000,
-                        showConfirmButton: false,
-                        customClass: {
-                            popup: 'bg-white rounded-lg shadow-md p-4',
-                            title: 'text-red-600 text-lg font-bold',
-                            content: 'text-gray-700 text-sm'
-                        },
-                    });
-                }
-            })
-            .catch(error => {
-                Swal.close();
+        // Validate inputs
+        if (!username || !password) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Missing Fields',
+                text: 'Username and password are required.',
+                timer: 1500,
+                showConfirmButton: false,
+            });
+            return;
+        }
+
+        try {
+            // Display loading state
+            Swal.fire({
+                title: 'Logging in...',
+                text: 'Please wait while we process your request.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+            });
+
+            // Perform the login request using Axios
+            const response = await axios.post('../database/login_process.php', {
+                username,
+                password
+            }, {
+                headers: {
+                    'Content-Type': 'application/json', // Send JSON data
+                },
+            });
+
+            // Handle the server response
+            Swal.close(); // Close the loading dialog
+
+            if (response.data.success) {
+                // Redirect to the target page
+                window.location.href = 'admin.php';
+            } else {
+                // Show an error dialog
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error',
-                    text: 'An error occurred while processing your request.'
+                    title: 'Login Failed',
+                    text: response.data.message || 'Invalid username or password.',
+                    timer: 2000,
+                    showConfirmButton: false,
                 });
+            }
+        } catch (error) {
+            // Close the loading dialog
+            Swal.close();
+
+            // Show a generic error dialog
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'An unexpected error occurred. Please try again later.',
             });
+
+            console.error('Error:', error); // Log the error for debugging
+        }
     }
     </script>
+
 </head>
 
 <body>
+
     <div class="bg-gray-50 font-[sans-serif]">
         <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
             <div class="max-w-md w-full">
@@ -93,21 +123,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <!-- <div class="flex flex-wrap items-center justify-between gap-4">
-                            <div class="flex items-center">
-                                <input id="remember-me" name="remember-me" type="checkbox"
-                                    class="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-                                <label for="remember-me" class="ml-3 block text-sm text-gray-800">
-                                    Remember me
-                                </label>
-                            </div>
-                            <div class="text-sm">
-                                <a href="jajvascript:void(0);"
-                                    class="text-red-500 hover:text-red-600 hover:underline font-semibold">
-                                    Forgot your password?
-                                </a>
-                            </div>
-                        </div> -->
+
                         <div class="!mt-8">
                             <button type="submit"
                                 class="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-red-500 hover:bg-red-600 focus:outline-none">
