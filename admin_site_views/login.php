@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
     async function loginFormBtn(event) {
-        event.preventDefault(); // Prevent default form submission behavior
+        event.preventDefault(); // Prevent the default form submission behavior
 
         // Fetch form values
         const username = document.getElementById('username').value.trim();
@@ -29,23 +29,27 @@
         }
 
         try {
-            console.log("Sending data:", {
-                username,
-                password
-            }); // Debug input data
+            // Display loading state
+            Swal.fire({
+                title: 'Logging in...',
+                text: 'Please wait while we process your request.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                },
+            });
 
             // Perform the login request using Axios
             const response = await axios.post('../database/login_process.php', {
                 username,
-                password,
+                password
             }, {
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json', // Send JSON data
                 },
             });
 
-            console.log("Server response:", response.data); // Debug server response
-
+            // Handle the server response
             Swal.close(); // Close the loading dialog
 
             if (response.data.success) {
@@ -65,21 +69,19 @@
             // Close the loading dialog
             Swal.close();
 
-            // Log the error for debugging
-            console.error('Axios error:', error);
-
             // Show a generic error dialog
             Swal.fire({
                 icon: 'error',
                 title: 'Error',
                 text: 'An unexpected error occurred. Please try again later.',
             });
-        }
 
+            console.error('Error:', error); // Log the error for debugging
+        }
     }
     </script>
-</head>
 
+</head>
 
 <body>
 
@@ -121,21 +123,7 @@
                                 </svg>
                             </div>
                         </div>
-                        <!-- <div class="flex flex-wrap items-center justify-between gap-4">
-                            <div class="flex items-center">
-                                <input id="remember-me" name="remember-me" type="checkbox"
-                                    class="h-4 w-4 shrink-0 text-blue-600 focus:ring-blue-500 border-gray-300 rounded" />
-                                <label for="remember-me" class="ml-3 block text-sm text-gray-800">
-                                    Remember me
-                                </label>
-                            </div>
-                            <div class="text-sm">
-                                <a href="jajvascript:void(0);"
-                                    class="text-red-500 hover:text-red-600 hover:underline font-semibold">
-                                    Forgot your password?
-                                </a>
-                            </div>
-                        </div> -->
+
                         <div class="!mt-8">
                             <button type="submit"
                                 class="w-full py-3 px-4 text-sm tracking-wide rounded-lg text-white bg-red-500 hover:bg-red-600 focus:outline-none">
