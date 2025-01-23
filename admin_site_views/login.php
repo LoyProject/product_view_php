@@ -9,52 +9,80 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-    function loginFormBtn(event) {
-        event.preventDefault();
-        const form = new FormData(event.target);
+    async function loginFormBtn(event) {
+        event.preventDefault(); // Prevent default form submission behavior
 
-        Swal.fire({
-            title: 'Logging in...',
-            text: 'Please wait while we process your request.',
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
-            }
-        });
+        // Fetch form values
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
 
-        axios.post('../database/login_process.php', form)
-            .then(response => {
-                Swal.close();
-                if (response.data.success) {
-                    window.location.href = 'admin.php';
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Login Failed',
-                        text: response.data.message,
-                        timer: 1000,
-                        showConfirmButton: false,
-                        customClass: {
-                            popup: 'bg-white rounded-lg shadow-md p-4',
-                            title: 'text-red-600 text-lg font-bold',
-                            content: 'text-gray-700 text-sm'
-                        },
-                    });
-                }
-            })
-            .catch(error => {
-                Swal.close();
+        // Validate inputs
+        if (!username || !password) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Missing Fields',
+                text: 'Username and password are required.',
+                timer: 1500,
+                showConfirmButton: false,
+            });
+            return;
+        }
+
+        try {
+            console.log("Sending data:", {
+                username,
+                password
+            }); // Debug input data
+
+            // Perform the login request using Axios
+            const response = await axios.post('../database/login_process.php', {
+                username,
+                password,
+            }, {
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            console.log("Server response:", response.data); // Debug server response
+
+            Swal.close(); // Close the loading dialog
+
+            if (response.data.success) {
+                // Redirect to the target page
+                window.location.href = 'admin.php';
+            } else {
+                // Show an error dialog
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error',
-                    text: 'An error occurred while processing your request.'
+                    title: 'Login Failed',
+                    text: response.data.message || 'Invalid username or password.',
+                    timer: 2000,
+                    showConfirmButton: false,
                 });
+            }
+        } catch (error) {
+            // Close the loading dialog
+            Swal.close();
+
+            // Log the error for debugging
+            console.error('Axios error:', error);
+
+            // Show a generic error dialog
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'An unexpected error occurred. Please try again later.',
             });
+        }
+
     }
     </script>
 </head>
 
+
 <body>
+
     <div class="bg-gray-50 font-[sans-serif]">
         <div class="min-h-screen flex flex-col items-center justify-center py-6 px-4">
             <div class="max-w-md w-full">

@@ -50,35 +50,11 @@
         imageInput.classList.add('hidden');
         document.getElementById('file-name').style.display = 'block';
         document.getElementById('upload-icon').style.display = 'block';
-        document.getElementById('product-image').style.display = 'block';
-        document.getElementById('lable-image').classList.add('border-slate-100');
-    }
-
-    function addProductBtn(event) {
-        event.preventDefault();
-        const formData = new FormData(document.getElementById('addProductForm'));
-
-        axios.post('../database/insert_product.php', formData)
-            .then(response => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Product Added',
-                    text: 'The product has been added successfully!',
-                });
-                document.getElementById('addProductForm').reset();
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'There was an error adding the product.',
-                });
-            });
     }
     </script>
 </head>
 
-<?php include 'header.php'?>
+<?php include 'header.php' ?>
 
 <body>
     <div class="relative font-[sans-serif] pt-[70px] h-screen">
@@ -86,11 +62,19 @@
             <?php include 'sidebar.php'; ?>
             <div class="main-content w-full overflow-auto p-6">
                 <div class="container-xl mx-auto">
-                    <h2 class="p-4 text-2xl font-bold mb-4">Add New Product</h2>
-                    <form id="addProductForm" onsubmit="addProductBtn(event)">
+                    <div class="flex justify-between item-center">
+                        <h2 class="p-4 text-2xl font-bold">Create New</h2>
+                        <a href="dealer.php">
+                            <button
+                                class="text-white bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]">
+                                Back
+                            </button>
+                        </a>
+                    </div>
+                    <form id="addProductForm">
                         <div class="p-4 space-y-2">
                             <label class=" font-md text-slate-500" for="product-name">
-                                Product Name
+                                Dealer Name
                             </label>
                             <input
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
@@ -98,7 +82,7 @@
                         </div>
                         <div class="p-4 space-y-2">
                             <label class=" font-md text-slate-500" for="product-description">
-                                Product Description
+                                Location Title
                             </label>
                             <textarea
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
@@ -125,11 +109,8 @@
                                     .png,
                                     .jpeg, .jpg are allowed.</span>
                                 <input type="file" id="image" name="image" accept="image/*" autocomplete="off"
-                                    class="hidden" accept=".jpg, .jpeg, .png" required onchange="displayFileName(this); if(this.files.length > 0);
-                                    document.getElementById('file-name').style.display = 'none';
-                                    document.getElementById('upload-icon').style.display = 'none';
-                                    document.getElementById('product-image').style.display = 'none';
-                                    document.getElementById('lable-image').classList.add('border-red-500');" />
+                                    class="hidden" accept=".jpg, .jpeg, .png" required
+                                    onchange="displayFileName(this); if(this.files.length > 0); document.getElementById('file-name').style.display = 'none'; document.getElementById('upload-icon').style.display = 'none'; document.getElementById('product-image').style.display = 'none';" />
                                 <img id="preview-image" class="hidden p-2 w-full h-52 object-contain rounded" />
                             </label>
                         </div>
@@ -162,6 +143,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

@@ -1,4 +1,5 @@
 <?php
+
     include '../database/db_connection.php';
 
     $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 10;
@@ -30,6 +31,7 @@
 <?php
 include 'header.php';
 ?>
+
 
 <body>
     <div class="relative font-[sans-serif] pt-[70px] h-screen">
