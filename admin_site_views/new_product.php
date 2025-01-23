@@ -83,7 +83,7 @@ include 'header.php';
         <div class="flex items-start">
             <?php include 'sidebar.php'; ?>
             <div class="main-content w-full overflow-auto p-6">
-                <div class="container mx-auto p-2 rounded-lg">
+                <div class="container-xl mx-auto">
                     <h2 class="p-4 text-2xl font-bold mb-4">Add New Product</h2>
                     <form id="addProductForm" onsubmit="addProductBtn(event)">
                         <div class="p-4 space-y-2">
