@@ -128,7 +128,7 @@ include 'header.php';
                                                 </a>
                                             </button>
                                             <button class="mr-4">
-                                                <a href="delete_product.php?id=<?= $row["id"] ?>">
+                                                <a href="delete_product.php?id=<?= $row["id"] ?>" onclick="return confirm('Are you sure you want to delete this product?');">
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                         class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
                                                         <path

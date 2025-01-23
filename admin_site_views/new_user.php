@@ -8,6 +8,41 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        function addUserBtn(event) {
+            event.preventDefault();
+            const formData = new FormData(document.getElementById('addUserForm'));
+
+            const password = formData.get('password');
+            const confirmPassword = formData.get('conpassword');
+
+            if (password !== confirmPassword) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Passwords do not match.',
+                });
+                return;
+            }
+
+            axios.post('../database/insert_user.php', formData)
+                .then(response => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'User Added',
+                        text: 'The user has been added successfully!',
+                    });
+                    document.getElementById('addUserForm').reset();
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'There was an error adding the user.',
+                    });
+                });
+        }
+    </script>
 </head>
 <?php
 include 'header.php';
@@ -29,53 +64,51 @@ include 'header.php';
                                 </button>
                             </a>
                         </div>
-                        <form id="addUserForm">
+                        <form id="addUserForm" onsubmit="addUserBtn(event)">
                             <div class="p-4 space-y-2">
-                                <label class=" font-md text-slate-500" for="product-name">
+                                <label class="font-md text-slate-500" for="name">
                                     Full Name
                                 </label>
                                 <input
                                     class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    type="text" id="name" name="name" autocomplete="off" required></input>
+                                    type="text" id="name" name="name" autocomplete="off" required>
                             </div>
                             <div class="p-4 space-y-2">
-                                <label class=" font-md text-slate-500" for="product-name">
+                                <label class="font-md text-slate-500" for="username">
                                     Username
                                 </label>
                                 <input
                                     class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    type="text" id="username" name="username" autocomplete="off" required></input>
+                                    type="text" id="username" name="username" autocomplete="off" required>
                             </div>
                             <div class="p-4 space-y-2">
-                                <label class=" font-md text-slate-500" for="role">
+                                <label class="font-md text-slate-500" for="role">
                                     Role
                                 </label>
                                 <select
                                     class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                     id="role" name="role" required autocomplete="off">
-                                    <option value="admin">Admin</option>
-                                    <option value="editor">Editor</option>
-                                    <option value="viewer">Viewer</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Editor">Editor</option>
+                                    <option value="Viewer">Viewer</option>
                                 </select>
                             </div>
                             <div class="p-4 space-y-2">
-                                <label class=" font-md text-slate-500" for="product-name">
+                                <label class="font-md text-slate-500" for="password">
                                     Password
                                 </label>
                                 <input
                                     class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    type="password" id="password" name="password" autocomplete="off" required></input>
+                                    type="password" id="password" name="password" autocomplete="off" required>
                             </div>
                             <div class="p-4 space-y-2">
-                                <label class=" font-md text-slate-500" for="product-name">
+                                <label class="font-md text-slate-500" for="conpassword">
                                     Confirm Password
                                 </label>
                                 <input
                                     class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    type="password" id="conpassword" name="conpassword" autocomplete="off"
-                                    required></input>
+                                    type="password" id="conpassword" name="conpassword" autocomplete="off" required>
                             </div>
-
                             <div class="p-4 space-x-4 flex justify-end">
                                 <button
                                     class="text-white bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"

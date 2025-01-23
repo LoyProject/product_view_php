@@ -54,7 +54,7 @@
                     title: 'Product Updated',
                     text: response.data.message,
                 }).then(() => {
-                    window.location.href = '../admin_site_views/admin.php';
+                    window.location.href = '../admin_site_views/product.php';
                 });
             })
             .catch(error => {
@@ -94,8 +94,7 @@ include 'header.php';
                             </label>
                             <textarea
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                id="description" name="description" autocomplete="off" required>
-                </textarea>
+                                id="description" name="description" autocomplete="off" required></textarea>
                         </div>
                         <div class="p-4 space-y-2">
                             <label class=" font-md text-slate-500" for="image">
@@ -112,7 +111,7 @@ include 'header.php';
                         <div class="p-4 space-y-2 text-right">
                             <button type="button"
                                 class="text-white bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
-                                onclick="window.location.href = '../admin_site_views/list_product.php';">Cancel</button>
+                                onclick="window.location.href = '../admin_site_views/product.php';">Cancel</button>
                             <button type="submit"
                                 class="text-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]">Update</button>
                         </div>

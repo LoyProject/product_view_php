@@ -42,6 +42,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    window.location.href = '../admin_site_views/list_product.php';
+    window.location.href = '../admin_site_views/product.php';
 });
 </script>

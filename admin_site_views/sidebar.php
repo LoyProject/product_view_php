@@ -22,7 +22,7 @@
         </ul>
         <ul class="space-y-2 mb-2">
             <li>
-                <a href="list_product.php" onclick="resetMenuColors();
+                <a href="product.php" onclick="resetMenuColors();
                                     this.classList.add('text-red-500');
                                     this.querySelector('svg').classList.add('fill-red-500');"
                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
