@@ -38,7 +38,7 @@ include 'header.php';
                 <div class="main-content w-full overflow-auto p-6">
                     <div class="container-xl mx-auto">
                         <div class="flex justify-between item-center">
-                            <h2 class="p-4 text-2xl font-bold">User</h2>
+                            <h2 class="p-4 text-2xl font-bold">Users List</h2>
                             <a href="new_user.php">
                                 <button
                                     class="text-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]">
