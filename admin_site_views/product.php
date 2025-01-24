@@ -164,15 +164,24 @@ include 'header.php';
                             <option value="50" <?= $limit == 50 ? 'selected' : '' ?>>50</option>
                             <option value="100" <?= $limit == 100 ? 'selected' : '' ?>>100</option>
                         </select>
-                        <ul class="flex space-x-1 ml-2">
-                            <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                            <li
-                                class="flex items-center justify-center cursor-pointer text-sm w-7 h-7 <?= $page == $i ? 'bg-[#007bff] text-white' : 'text-gray-500' ?> rounded">
-                                <a href="<?= $_SERVER['PHP_SELF'] ?>?page=<?= $i ?>&limit=<?= $limit ?>"
-                                    class="block w-full h-full text-center leading-7"><?= $i ?></a>
-                            </li>
-                            <?php endfor; ?>
-                        </ul>
+                        <div class="flex space-x-2 ml-8">
+                            <?php if ($page > 1): ?>
+                            <a href="<?= $_SERVER['PHP_SELF'] ?>?page=<?= $page - 1 ?>&limit=<?= $limit ?>">
+                                <button
+                                    class="w-16 text-white text-xs bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-1 rounded focus:outline-none focus:shadow-outline font-[sans-serif]">
+                                    Previous
+                                </button>
+                            </a>
+                            <?php endif; ?>
+                            <?php if ($page < $total_pages): ?>
+                            <a href="<?= $_SERVER['PHP_SELF'] ?>?page=<?= $page + 1 ?>&limit=<?= $limit ?>">
+                                <button
+                                    class="w-16 text-white text-xs bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-1 rounded focus:outline-none focus:shadow-outline font-[sans-serif]">
+                                    Next
+                                </button>
+                            </a>
+                            <?php endif; ?>
+                        </div>
                     </div>
                 </div>
             </div>
