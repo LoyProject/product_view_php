@@ -1,6 +1,5 @@
 <?php
     header('Content-Type: application/json');
-
     include 'db_connection.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -10,8 +9,11 @@
         $password = $_POST['password'];
         $active = 1;
 
+        // Hash the password before saving it
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
         $stmt = $conn->prepare("INSERT INTO users (full_name, role, username, password, active) VALUES (?, ?, ?, ?, ?)");
-        $stmt->bind_param("ssssi", $fullname, $role, $username, $password, $active);
+        $stmt->bind_param("ssssi", $fullname, $role, $username, $hashedPassword, $active);
 
         if ($stmt->execute()) {
             $response['status'] = 'success';

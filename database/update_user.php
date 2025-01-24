@@ -9,9 +9,12 @@
         $password = $_POST['password'];
         $active = 1;
 
+        // Hash the password before saving to the database
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
         $sql = "UPDATE users SET full_name=?, role=?, username=?, password=?, active=? WHERE id=?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssii", $name, $role, $username, $password, $active, $id);
+        $stmt->bind_param("ssssii", $name, $role, $username, $hashedPassword, $active, $id);
 
         if ($stmt->execute()) {
             echo "User updated successfully.";

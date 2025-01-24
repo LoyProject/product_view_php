@@ -22,7 +22,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products List</title>
+    <title>Products</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -130,7 +130,8 @@ include 'header.php';
                                                 </a>
                                             </button>
                                             <button class="mr-4">
-                                                <a href="delete_product.php?id=<?= $row["id"] ?>" onclick="return confirm('Are you sure you want to delete this product?');">
+                                                <a href="delete_product.php?id=<?= $row["id"] ?>"
+                                                    onclick="return confirm('Are you sure you want to delete this product?');">
                                                     <svg xmlns="http://www.w3.org/2000/svg"
                                                         class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
                                                         <path

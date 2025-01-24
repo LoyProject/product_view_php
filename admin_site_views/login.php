@@ -9,76 +9,76 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-    async function loginFormBtn(event) {
-        event.preventDefault(); // Prevent the default form submission behavior
+        async function loginFormBtn(event) {
+            event.preventDefault(); // Prevent the default form submission behavior
 
-        // Fetch form values
-        const username = document.getElementById('username').value.trim();
-        const password = document.getElementById('password').value.trim();
+            // Fetch form values
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
 
-        // Validate inputs
-        if (!username || !password) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Missing Fields',
-                text: 'Username and password are required.',
-                timer: 1500,
-                showConfirmButton: false,
-            });
-            return;
-        }
-
-        try {
-            // Display loading state
-            Swal.fire({
-                title: 'Logging in...',
-                text: 'Please wait while we process your request.',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                },
-            });
-
-            // Perform the login request using Axios
-            const response = await axios.post('../database/login_process.php', {
-                username,
-                password
-            }, {
-                headers: {
-                    'Content-Type': 'application/json', // Send JSON data
-                },
-            });
-
-            // Handle the server response
-            Swal.close(); // Close the loading dialog
-
-            if (response.data.success) {
-                // Redirect to the target page
-                window.location.href = 'admin.php';
-            } else {
-                // Show an error dialog
+            // Validate inputs
+            if (!username || !password) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Login Failed',
-                    text: response.data.message || 'Invalid username or password.',
-                    timer: 2000,
+                    title: 'Missing Fields',
+                    text: 'Username and password are required.',
+                    timer: 1500,
                     showConfirmButton: false,
                 });
+                return;
             }
-        } catch (error) {
-            // Close the loading dialog
-            Swal.close();
 
-            // Show a generic error dialog
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'An unexpected error occurred. Please try again later.',
-            });
+            try {
+                // Display loading state
+                Swal.fire({
+                    title: 'Logging in...',
+                    text: 'Please wait while we process your request.',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    },
+                });
 
-            console.error('Error:', error); // Log the error for debugging
+                // Perform the login request using Axios
+                const response = await axios.post('../database/login_process.php', {
+                    username,
+                    password
+                }, {
+                    headers: {
+                        'Content-Type': 'application/json', // Send JSON data
+                    },
+                });
+
+                // Handle the server response
+                Swal.close(); // Close the loading dialog
+
+                if (response.data.success) {
+                    // Redirect to the target page
+                    window.location.href = 'dashboard.php';
+                } else {
+                    // Show an error dialog
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Login Failed',
+                        text: response.data.message || 'Invalid username or password.',
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
+                }
+            } catch (error) {
+                // Close the loading dialog
+                Swal.close();
+
+                // Show a generic error dialog
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An unexpected error occurred. Please try again later.',
+                });
+
+                console.error('Error:', error); // Log the error for debugging
+            }
         }
-    }
     </script>
 
 </head>
