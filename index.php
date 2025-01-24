@@ -64,9 +64,9 @@ include('client_site_views/header.php');
                         echo '</div>';
                         }
                     } else {
-                        echo '<script>document.getElementById("load-more").style.display = "none";</script>'; // Hide the button
+                        echo '<script>document.getElementById("load-more").style.display = "none";</script>';
                     }
-                    exit(); // Prevent further output
+                    exit();
                 }
         ?>
 

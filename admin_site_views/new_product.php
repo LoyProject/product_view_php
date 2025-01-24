@@ -51,7 +51,6 @@
         document.getElementById('file-name').style.display = 'block';
         document.getElementById('upload-icon').style.display = 'block';
         document.getElementById('product-image').style.display = 'block';
-        document.getElementById('lable-image').classList.add('border-slate-100');
     }
 
     function addProductBtn(event) {
@@ -78,7 +77,7 @@
     </script>
 </head>
 
-<?php include 'header.php'?>
+<?php include 'header.php' ?>
 
 <body>
     <div class="relative font-[sans-serif] pt-[70px] h-screen">
@@ -86,7 +85,15 @@
             <?php include 'sidebar.php'; ?>
             <div class="main-content w-full overflow-auto p-6">
                 <div class="container-xl mx-auto">
-                    <h2 class="p-4 text-2xl font-bold mb-4">Add New Product</h2>
+                    <div class="flex justify-between item-center">
+                        <h2 class="p-4 text-2xl font-bold">Create New</h2>
+                        <a href="product.php">
+                            <button
+                                class="text-white bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]">
+                                Back
+                            </button>
+                        </a>
+                    </div>
                     <form id="addProductForm" onsubmit="addProductBtn(event)">
                         <div class="p-4 space-y-2">
                             <label class=" font-md text-slate-500" for="product-name">
@@ -137,9 +144,8 @@
                             <button
                                 class="text-white bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
                                 type="button" onclick="document.getElementById('addProductForm').reset();
-                                        document.getElementById('preview-image').classList.add('hidden');
-                                        window.location.href = 'product.php';">
-                                Cancel
+                                        document.getElementById('preview-image').classList.add('hidden');">
+                                Clear
                             </button>
                             <button
                                 class="text-white bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"

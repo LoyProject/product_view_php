@@ -54,10 +54,10 @@
                 </a>
             </li>
         </ul>
-        
-         <ul class="space-y-2 mb-2">
+
+        <ul class="space-y-2 mb-2">
             <li>
-                <a href="list_dealer.php" onclick="resetMenuColors();
+                <a href="dealer.php" onclick="resetMenuColors();
                                     this.classList.add('text-red-500');
                                     this.querySelector('svg').classList.add('fill-red-500');"
                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
@@ -89,7 +89,7 @@
                 </a>
             </li>
         </ul>
-        
+
         <ul class="space-y-2 mb-2">
             <li>
                 <a href="javascript:void(0)" onclick="resetMenuColors();
@@ -123,16 +123,16 @@
             </li>
         </ul>
         <script>
-        function resetMenuColors() {
-            const menuItems = document.querySelectorAll('nav#sidebar a');
-            menuItems.forEach(item => {
-                item.classList.remove('text-red-500');
-                const svg = item.querySelector('svg');
-                if (svg) {
-                    svg.classList.remove('fill-red-500');
-                }
-            });
-        }
+            function resetMenuColors() {
+                const menuItems = document.querySelectorAll('nav#sidebar a');
+                menuItems.forEach(item => {
+                    item.classList.remove('text-red-500');
+                    const svg = item.querySelector('svg');
+                    if (svg) {
+                        svg.classList.remove('fill-red-500');
+                    }
+                });
+            }
         </script>
     </div>
 </nav>
