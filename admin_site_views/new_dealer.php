@@ -20,37 +20,6 @@
         };
         reader.readAsDataURL(file);
     }
-
-    function viewImage() {
-        const imageInput = document.getElementById('image');
-        const file = imageInput.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                Swal.fire({
-                    title: file.name,
-                    imageUrl: e.target.result,
-                    imageAlt: 'Product Image',
-                    imageHeight: 300,
-                    confirmButtonText: 'Close'
-                });
-            }
-            reader.readAsDataURL(file);
-        } else {
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'No image selected!',
-            });
-        }
-    }
-
-    function removeImage() {
-        const imageInput = document.getElementById('preview-image');
-        imageInput.classList.add('hidden');
-        document.getElementById('file-name').style.display = 'block';
-        document.getElementById('upload-icon').style.display = 'block';
-    }
     </script>
 </head>
 
@@ -71,9 +40,9 @@
                             </button>
                         </a>
                     </div>
-                    <form id="addProductForm">
+                    <form id="addDealerForm">
                         <div class="p-4 space-y-2">
-                            <label class=" font-md text-slate-500" for="product-name">
+                            <label class=" font-md text-slate-500">
                                 Dealer Name
                             </label>
                             <input
@@ -81,16 +50,33 @@
                                 type="text" id="name" name="name" autocomplete="off" required></input>
                         </div>
                         <div class="p-4 space-y-2">
-                            <label class=" font-md text-slate-500" for="product-description">
-                                Location Title
+                            <label class=" font-md text-slate-500">
+                                Contact Number
+                            </label>
+                            <input
+                                class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
+                                type="text" id="name" name="name" autocomplete="off" required></input>
+                        </div>
+                        <div class="p-4 space-y-2">
+                            <label class=" font-md text-slate-500">
+                                Address
                             </label>
                             <textarea
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                 id="description" name="description" autocomplete="off" required></textarea>
                         </div>
                         <div class="p-4 space-y-2">
+                            <label class=" font-md text-slate-500">
+                                Google Map
+                            </label>
+                            <input
+                                class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
+                                type="text" id="name" name="name" autocomplete="off" required></input>
+                        </div>
+
+                        <div class="p-4 space-y-2">
                             <label id="lable-image"
-                                class="block hover:border-red-500 border-2 border-dashed border-slate-100 shadow-sm w-full px-2 h-52 rounded max-w-md text-slate-500 cursor-pointer mx-auto flex flex-col justify-center items-center">
+                                class="block hover:border-red-500 border-2 border-dashed border-slate-100 shadow-sm w-full px-2 h-52 rounded text-slate-500 cursor-pointer mx-auto flex flex-col justify-center items-center">
                                 <div id="upload-icon" class="flex justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-11 mb-2 fill-gray-500"
                                         viewBox="0 0 32 32">
@@ -119,18 +105,8 @@
                                 class="text-white bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
                                 type="button" onclick="document.getElementById('addProductForm').reset();
                                         document.getElementById('preview-image').classList.add('hidden');
-                                        window.location.href = 'list_product.php';">
+                                        window.location.href = 'dealer.php';">
                                 Cancel
-                            </button>
-                            <button
-                                class="text-white bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
-                                type="button" onclick="viewImage()">
-                                View Image
-                            </button>
-                            <button
-                                class="text-white bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
-                                type="button" onclick="removeImage()">
-                                Delete Image
                             </button>
                             <button
                                 class="text-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"

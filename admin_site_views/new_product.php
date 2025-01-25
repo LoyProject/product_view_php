@@ -89,7 +89,7 @@
                         </div>
                         <div class="p-4 space-y-2">
                             <label id="lable-image"
-                                class="block hover:border-red-500 border-2 border-dashed border-slate-100 shadow-sm w-full px-2 h-52 rounded max-w-md text-slate-500 cursor-pointer mx-auto flex flex-col justify-center items-center">
+                                class="block hover:border-red-500 border-2 border-dashed border-slate-100 shadow-sm w-full px-2 h-52 rounded text-slate-500 cursor-pointer mx-auto flex flex-col justify-center items-center">
                                 <div id="upload-icon" class="flex justify-center">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-11 mb-2 fill-gray-500"
                                         viewBox="0 0 32 32">

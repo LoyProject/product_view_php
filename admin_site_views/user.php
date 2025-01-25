@@ -73,23 +73,23 @@ include 'header.php';
                                 <?php if ($result->num_rows > 0): ?>
                                 <?php while ($row = $result->fetch_assoc()): ?>
                                 <tr class="hover:bg-slate-50">
-                                    <td class="px-4 border-b border-slate-200 w-0.5/5">
+                                    <td class="px-4 py-2 border-b border-slate-200 w-0.5/5">
                                         <p class="block text-xs text-slate-800"><?= $row["id"] ?></p>
                                     </td>
-                                    <td class="px-4 border-b border-slate-200 w-1/5">
+                                    <td class="px-4 py-2 border-b border-slate-200 w-1/5">
                                         <p class="block text-xs text-slate-800"><?= $row["full_name"] ?></p>
                                     </td>
-                                    <td class="px-4 border-b border-slate-200 w-1/5">
+                                    <td class="px-4 py-2 border-b border-slate-200 w-1/5">
                                         <p class="block text-xs text-slate-800"><?= $row["role"] ?></p>
                                     </td>
-                                    <td class="px-4 border-b border-slate-200 w-1/5">
+                                    <td class="px-4 py-2 border-b border-slate-200 w-1/5">
                                         <p class="block text-xs text-slate-800"><?= $row["username"] ?></p>
                                     </td>
-                                    <td class="px-4 border-b border-slate-200 w-1/5">
+                                    <td class="px-4 py-2 border-b border-slate-200 w-1/5">
                                         <p class="block text-xs text-slate-800">
                                             <?= $row["active"] ? 'Active' : 'Inactive' ?></p>
                                     </td>
-                                    <td class="px-4 border-b border-slate-200">
+                                    <td class="px-4 py-2 border-b border-slate-200">
                                         <button class="mr-4">
                                             <a href="edit_user.php?id=<?= $row["id"] ?>">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
