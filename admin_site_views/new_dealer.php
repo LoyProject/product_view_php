@@ -9,17 +9,39 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-    function displayFileName(input) {
-        const file = input.files[0];
-        const previewImage = document.getElementById('preview-image');
+        function displayFileName(input) {
+            const file = input.files[0];
+            const previewImage = document.getElementById('preview-image');
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewImage.src = e.target.result;
-            previewImage.classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
-    }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function addDealerBtn(event) {
+            event.preventDefault();
+            const formData = new FormData(document.getElementById(event.target.id));
+
+            axios.post('../database/insert_dealer.php', formData)
+                .then(response => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Dealer Added',
+                        text: 'The dealer has been added successfully!',
+                    });
+                    document.getElementById(event.target.id).reset();
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'There was an error adding the dealer.',
+                    });
+                });
+        }
     </script>
 </head>
 
@@ -40,7 +62,7 @@
                             </button>
                         </a>
                     </div>
-                    <form id="addDealerForm">
+                    <form id="addDealerForm" onsubmit="addDealerBtn(event)">
                         <div class="p-4 space-y-2">
                             <label class=" font-md text-slate-500">
                                 Dealer Name
@@ -55,7 +77,7 @@
                             </label>
                             <input
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                type="text" id="name" name="name" autocomplete="off" required></input>
+                                type="text" id="contact" name="contact" autocomplete="off" required></input>
                         </div>
                         <div class="p-4 space-y-2">
                             <label class=" font-md text-slate-500">
@@ -63,7 +85,7 @@
                             </label>
                             <textarea
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                id="description" name="description" autocomplete="off" required></textarea>
+                                id="address" name="address" autocomplete="off" required></textarea>
                         </div>
                         <div class="p-4 space-y-2">
                             <label class=" font-md text-slate-500">
@@ -71,9 +93,8 @@
                             </label>
                             <input
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                type="text" id="name" name="name" autocomplete="off" required></input>
+                                type="text" id="map" name="map" autocomplete="off" required></input>
                         </div>
-
                         <div class="p-4 space-y-2">
                             <label id="lable-image"
                                 class="block hover:border-red-500 border-2 border-dashed border-slate-100 shadow-sm w-full px-2 h-52 rounded text-slate-500 cursor-pointer mx-auto flex flex-col justify-center items-center">

@@ -9,47 +9,39 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-    function displayFileName(input) {
-        const file = input.files[0];
-        const previewImage = document.getElementById('preview-image');
+        function displayFileName(input) {
+            const file = input.files[0];
+            const previewImage = document.getElementById('preview-image');
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewImage.src = e.target.result;
-            previewImage.classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
-    }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
 
-    function removeImage() {
-        const imageInput = document.getElementById('preview-image');
-        imageInput.classList.add('hidden');
-        document.getElementById('file-name').style.display = 'block';
-        document.getElementById('upload-icon').style.display = 'block';
-        document.getElementById('product-image').style.display = 'block';
-    }
+        function addProductBtn(event) {
+            event.preventDefault();
+            const formData = new FormData(document.getElementById('addProductForm'));
 
-    function addProductBtn(event) {
-        event.preventDefault();
-        const formData = new FormData(document.getElementById('addProductForm'));
-
-        axios.post('../database/insert_product.php', formData)
-            .then(response => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Product Added',
-                    text: 'The product has been added successfully!',
+            axios.post('../database/insert_product.php', formData)
+                .then(response => {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Product Added',
+                        text: 'The product has been added successfully!',
+                    });
+                    document.getElementById('addProductForm').reset();
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'There was an error adding the product.',
+                    });
                 });
-                document.getElementById('addProductForm').reset();
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'There was an error adding the product.',
-                });
-            });
-    }
+        }
     </script>
 </head>
 

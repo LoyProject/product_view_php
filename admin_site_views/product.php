@@ -26,7 +26,20 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
+    <script>
+        function toggleText(button) {
+            const p = button.previousElementSibling;
+            if (button.textContent === 'See more') {
+                p.style.maxHeight = 'none';
+                p.style.overflow = 'visible';
+                button.textContent = 'See less';
+            } else {
+                p.style.maxHeight = '2.5em';
+                p.style.overflow = 'hidden';
+                button.textContent = 'See more';
+            }
+        }
+    </script>
 </head>
 <?php
 include 'header.php';
@@ -92,21 +105,6 @@ include 'header.php';
                                         onclick="toggleText(this)">See more</button>
                                     <?php endif; ?>
                                 </td>
-
-                                <script>
-                                function toggleText(button) {
-                                    const p = button.previousElementSibling;
-                                    if (button.textContent === 'See more') {
-                                        p.style.maxHeight = 'none';
-                                        p.style.overflow = 'visible';
-                                        button.textContent = 'See less';
-                                    } else {
-                                        p.style.maxHeight = '2.5em';
-                                        p.style.overflow = 'hidden';
-                                        button.textContent = 'See more';
-                                    }
-                                }
-                                </script>
                                 <td class="px-4 border-b border-slate-200">
                                     <img src="../images/<?= $row["image"] ?>" class="w-16 h-16">
                                 </td>

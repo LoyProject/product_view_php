@@ -1,3 +1,21 @@
+<?php
+
+    include '../database/db_connection.php';
+
+    $limit = isset($_GET['limit']) ? intval($_GET['limit']) : 10;
+    $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+    $offset = ($page - 1) * $limit;
+
+    $total_sql = "SELECT COUNT(*) as total FROM dealers";
+    $total_result = $conn->query($total_sql);
+    $total_row = $total_result->fetch_assoc();
+    $total_records = $total_row['total'];
+    $total_pages = ceil($total_records / $limit);
+
+    $sql = "SELECT * FROM dealers ORDER BY id DESC LIMIT $limit OFFSET $offset";
+    $result = $conn->query($sql);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,6 +63,9 @@ include 'header.php';
                                         <p class="block text-sm font-normal leading-none text-slate-500">Address</p>
                                     </th>
                                     <th class="p-4 border-b border-slate-300 bg-slate-50">
+                                        <p class="block text-sm font-normal leading-none text-slate-500">Image</p>
+                                    </th>
+                                    <th class="p-4 border-b border-slate-300 bg-slate-50">
                                         <p class="block text-sm font-normal leading-none text-slate-500">Google Map</p>
                                     </th>
                                     <th class="p-4 border-b border-slate-300 bg-slate-50">
@@ -57,24 +78,26 @@ include 'header.php';
                                 <?php while ($row = $result->fetch_assoc()): ?>
                                 <tr class="hover:bg-slate-50">
                                     <td class="px-4 border-b border-slate-200 w-0.5/5">
-                                        <p class="block text-xs text-slate-800"><?= $row["id"] ?></p>
+                                        <p class="block text-xs text-slate-800"><?= htmlspecialchars($row["id"]) ?></p>
                                     </td>
                                     <td class="px-4 border-b border-slate-200 w-1/5">
-                                        <p class="block text-xs text-slate-800"><?= $row["full_name"] ?></p>
+                                        <p class="block text-xs text-slate-800"><?= htmlspecialchars($row["name"]) ?></p>
                                     </td>
                                     <td class="px-4 border-b border-slate-200 w-1/5">
-                                        <p class="block text-xs text-slate-800"><?= $row["role"] ?></p>
+                                        <p class="block text-xs text-slate-800"><?= htmlspecialchars($row["contact"]) ?></p>
                                     </td>
                                     <td class="px-4 border-b border-slate-200 w-1/5">
-                                        <p class="block text-xs text-slate-800"><?= $row["username"] ?></p>
+                                        <p class="block text-xs text-slate-800 truncate"><?= htmlspecialchars($row["address"]) ?></p>
                                     </td>
                                     <td class="px-4 border-b border-slate-200 w-1/5">
-                                        <p class="block text-xs text-slate-800">
-                                            <?= $row["active"] ? 'Active' : 'Inactive' ?></p>
+                                        <img src="../images_dealer/<?= htmlspecialchars($row["image"]) ?>" alt="Dealer Image" class="w-16 h-16 object-cover">
+                                    </td>
+                                    <td class="px-4 border-b border-slate-200 w-1/5">
+                                        <p class="block text-xs text-slate-800 truncate"><?= htmlspecialchars($row["map"]) ?></p>
                                     </td>
                                     <td class="px-4 border-b border-slate-200">
                                         <button class="mr-4">
-                                            <a href="edit_user.php?id=<?= $row["id"] ?>">
+                                            <a href="edit_dealer.php?id=<?= htmlspecialchars($row["id"]) ?>">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                     class="w-5 fill-blue-500 hover:fill-blue-700"
                                                     viewBox="0 0 348.882 348.882">
@@ -88,8 +111,8 @@ include 'header.php';
                                             </a>
                                         </button>
                                         <button class="mr-4">
-                                            <a href="delete_user.php?id=<?= $row["id"] ?>"
-                                                onclick="return confirm('Are you sure you want to delete this user?');">
+                                            <a href="delete_dealer.php?id=<?= htmlspecialchars($row["id"]) ?>"
+                                                onclick="return confirm('Are you sure you want to delete this dealer?');">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                     class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
                                                     <path
@@ -106,7 +129,7 @@ include 'header.php';
                                 <?php endwhile; ?>
                                 <?php else: ?>
                                 <tr>
-                                    <td colspan="6" class="py-2 px-4 border-b text-center">No users found</td>
+                                    <td colspan="6" class="p-4 border-b border-slate-200 text-center">No records found</td>
                                 </tr>
                                 <?php endif; ?>
                             </tbody>
