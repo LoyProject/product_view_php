@@ -26,7 +26,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('name').value = "<?php echo $name; ?>";
         document.getElementById('description').value = "<?php echo $description; ?>";
-        document.getElementById('image').value = "<?php echo $image; ?>";
     });
 
     function displayFileName(input) {
@@ -103,7 +102,7 @@ include 'header.php';
                             <label id="label-image"
                                 class="block hover:border-red-500 border-2 border-dashed border-slate-100 shadow-sm w-full px-2 h-52 rounded-md text-slate-500 cursor-pointer flex flex-col justify-center items-center">
                                 <input type="file" id="image" name="image" accept="image/*" autocomplete="off"
-                                    class="hidden" onchange="displayFileName(this)" required />
+                                    class="hidden" onchange="displayFileName(this)" />
                                 <img id="preview-image" src="<?php echo '../images/' . $image; ?>"
                                     class="w-full h-48 object-contain rounded <?php echo empty($image) ? 'hidden' : ''; ?>" />
                             </label>

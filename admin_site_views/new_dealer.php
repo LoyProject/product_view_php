@@ -25,6 +25,16 @@
             event.preventDefault();
             const formData = new FormData(document.getElementById(event.target.id));
 
+            const imageInput = document.getElementById('image');
+            if (!imageInput.files.length) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Please upload an image.',
+                });
+                return;
+            }
+
             axios.post('../database/insert_dealer.php', formData)
                 .then(response => {
                     Swal.fire({
@@ -33,6 +43,10 @@
                         text: 'The dealer has been added successfully!',
                     });
                     document.getElementById(event.target.id).reset();
+                    document.getElementById('preview-image').classList.add('hidden');
+                    document.getElementById('file-name').style.display = 'block';
+                    document.getElementById('upload-icon').style.display = 'block';
+                    
                 })
                 .catch(error => {
                     Swal.fire({
@@ -108,26 +122,24 @@
                                             d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
                                             data-original="#000000" />
                                     </svg>
-                                </div>
-                                <label class=" font-md text-slate-500" id="product-image">
-                                    Upload Image
-                                </label>
-                                <span id="file-name" class="text-xs font-medium text-gray-400 mt-2">Only
-                                    .png,
-                                    .jpeg, .jpg are allowed.</span>
+                                </div>    
+                                <span id="file-name" class="text-xs font-medium text-gray-400 text-center"><b>Upload Image</b><br>
+                                    Only .png, .jpeg, .jpg are allowed.</span>
                                 <input type="file" id="image" name="image" accept="image/*" autocomplete="off"
-                                    class="hidden" accept=".jpg, .jpeg, .png" required
-                                    onchange="displayFileName(this); if(this.files.length > 0); document.getElementById('file-name').style.display = 'none'; document.getElementById('upload-icon').style.display = 'none'; document.getElementById('product-image').style.display = 'none';" />
+                                    class="hidden" accept=".jpg, .jpeg, .png" 
+                                    onchange="displayFileName(this); document.getElementById('file-name').style.display = 'none';
+                                        document.getElementById('upload-icon').style.display = 'none';" />
                                 <img id="preview-image" class="hidden p-2 w-full h-52 object-contain rounded" />
                             </label>
                         </div>
                         <div class="p-4 space-x-4 flex justify-end">
                             <button
                                 class="text-white bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
-                                type="button" onclick="document.getElementById('addProductForm').reset();
+                                type="button" onclick="document.getElementById('addDealerForm').reset();
                                         document.getElementById('preview-image').classList.add('hidden');
-                                        window.location.href = 'dealer.php';">
-                                Cancel
+                                        document.getElementById('file-name').style.display = 'block';
+                                        document.getElementById('upload-icon').style.display = 'block';">
+                                Clear
                             </button>
                             <button
                                 class="text-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"

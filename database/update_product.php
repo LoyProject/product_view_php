@@ -18,13 +18,13 @@
             $stmt->fetch();
             $stmt->close();
 
-            if (!empty($old_image) && file_exists($old_image)) {
-                unlink($old_image);
+            if (!empty($old_image) && file_exists("../images/" . $old_image)) {
+                unlink("../images/" . $old_image);
             }
 
             $sql = "UPDATE products SET name=?, description=?, image=? WHERE id=?";
             $stmt = $conn->prepare($sql);
-            $stmt->bind_param("sssi", $name, $description, $target_file, $id);
+            $stmt->bind_param("sssi", $name, $description, basename($target_file), $id);
 
             if ($stmt->execute()) {
                 echo "Product updated successfully.";
