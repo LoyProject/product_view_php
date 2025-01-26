@@ -21,14 +21,13 @@ include 'header.php';
     <div class="relative font-[sans-serif] pt-[70px] h-screen">
         <div class="flex items-start">
             <?php include 'sidebar.php'; ?>
-
-            <section class="main-content w-full overflow-auto p-6 hidden" id="Dashboard">
-                <div>
-                    <div class="flex items-center">
-                        <h1>Dashboard</h1>
+            <div class="main-content w-full overflow-auto p-6">
+                <div class="container-xl mx-auto">
+                    <div class="flex justify-between item-center">
+                        <h2 class="p-4 text-2xl font-bold">Dashboard</h2>
                     </div>
                 </div>
-            </section>
+            </div>
         </div>
     </div>
 </body>

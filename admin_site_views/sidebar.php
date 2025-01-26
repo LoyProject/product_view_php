@@ -16,7 +16,7 @@
         class="bg-white shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max max-lg:w-0 max-lg:invisible transition-all duration-500">
         <ul class="space-y-2 mb-2">
             <li>
-                <a href="javascript:void(0)" onclick="resetMenuColors();
+                <a href="dashboard.php" onclick="resetMenuColors();
                                 this.classList.add('text-red-500');
                                 this.querySelector('svg').classList.add('fill-red-500');"
                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
@@ -84,7 +84,7 @@
         </ul>
         <ul class="space-y-2 mb-2">
             <li>
-                <a href="javascript:void(0)" onclick="resetMenuColors();
+                <a href="upload_logo.php" onclick="resetMenuColors();
                                     this.classList.add('text-red-500');
                                     this.querySelector('svg').classList.add('fill-red-500');"
                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">

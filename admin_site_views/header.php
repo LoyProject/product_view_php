@@ -1,18 +1,15 @@
 <?php
-session_start();
+    session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to the login page if not logged in
-    header("Location: login.php");
-    exit();
-}
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+        exit();
+    }
 ?>
+
 <header class='flex shadow-md py-1 px-4 sm:px-7 bg-white min-h-[70px] tracking-wide z-[110] fixed top-0 w-full'>
     <div class='flex flex-wrap items-center justify-between gap-4 w-full relative'>
-        <a href="javascript:void(0)"><img src="https://readymadeui.com/readymadeui.svg" alt="logo" class='w-36' />
-        </a>
-
+        <a href="javascript:void(0)"><img src="https://readymadeui.com/readymadeui.svg" alt="logo" class='w-36'/></a>
         <div id="collapseMenu"
             class='max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50'>
             <button id="toggleClose" class='lg:hidden fixed top-2 right-4 z-[100] rounded-full bg-white p-3'>
@@ -144,14 +141,15 @@ if (!isset($_SESSION['user_id'])) {
         </button>
     </div>
 </header>
+
 <script>
-function logout() {
-    axios.get('../database/logout.php')
-        .then(response => {
-            window.location.href = 'login.php';
-        })
-        .catch(error => {
-            console.error('Logout error:', error);
-        });
-}
+    function logout() {
+        axios.get('../database/logout.php')
+            .then(response => {
+                window.location.href = 'login.php';
+            })
+            .catch(error => {
+                console.error('Logout error:', error);
+            });
+    }
 </script>
