@@ -16,9 +16,7 @@
         class="bg-white shadow-lg h-screen fixed py-6 px-4 top-[70px] left-0 overflow-auto z-[99] lg:min-w-[250px] lg:w-max max-lg:w-0 max-lg:invisible transition-all duration-500">
         <ul class="space-y-2 mb-2">
             <li>
-                <a href="dashboard.php" onclick="resetMenuColors();
-                                this.classList.add('text-red-500');
-                                this.querySelector('svg').classList.add('fill-red-500');"
+                <a href="dashboard.php" onclick="this.style.color = 'red';"
                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
                         viewBox="0 0 24 24">
@@ -35,9 +33,7 @@
         </ul>
         <ul class="space-y-2 mb-2">
             <li>
-                <a href="product.php" onclick="resetMenuColors();
-                                    this.classList.add('text-red-500');
-                                    this.querySelector('svg').classList.add('fill-red-500');"
+                <a href="product.php"
                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
                         viewBox="0 0 24 24">
@@ -51,9 +47,7 @@
         </ul>
         <ul class="space-y-2 mb-2">
             <li>
-                <a href="dealer.php" onclick="resetMenuColors();
-                                    this.classList.add('text-red-500');
-                                    this.querySelector('svg').classList.add('fill-red-500');"
+                <a href="dealer.php"
                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
                         viewBox="0 0 22 22">
@@ -61,16 +55,13 @@
                             d="M20.025 8.05V16C20.025 16.55 19.8292 17.0208 19.4375 17.4125C19.0459 17.8042 18.575 18 18.025 18H4.02503C3.47503 18 3.00419 17.8042 2.61253 17.4125C2.22086 17.0208 2.02503 16.55 2.02503 16V8.05C1.64169 7.7 1.34586 7.25 1.13753 6.7C0.929194 6.15 0.925027 5.55 1.12503 4.9L2.17503 1.5C2.30836 1.06667 2.54586 0.708333 2.88753 0.425C3.22919 0.141667 3.62503 0 4.07503 0H17.975C18.425 0 18.8167 0.1375 19.15 0.4125C19.4834 0.6875 19.725 1.05 19.875 1.5L20.925 4.9C21.125 5.55 21.1209 6.14167 20.9125 6.675C20.7042 7.20833 20.4084 7.66667 20.025 8.05ZM13.225 7C13.675 7 14.0167 6.84583 14.25 6.5375C14.4834 6.22917 14.575 5.88333 14.525 5.5L13.975 2H12.025V5.7C12.025 6.05 12.1417 6.35417 12.375 6.6125C12.6084 6.87083 12.8917 7 13.225 7ZM8.72503 7C9.10836 7 9.42086 6.87083 9.66253 6.6125C9.90419 6.35417 10.025 6.05 10.025 5.7V2H8.07503L7.52503 5.5C7.45836 5.9 7.54586 6.25 7.78753 6.55C8.02919 6.85 8.34169 7 8.72503 7ZM4.27503 7C4.57503 7 4.83753 6.89167 5.06253 6.675C5.28753 6.45833 5.42503 6.18333 5.47503 5.85L6.02503 2H4.07503L3.07503 5.35C2.97503 5.68333 3.02919 6.04167 3.23753 6.425C3.44586 6.80833 3.79169 7 4.27503 7ZM17.775 7C18.2584 7 18.6084 6.80833 18.825 6.425C19.0417 6.04167 19.0917 5.68333 18.975 5.35L17.925 2H16.025L16.575 5.85C16.625 6.18333 16.7625 6.45833 16.9875 6.675C17.2125 6.89167 17.475 7 17.775 7ZM4.02503 16H18.025V8.95C17.9417 8.98333 17.8875 9 17.8625 9H17.775C17.325 9 16.9292 8.925 16.5875 8.775C16.2459 8.625 15.9084 8.38333 15.575 8.05C15.275 8.35 14.9334 8.58333 14.55 8.75C14.1667 8.91667 13.7584 9 13.325 9C12.875 9 12.4542 8.91667 12.0625 8.75C11.6709 8.58333 11.325 8.35 11.025 8.05C10.7417 8.35 10.4125 8.58333 10.0375 8.75C9.66253 8.91667 9.25836 9 8.82503 9C8.34169 9 7.90419 8.91667 7.51253 8.75C7.12086 8.58333 6.77503 8.35 6.47503 8.05C6.12503 8.4 5.77919 8.64583 5.43753 8.7875C5.09586 8.92917 4.70836 9 4.27503 9H4.16253C4.12086 9 4.07503 8.98333 4.02503 8.95V16ZM7.52503 15H9.52503C9.65836 15 9.77503 14.95 9.87503 14.85C9.97503 14.75 10.025 14.6333 10.025 14.5C10.025 14.3667 9.97503 14.25 9.87503 14.15C9.77503 14.05 9.65836 14 9.52503 14H8.02503V13H9.52503C9.65836 13 9.77503 12.95 9.87503 12.85C9.97503 12.75 10.025 12.6333 10.025 12.5V10.5C10.025 10.3667 9.97503 10.25 9.87503 10.15C9.77503 10.05 9.65836 10 9.52503 10H7.52503C7.39169 10 7.27503 10.05 7.17503 10.15C7.07503 10.25 7.02503 10.3667 7.02503 10.5C7.02503 10.6333 7.07503 10.75 7.17503 10.85C7.27503 10.95 7.39169 11 7.52503 11H9.02503V12H7.52503C7.39169 12 7.27503 12.05 7.17503 12.15C7.07503 12.25 7.02503 12.3667 7.02503 12.5V14.5C7.02503 14.6333 7.07503 14.75 7.17503 14.85C7.27503 14.95 7.39169 15 7.52503 15ZM14.025 13V14.5C14.025 14.6333 14.075 14.75 14.175 14.85C14.275 14.95 14.3917 15 14.525 15C14.6584 15 14.775 14.95 14.875 14.85C14.975 14.75 15.025 14.6333 15.025 14.5V10.5C15.025 10.3667 14.975 10.25 14.875 10.15C14.775 10.05 14.6584 10 14.525 10C14.3917 10 14.275 10.05 14.175 10.15C14.075 10.25 14.025 10.3667 14.025 10.5V12H13.025V10.5C13.025 10.3667 12.975 10.25 12.875 10.15C12.775 10.05 12.6584 10 12.525 10C12.3917 10 12.275 10.05 12.175 10.15C12.075 10.25 12.025 10.3667 12.025 10.5V12.5C12.025 12.6333 12.075 12.75 12.175 12.85C12.275 12.95 12.3917 13 12.525 13H14.025Z"
                             fill="#666666" />
                     </svg>
-
                     <span>Dealers</span>
                 </a>
             </li>
         </ul>
         <ul class="space-y-2 mb-2">
             <li>
-                <a href="user.php" onclick="resetMenuColors();
-                                    this.classList.add('text-red-500');
-                                    this.querySelector('svg').classList.add('fill-red-500');"
+                <a href="user.php"
                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
                         viewBox="0 0 512 512">
@@ -84,9 +75,7 @@
         </ul>
         <ul class="space-y-2 mb-2">
             <li>
-                <a href="upload_logo.php" onclick="resetMenuColors();
-                                    this.classList.add('text-red-500');
-                                    this.querySelector('svg').classList.add('fill-red-500');"
+                <a href="upload_logo.php"
                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[20px] h-[20px] mr-3"
                         viewBox="0 0 24 24">
@@ -98,6 +87,10 @@
                 </a>
             </li>
         </ul>
+
+        <div class="absolute bottom-4 left-4 text-sm text-gray-500">
+            <p>&copy; 2025 Power by Loy Team.   </p>
+        </div>
     </div>
 </nav>
 

@@ -33,11 +33,9 @@
         });
     </script>
 </head>
-<?php
-include 'header.php';
-?>
 
 <body>
+    <?php include 'header.php'; ?>
     <div class="relative font-[sans-serif] pt-[70px] h-screen">
         <div class="flex items-start">
             <?php include 'sidebar.php'; ?>
