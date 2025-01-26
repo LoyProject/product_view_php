@@ -20,21 +20,17 @@
                 <ul id="menu-list"
                     class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
                     <li>
-                        <a href="../index.php"
-                            class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500"
+                        <a href="../index.php" class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500"
                             aria-current="page">Home</a>
                     </li>
                     <li>
-                        <a href="#"
-                            class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500">Dealer</a>
+                        <a href="client_site_views/dealer.php" class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500">Dealer</a>
                     </li>
                     <li>
-                        <a id="open-modal-service-btn" href="#"
-                            class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500">Services</a>
+                        <a id="open-modal-service-btn" href="#" class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500">Services</a>
                     </li>
                     <li>
-                        <a id="open-modal-contact-btn" href="#"
-                            class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500">Contact</a>
+                        <a id="open-modal-contact-btn" href="#" class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500">Contact</a>
                     </li>
                 </ul>
             </div>
