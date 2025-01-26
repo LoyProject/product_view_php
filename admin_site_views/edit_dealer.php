@@ -23,49 +23,60 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('name').value = "<?php echo $name; ?>";
-        document.getElementById('contact').value = "<?php echo $contact; ?>";
-        document.getElementById('address').value = "<?php echo $address; ?>";
-        document.getElementById('map').value = "<?php echo $map; ?>";
-    });
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('name').value = "<?php echo $name; ?>";
+            document.getElementById('contact').value = "<?php echo $contact; ?>";
+            document.getElementById('address').value = "<?php echo $address; ?>";
+            document.getElementById('map').value = "<?php echo $map; ?>";
+        });
 
-    function displayFileName(input) {
-        const file = input.files[0];
-        const previewImage = document.getElementById('preview-image');
+        function displayFileName(input) {
+            const file = input.files[0];
+            const previewImage = document.getElementById('preview-image');
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewImage.src = e.target.result;
-            previewImage.classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
-    }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
 
-    function editDealerBtn(event) {
-        event.preventDefault();
+        function editDealerBtn(event) {
+            event.preventDefault();
 
-        const formData = new FormData(document.getElementById('editDealerForm'));
-        formData.append('id', "<?php echo $dealerId; ?>");
-
-        axios.post('../database/update_dealer.php', formData)
-            .then(response => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Dealer Updated',
-                    text: response.data.message,
-                }).then(() => {
-                    window.location.href = '../admin_site_views/dealer.php';
-                });
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: error.response.data.message,
-                });
+            Swal.fire({
+                title: 'Updating...',
+                text: 'Please wait while the dealer is being updated.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
             });
-    }
+
+            const formData = new FormData(document.getElementById('editDealerForm'));
+            formData.append('id', "<?php echo $dealerId; ?>");
+
+            axios.post('../database/update_dealer.php', formData)
+                .then(response => {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Dealer Updated',
+                        text: response.data.message,
+                    }).then(() => {
+                        window.location.href = '../admin_site_views/dealer.php';
+                    });
+                })
+                .catch(error => {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error.response.data.message,
+                    });
+                });
+        }
     </script>
 </head>
 
@@ -120,7 +131,7 @@ include 'header.php';
                             <label id="label-image"
                                 class="block hover:border-red-500 border-2 border-dashed border-slate-100 shadow-sm w-full px-2 h-52 rounded-md text-slate-500 cursor-pointer flex flex-col justify-center items-center">
                                 <input type="file" id="image" name="image" accept="image/*" autocomplete="off"
-                                    class="hidden" onchange="displayFileName(this)"/>
+                                    class="hidden" onchange="displayFileName(this)" />
                                 <img id="preview-image" src="<?php echo '../images_dealer/' . $image; ?>"
                                     class="w-full h-48 object-contain rounded <?php echo empty($image) ? 'hidden' : ''; ?>" />
                             </label>

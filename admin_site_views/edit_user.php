@@ -34,50 +34,60 @@ if (!isset($_SESSION['user_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('name').value = "<?php echo $name; ?>";
-        document.getElementById('username').value = "<?php echo $username; ?>";
-        document.getElementById('role').value = "<?php echo $role; ?>";
-        document.getElementById('password').value = "<?php echo $password; ?>";
-        document.getElementById('conpassword').value = "<?php echo $password; ?>";
-    });
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('name').value = "<?php echo $name; ?>";
+            document.getElementById('username').value = "<?php echo $username; ?>";
+            document.getElementById('role').value = "<?php echo $role; ?>";
+            document.getElementById('password').value = "<?php echo $password; ?>";
+            document.getElementById('conpassword').value = "<?php echo $password; ?>";
+        });
 
-    function editUserBtn(event) {
-        event.preventDefault();
+        function editUserBtn(event) {
+            event.preventDefault();
 
-        const password = document.getElementById('password').value;
-        const conpassword = document.getElementById('conpassword').value;
+            const password = document.getElementById('password').value;
+            const conpassword = document.getElementById('conpassword').value;
 
-        if (password !== conpassword) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Passwords do not match!',
-            });
-            return;
-        }
-
-        const formData = new FormData(document.getElementById('editUserForm'));
-        formData.append('id', "<?php echo $userId; ?>");
-
-        axios.post('../database/update_user.php', formData)
-            .then(response => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'User Updated',
-                    text: response.data.message,
-                }).then(() => {
-                    window.location.href = '../admin_site_views/user.php';
-                });
-            })
-            .catch(error => {
+            if (password !== conpassword) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: error.response.data.message,
+                    text: 'Passwords do not match!',
                 });
+                return;
+            }
+
+            const formData = new FormData(document.getElementById('editUserForm'));
+            formData.append('id', "<?php echo $userId; ?>");
+
+            Swal.fire({
+                title: 'Updating User...',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
             });
-    }
+
+            axios.post('../database/update_user.php', formData)
+                .then(response => {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'User Updated',
+                        text: response.data.message,
+                    }).then(() => {
+                        window.location.href = '../admin_site_views/user.php';
+                    });
+                })
+                .catch(error => {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error.response.data.message,
+                    });
+                });
+        }
     </script>
 </head>
 

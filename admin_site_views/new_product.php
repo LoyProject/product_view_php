@@ -24,9 +24,19 @@
         function addProductBtn(event) {
             event.preventDefault();
             const formData = new FormData(document.getElementById('addProductForm'));
+            
+            Swal.fire({
+                title: 'Adding Product...',
+                text: 'Please wait while the product is being added.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
 
             axios.post('../database/insert_product.php', formData)
                 .then(response => {
+                    Swal.close();
                     Swal.fire({
                         icon: 'success',
                         title: 'Product Added',
@@ -35,6 +45,7 @@
                     document.getElementById('addProductForm').reset();
                 })
                 .catch(error => {
+                    Swal.close();
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',

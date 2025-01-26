@@ -23,47 +23,58 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('name').value = "<?php echo $name; ?>";
-        document.getElementById('description').value = "<?php echo $description; ?>";
-    });
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('name').value = "<?php echo $name; ?>";
+            document.getElementById('description').value = "<?php echo $description; ?>";
+        });
 
-    function displayFileName(input) {
-        const file = input.files[0];
-        const previewImage = document.getElementById('preview-image');
+        function displayFileName(input) {
+            const file = input.files[0];
+            const previewImage = document.getElementById('preview-image');
 
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            previewImage.src = e.target.result;
-            previewImage.classList.remove('hidden');
-        };
-        reader.readAsDataURL(file);
-    }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
 
-    function editProductBtn(event) {
-        event.preventDefault();
+        function editProductBtn(event) {
+            event.preventDefault();
 
-        const formData = new FormData(document.getElementById('editProductForm'));
-        formData.append('id', "<?php echo $productId; ?>");
+            const formData = new FormData(document.getElementById('editProductForm'));
+            formData.append('id', "<?php echo $productId; ?>");
 
-        axios.post('../database/update_product.php', formData)
-            .then(response => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Product Updated',
-                    text: response.data.message,
-                }).then(() => {
-                    window.location.href = '../admin_site_views/product.php';
-                });
-            })
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: error.response.data.message,
-                });
+            Swal.fire({
+                title: 'Updating...',
+                text: 'Please wait while the product is being updated.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
             });
-    }
+
+            axios.post('../database/update_product.php', formData)
+                .then(response => {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Product Updated',
+                        text: response.data.message,
+                    }).then(() => {
+                        window.location.href = '../admin_site_views/product.php';
+                    });
+                })
+                .catch(error => {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: error.response.data.message,
+                    });
+                });
+        }
     </script>
 </head>
 

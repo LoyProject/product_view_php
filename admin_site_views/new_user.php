@@ -25,8 +25,18 @@
                 return;
             }
 
+            Swal.fire({
+                title: 'Adding User...',
+                text: 'Please wait while the user is being added.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
             axios.post('../database/insert_user.php', formData)
                 .then(response => {
+                    Swal.close();
                     Swal.fire({
                         icon: 'success',
                         title: 'User Added',
@@ -35,6 +45,7 @@
                     document.getElementById('addUserForm').reset();
                 })
                 .catch(error => {
+                    swal.close();
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',

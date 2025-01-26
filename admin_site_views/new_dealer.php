@@ -35,8 +35,18 @@
                 return;
             }
 
+            Swal.fire({
+                title: 'Processing...',
+                text: 'Please wait while we add the dealer.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
+
             axios.post('../database/insert_dealer.php', formData)
                 .then(response => {
+                    Swal.close();
                     Swal.fire({
                         icon: 'success',
                         title: 'Dealer Added',
@@ -49,6 +59,7 @@
                     
                 })
                 .catch(error => {
+                    Swal.close();
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
