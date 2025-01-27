@@ -21,19 +21,22 @@
                 <li>
                     <a href="../index.php"
                         class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500"
-                        aria-current="page">Home</a>
+                        onclick="handleMenuClick(event)" aria-current="page">Home</a>
                 </li>
                 <li>
                     <a href="client_site_views/dealer.php"
-                        class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500">Dealer</a>
+                        class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500"
+                        onclick="handleMenuClick(event)">Dealer</a>
                 </li>
                 <li>
                     <a id="open-modal-service-btn" href="#"
-                        class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500">Services</a>
+                        class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500"
+                        onclick="handleMenuClick(event)">Services</a>
                 </li>
                 <li>
                     <a id="open-modal-contact-btn" href="#"
-                        class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500">Contact</a>
+                        class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500"
+                        onclick="handleMenuClick(event)">Contact</a>
                 </li>
             </ul>
         </div>
@@ -41,22 +44,24 @@
 </nav>
 
 <script>
-    function toggleMenu() {
-        const navLinks = document.getElementById('navbar-sticky');
-        navLinks.classList.toggle('hidden');
-    }
+function toggleMenu() {
+    const navLinks = document.getElementById('navbar-sticky');
+    navLinks.classList.toggle('hidden');
+}
 
-    const menuItems = document.querySelectorAll('.menu-item');
-    menuItems.forEach(item => {
-        item.addEventListener('click', () => {
-            menuItems.forEach(link => {
-                link.classList.remove('text-red-500');
-                link.classList.add('text-gray-900');
-            });
-            item.classList.remove('text-gray-900');
-            item.classList.add('text-red-500');
-        });
+// Highlight the menu item based on the current URL
+document.addEventListener("DOMContentLoaded", function() {
+    const currentUrl = window.location.pathname; // Get the current URL path
+    const links = document.querySelectorAll('#menu-list a');
+
+    links.forEach(link => {
+        if (link.getAttribute('href') === currentUrl) {
+            link.classList.add('text-red-500'); // Add the red text class
+        } else {
+            link.classList.remove('text-red-500'); // Ensure others are not highlighted
+        }
     });
+});
 </script>
 
 <div id="open-modal-service" aria-hidden="true"
