@@ -7,7 +7,7 @@
     }
 ?>
 
-<header class='flex shadow-md py-1 px-4 sm:px-7 bg-white min-h-[70px] tracking-wide z-[110] fixed top-0 w-full'>
+<div class='flex shadow-md py-1 px-4 sm:px-7 bg-white min-h-[70px] tracking-wide z-[110] fixed top-0 w-full'>
     <div class='flex flex-wrap items-center justify-between gap-4 w-full relative'>
         <?php
             include '../database/db_connection.php';
@@ -87,7 +87,7 @@
             </svg>
         </button>
     </div>
-</header>
+</div>
 
 <script>
     function logout() {
