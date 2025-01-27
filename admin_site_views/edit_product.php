@@ -63,7 +63,7 @@
             formData.append('id', "<?php echo $productId; ?>");
 
             Swal.fire({
-                title: 'Updating...',
+                title: 'Updating Product...',
                 text: 'Please wait while the product is being updated.',
                 allowOutsideClick: false,
                 didOpen: () => {

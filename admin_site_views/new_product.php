@@ -25,7 +25,17 @@
 
         function addProduct(event) {
             event.preventDefault();
-            const formData = new FormData(document.getElementById('addProductForm'));
+            const formData = new FormData(document.getElementById(event.target.id));
+
+            const imageInput = document.getElementById('image');
+            if (!imageInput.files.length) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Please upload an image.'
+                });
+                return;
+            }
 
             Swal.fire({
                 title: 'Adding Product...',
@@ -44,7 +54,6 @@
                         title: 'Product Added',
                         text: 'The product has been added successfully!'
                     });
-                    document.getElementById('addProductForm').reset();
                     resetImagePreview();
                 })
                 .catch(error => {
@@ -103,7 +112,7 @@
 
                         <div class="mb-6">
                             <label for="image" class="block text-gray-700 font-medium mb-2">Product Image</label>
-                            <label for="image"
+                            <label id="lable-image"
                                 class="block border-2 border-dashed border-gray-300 shadow-sm w-full h-52 rounded cursor-pointer flex flex-col justify-center items-center">
                                 <div id="upload-icon" class="text-gray-500 mb-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-11" viewBox="0 0 32 32">
@@ -118,7 +127,7 @@
                                 <span id="file-name" class="text-gray-400 text-center">
                                     <strong>Upload Image</strong><br>Only .png, .jpeg, .jpg files are allowed.
                                 </span>
-                                <input type="file" id="image" name="image" required accept=".jpg, .jpeg, .png"
+                                <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png"
                                     class="hidden" onchange="displayFileName(this); document.getElementById('file-name').style.display = 'none'; document.getElementById('upload-icon').style.display = 'none';">
                                 <img id="preview-image" class="hidden px-2 w-full h-48 object-contain rounded">
                             </label>
