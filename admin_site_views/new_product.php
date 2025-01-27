@@ -15,7 +15,7 @@
 
             if (file) {
                 const reader = new FileReader();
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     previewImage.src = e.target.result;
                     previewImage.classList.remove('hidden');
                 };
@@ -89,9 +89,10 @@
             <div class="main-content w-full overflow-auto p-6">
                 <div class="container mx-auto">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold">Create New Product</h2>
+                        <h2 class="text-2xl font-bold">Create New</h2>
                         <a href="product.php">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
+                            <button
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
                                 Back
                             </button>
                         </a>
@@ -105,7 +106,8 @@
                         </div>
 
                         <div class="mb-6">
-                            <label for="description" class="block text-gray-700 font-medium mb-2">Product Description</label>
+                            <label for="description" class="block text-gray-700 font-medium mb-2">Product
+                                Description</label>
                             <textarea id="description" name="description" required autocomplete="off"
                                 class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
                         </div>
@@ -127,8 +129,8 @@
                                 <span id="file-name" class="text-gray-400 text-center">
                                     <strong>Upload Image</strong><br>Only .png, .jpeg, .jpg files are allowed.
                                 </span>
-                                <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png"
-                                    class="hidden" onchange="displayFileName(this); document.getElementById('file-name').style.display = 'none'; document.getElementById('upload-icon').style.display = 'none';">
+                                <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" class="hidden"
+                                    onchange="displayFileName(this); document.getElementById('file-name').style.display = 'none'; document.getElementById('upload-icon').style.display = 'none';">
                                 <img id="preview-image" class="hidden px-2 w-full h-48 object-contain rounded">
                             </label>
                         </div>

@@ -81,7 +81,7 @@
             <div class="main-content w-full overflow-auto p-6">
                 <div class="container-xl mx-auto">
                     <div class="item-center">
-                        <h2 class="p-4 text-2xl font-bold">Upload Logo</h2>
+                        <h2 class="text-2xl font-bold mb-6 mt-2">Upload Logo</h2>
                         <div class="flex">
                             <label id="lable-image" class="block border-2 border-dashed border-gray-300 shadow-sm w-full h-52 rounded cursor-pointer flex flex-col justify-center items-center">
                                 <div id="upload-icon" class="text-gray-500 mb-2">
