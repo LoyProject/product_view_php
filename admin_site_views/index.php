@@ -1,4 +1,4 @@
 <?php
-header('Location: product.php');
-exit();
+    header('Location: product.php');
+    exit();
 ?>

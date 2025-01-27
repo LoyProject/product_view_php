@@ -4,23 +4,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New</title>
+    <title>Add New User</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function addUserBtn(event) {
+        function addUser(event) {
             event.preventDefault();
-            const formData = new FormData(document.getElementById('addUserForm'));
+            const formData = new FormData(document.getElementById(event.target.id));
 
             const password = formData.get('password');
-            const confirmPassword = formData.get('conpassword');
+            const confirmPassword = formData.get('confirm_password');
 
             if (password !== confirmPassword) {
                 Swal.fire({
                     icon: 'error',
-                    title: 'Error',
-                    text: 'Passwords do not match.',
+                    title: 'Password Mismatch',
+                    text: 'Password and Confirm Password do not match. Please try again.'
                 });
                 return;
             }
@@ -40,101 +40,86 @@
                     Swal.fire({
                         icon: 'success',
                         title: 'User Added',
-                        text: 'The user has been added successfully!',
+                        text: 'The user has been added successfully!'
                     });
                     document.getElementById('addUserForm').reset();
                 })
                 .catch(error => {
-                    swal.close();
+                    Swal.close();
                     Swal.fire({
                         icon: 'error',
                         title: 'Error',
-                        text: 'There was an error adding the user.',
+                        text: 'There was an error adding the user. Please try again.'
                     });
                 });
         }
     </script>
 </head>
-<?php
-include 'header.php';
-?>
 
 <body>
-    <div>
-        <div class="relative font-[sans-serif] pt-[70px] h-screen">
-            <div class="flex items-start">
-                <?php include 'sidebar.php'; ?>
-                <div class="main-content w-full overflow-auto p-6">
-                    <div class="container-xl mx-auto">
-                        <div class="flex justify-between item-center">
-                            <h2 class="p-4 text-2xl font-bold">Create New</h2>
-                            <a href="user.php">
-                                <button
-                                    class="text-white bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]">
-                                    Back
-                                </button>
-                            </a>
-                        </div>
-                        <form id="addUserForm" onsubmit="addUserBtn(event)">
-                            <div class="p-4 space-y-2">
-                                <label class="font-md text-slate-500" for="name">
-                                    Full Name
-                                </label>
-                                <input
-                                    class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    type="text" id="name" name="name" autocomplete="off" required>
-                            </div>
-                            <div class="p-4 space-y-2">
-                                <label class="font-md text-slate-500" for="username">
-                                    Username
-                                </label>
-                                <input
-                                    class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    type="text" id="username" name="username" autocomplete="off" required>
-                            </div>
-                            <div class="p-4 space-y-2">
-                                <label class="font-md text-slate-500" for="role">
-                                    Role
-                                </label>
-                                <select
-                                    class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    id="role" name="role" required autocomplete="off">
-                                    <option value="Admin">Admin</option>
-                                    <option value="Editor">Editor</option>
-                                    <option value="Viewer">Viewer</option>
-                                </select>
-                            </div>
-                            <div class="p-4 space-y-2">
-                                <label class="font-md text-slate-500" for="password">
-                                    Password
-                                </label>
-                                <input
-                                    class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    type="password" id="password" name="password" autocomplete="off" required>
-                            </div>
-                            <div class="p-4 space-y-2">
-                                <label class="font-md text-slate-500" for="conpassword">
-                                    Confirm Password
-                                </label>
-                                <input
-                                    class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
-                                    type="password" id="conpassword" name="conpassword" autocomplete="off" required>
-                            </div>
-                            <div class="p-4 space-x-4 flex justify-end">
-                                <button
-                                    class="text-white bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
-                                    type="button" onclick="document.getElementById('addUserForm').reset();
-                                        window.location.href = 'user.php';">
-                                    Cancel
-                                </button>
-                                <button
-                                    class="text-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]"
-                                    type="submit">
-                                    Submit
-                                </button>
-                            </div>
-                        </form>
+    <?php include 'header.php'; ?>
+
+    <div class="relative font-sans pt-[70px] min-h-screen">
+        <div class="flex items-start">
+            <?php include 'sidebar.php'; ?>
+
+            <div class="main-content w-full overflow-auto p-6">
+                <div class="container mx-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">Create New User</h2>
+                        <a href="user.php">
+                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
+                                Back
+                            </button>
+                        </a>
                     </div>
+
+                    <form id="addUserForm" onsubmit="addUser(event)">
+                        <div class="mb-6">
+                            <label for="name" class="block text-gray-700 font-medium mb-2">Full Name</label>
+                            <input type="text" id="name" name="name" required autocomplete="off"
+                                class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="username" class="block text-gray-700 font-medium mb-2">Username</label>
+                            <input type="username" id="username" name="username" required autocomplete="off"
+                                class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="role" class="block text-gray-700 font-medium mb-2">Role</label>
+                            <select id="role" name="role"
+                                class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                                <option value="Admin">Admin</option>
+                                <option value="Editor">Editor</option>
+                                <option value="Viewer">Viewer</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
+                            <input type="password" id="password" name="password" required autocomplete="off"
+                                class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="confirm_password" class="block text-gray-700 font-medium mb-2">Confirm Password</label>
+                            <input type="password" id="confirm_password" name="confirm_password" required autocomplete="off"
+                                class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                        </div>
+
+                        <div class="flex justify-end space-x-4">
+                            <button type="button" onclick="document.getElementById('addUserForm').reset()"
+                                class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
+                                Clear
+                            </button>
+                            <button type="submit"
+                                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
+                                Submit
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

@@ -14,7 +14,6 @@
             const file = event.target.files[0];
             const iconUpload = document.getElementById('upload-icon');
             const previewImage = document.getElementById('preview-image');
-            const logoImageLabel = document.getElementById('logo-image');
             const fileNameSpan = document.getElementById('file-name');
 
             if (file) {
@@ -23,7 +22,6 @@
                     previewImage.src = e.target.result;
                     iconUpload.classList.add('hidden');
                     previewImage.classList.remove('hidden');
-                    logoImageLabel.classList.add('hidden');
                     fileNameSpan.classList.add('hidden');
                 };
                 reader.readAsDataURL(file);
@@ -38,14 +36,12 @@
         function clearImage() {
             const iconUpload = document.getElementById('upload-icon');
             const previewImage = document.getElementById('preview-image');
-            const logoImageLabel = document.getElementById('logo-image');
             const fileNameSpan = document.getElementById('file-name');
             const imageInput = document.getElementById('image');
 
             imageInput.value = '';
             iconUpload.classList.remove('hidden');
             previewImage.classList.add('hidden');
-            logoImageLabel.classList.remove('hidden');
             fileNameSpan.classList.remove('hidden');
         }
 
@@ -87,21 +83,19 @@
                     <div class="item-center">
                         <h2 class="p-4 text-2xl font-bold">Upload Logo</h2>
                         <div class="flex">
-                            <label id="lable-image" class="block hover:border-red-500 border-2 border-dashed border-slate-100 shadow-sm w-full px-2 h-52 rounded text-slate-500 cursor-pointer mx-auto flex flex-col justify-center items-center">
-                                <div id="upload-icon" class="flex justify-center">
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-11 mb-2 fill-gray-500"
-                                        viewBox="0 0 32 32">
+                            <label id="lable-image" class="block border-2 border-dashed border-gray-300 shadow-sm w-full h-52 rounded cursor-pointer flex flex-col justify-center items-center">
+                                <div id="upload-icon" class="text-gray-500 mb-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-11" viewBox="0 0 32 32">
                                         <path
                                             d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
-                                            data-original="#000000" />
+                                            fill="currentColor" />
                                         <path
                                             d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
-                                            data-original="#000000" />
+                                            fill="currentColor" />
                                     </svg>
                                 </div>
-                                <label class=" font-md text-slate-500" id="logo-image">Upload Image</label>
-                                <span id="file-name" class="text-xs font-medium text-gray-400 mt-2">
-                                    Only .png, .jpeg, .jpg are allowed.
+                                <span id="file-name" class="text-gray-400 text-center">
+                                    <strong>Upload Image</strong><br>Only .png, .jpeg, .jpg files are allowed.
                                 </span>
                                 <input type="file" id="image" name="image" accept="image/*" autocomplete="off"
                                     class="hidden" accept=".jpg, .jpeg, .png" required onchange="handleImageChange(event)" />
@@ -111,13 +105,13 @@
                                         echo '<img id="preview-image" class="p-2 w-full h-52 object-contain rounded" src="../images_logo/' . $row['image'] . '" />';
                                         echo '<script>
                                             document.getElementById("upload-icon").classList.add("hidden");
-                                            document.getElementById("logo-image").classList.add("hidden");
+                                            document.getElementById("preview-image").classList.remove("hidden");
                                             document.getElementById("file-name").classList.add("hidden");
                                         </script>';
                                         $conn->close();
                                     }
                                 ?>
-                            </label>
+                            </label>   
                         </div>
                         <div class="flex justify-end mt-4">
                             <button type="button" onclick="clearImage()" class="text-white bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 mr-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]">

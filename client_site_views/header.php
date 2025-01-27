@@ -39,21 +39,20 @@
         </div>
     </div>
 </nav>
+
 <script>
     function toggleMenu() {
         const navLinks = document.getElementById('navbar-sticky');
         navLinks.classList.toggle('hidden');
     }
-    // Manage active menu item
+
     const menuItems = document.querySelectorAll('.menu-item');
     menuItems.forEach(item => {
         item.addEventListener('click', () => {
-            // Remove active class from all menu items
             menuItems.forEach(link => {
                 link.classList.remove('text-red-500');
-                link.classList.add('text-gray-900'); // Reset to default color
+                link.classList.add('text-gray-900');
             });
-            // Add active class to the clicked menu item
             item.classList.remove('text-gray-900');
             item.classList.add('text-red-500');
         });
@@ -63,9 +62,7 @@
 <div id="open-modal-service" aria-hidden="true"
     class="hidden fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
     <div class="relative p-4 w-full max-w-2xl max-h-full">
-        <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Our Services</h3>
                 <button id="close-modal-service-btn" type="button"
@@ -78,7 +75,6 @@
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
-            <!-- Modal body -->
             <div class="p-4 md:p-5 space-y-4">
                 <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                     With less than a month to go before the European Union enacts new
@@ -93,9 +89,7 @@
 <div id="open-modal-contact" aria-hidden="true"
     class="hidden fixed inset-0 p-4 flex flex-wrap justify-center items-center w-full h-full z-[1000] before:fixed before:inset-0 before:w-full before:h-full before:bg-[rgba(0,0,0,0.5)] overflow-auto font-[sans-serif]">
     <div class="relative p-4 w-full max-w-2xl max-h-full">
-        <!-- Modal content -->
         <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-            <!-- Modal header -->
             <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                 <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Contact Us</h3>
                 <button id="close-modal-contact-btn" type="button"
@@ -108,7 +102,6 @@
                     <span class="sr-only">Close modal</span>
                 </button>
             </div>
-            <!-- Modal body -->
             <div class="p-4 md:p-5 space-y-4">
                 <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
                     With less than a month to go before the European Union enacts new

@@ -1,58 +1,59 @@
 <?php
-session_start();
+    session_start();
 
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to the login page if not logged in
-    header("Location: login.php");
-    exit();
-}
-?>
-
-<?php
+    if (!isset($_SESSION['user_id'])) {
+        header("Location: login.php");
+        exit();
+    }
 
     include '../database/db_connection.php';
 
-    $id = $_GET['id'];
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $id = intval($_GET['id']);
 
-    if ($id) {
         $stmt = $conn->prepare("SELECT image FROM products WHERE id = ?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
-        $stmt->close();
+        if ($stmt) {
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
-        if ($row && isset($row['image'])) {
-            $imageName = $row['image'];
-            $imagePath = "../images/" . $imageName;
+            if ($result && $row = $result->fetch_assoc()) {
+                $imageName = $row['image'];
+                $imagePath = "../images/" . $imageName;
 
-            if (file_exists($imagePath) && unlink($imagePath)) {
-                $stmt = $conn->prepare("DELETE FROM products WHERE id = ?");
-                $stmt->bind_param("i", $id);
-
-                if ($stmt->execute()) {
-                    echo json_encode(['success' => true]);
+                if (file_exists($imagePath) && unlink($imagePath)) {
+                    $deleteStmt = $conn->prepare("DELETE FROM products WHERE id = ?");
+                    if ($deleteStmt) {
+                        $deleteStmt->bind_param("i", $id);
+                        if ($deleteStmt->execute()) {
+                            echo json_encode(['success' => true]);
+                        } else {
+                            echo json_encode(['success' => false, 'error' => 'Failed to delete record']);
+                        }
+                        $deleteStmt->close();
+                    } else {
+                        echo json_encode(['success' => false, 'error' => 'Failed to prepare delete statement']);
+                    }
                 } else {
-                    echo json_encode(['success' => false, 'error' => 'Failed to delete record']);
+                    echo json_encode(['success' => false, 'error' => 'Failed to delete image file']);
                 }
-
-                $stmt->close();
             } else {
-                echo json_encode(['success' => false, 'error' => 'Failed to delete image file']);
+                echo json_encode(['success' => false, 'error' => 'Image not found for the given ID']);
             }
+
+            $stmt->close();
         } else {
-            echo json_encode(['success' => false, 'error' => 'Image file not found']);
+            echo json_encode(['success' => false, 'error' => 'Failed to prepare select statement']);
         }
     } else {
-        echo json_encode(['success' => false, 'error' => 'Invalid ID']);
+        echo json_encode(['success' => false, 'error' => 'Invalid or missing ID']);
     }
 
     $conn->close();
 ?>
 
 <script>
-document.addEventListener('DOMContentLoaded', function() {
-    window.location.href = '../admin_site_views/product.php';
-});
+    document.addEventListener('DOMContentLoaded', function() {
+        window.location.href = '../admin_site_views/product.php';
+    });
 </script>
