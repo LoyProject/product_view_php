@@ -38,7 +38,7 @@ include 'header.php';
                 <div class="main-content w-full overflow-auto p-6">
                     <div class="container-xl mx-auto">
                         <div class="flex justify-between item-center">
-                            <h2 class="p-4 text-2xl font-bold">Users List</h2>
+                            <h2 class="py-4 text-2xl font-bold">Users List</h2>
                             <a href="new_user.php">
                                 <button
                                     class="text-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]">
@@ -46,26 +46,26 @@ include 'header.php';
                                 </button>
                             </a>
                         </div>
-                        <table class="w-full text-left table-fixed min-w-max">
-                            <thead>
+                        <table class="w-full table-auto border-collapse">
+                            <thead class="text-left">
                                 <tr>
                                     <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                        <p class="block text-sm font-normal leading-none text-slate-500">ID</p>
+                                        <p class="block text-sm font-bold leading-none text-slate-500">ID</p>
                                     </th>
                                     <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                        <p class="block text-sm font-normal leading-none text-slate-500">Full Name</p>
+                                        <p class="block text-sm font-bold leading-none text-slate-500">Full Name</p>
                                     </th>
                                     <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                        <p class="block text-sm font-normal leading-none text-slate-500">Role</p>
+                                        <p class="block text-sm font-bold leading-none text-slate-500">Role</p>
                                     </th>
                                     <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                        <p class="block text-sm font-normal leading-none text-slate-500">Username</p>
+                                        <p class="block text-sm font-bold leading-none text-slate-500">Username</p>
                                     </th>
                                     <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                        <p class="block text-sm font-normal leading-none text-slate-500">Status</p>
+                                        <p class="block text-sm font-bold leading-none text-slate-500">Status</p>
                                     </th>
                                     <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                        <p class="block text-sm font-normal leading-none text-slate-500">Action</p>
+                                        <p class="block text-sm font-bold leading-none text-slate-500">Action</p>
                                     </th>
                                 </tr>
                             </thead>
@@ -128,6 +128,29 @@ include 'header.php';
                                 <?php endif; ?>
                             </tbody>
                         </table>
+                        <div class="flex justify-between items-center mt-4">
+                            <p class="text-sm text-gray-500">Showing <?= $offset + 1 ?> to
+                                <?= min($offset + $limit, $total_records) ?> of <?= $total_records ?> entries
+                            </p>
+                            <div class="flex space-x-2">
+                                <?php if ($page > 1): ?>
+                                <a href="?page=<?= $page - 1 ?>&limit=<?= $limit ?>">
+                                    <button
+                                        class="bg-gray-200 text-gray-600 text-xs font-bold py-2 px-4 rounded hover:bg-red-500 hover:text-white w-20">
+                                        Previous
+                                    </button>
+                                </a>
+                                <?php endif; ?>
+                                <?php if ($page < $total_pages): ?>
+                                <a href="?page=<?= $page + 1 ?>&limit=<?= $limit ?>">
+                                    <button
+                                        class="bg-gray-200 text-gray-600 text-xs font-bold py-2 px-4 rounded hover:bg-red-700 hover:text-white w-20">
+                                        Next
+                                    </button>
+                                </a>
+                                <?php endif; ?>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

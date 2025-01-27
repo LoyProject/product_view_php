@@ -23,60 +23,60 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('name').value = "<?php echo $name; ?>";
-            document.getElementById('contact').value = "<?php echo $contact; ?>";
-            document.getElementById('address').value = "<?php echo $address; ?>";
-            document.getElementById('map').value = "<?php echo $map; ?>";
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('name').value = "<?php echo $name; ?>";
+        document.getElementById('contact').value = "<?php echo $contact; ?>";
+        document.getElementById('address').value = "<?php echo $address; ?>";
+        document.getElementById('map').value = "<?php echo $map; ?>";
+    });
+
+    function displayFileName(input) {
+        const file = input.files[0];
+        const previewImage = document.getElementById('preview-image');
+
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            previewImage.src = e.target.result;
+            previewImage.classList.remove('hidden');
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function editDealerBtn(event) {
+        event.preventDefault();
+
+        Swal.fire({
+            title: 'Updating...',
+            text: 'Please wait while the dealer is being updated.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
         });
 
-        function displayFileName(input) {
-            const file = input.files[0];
-            const previewImage = document.getElementById('preview-image');
+        const formData = new FormData(document.getElementById('editDealerForm'));
+        formData.append('id', "<?php echo $dealerId; ?>");
 
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                previewImage.src = e.target.result;
-                previewImage.classList.remove('hidden');
-            };
-            reader.readAsDataURL(file);
-        }
-
-        function editDealerBtn(event) {
-            event.preventDefault();
-
-            Swal.fire({
-                title: 'Updating...',
-                text: 'Please wait while the dealer is being updated.',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            });
-
-            const formData = new FormData(document.getElementById('editDealerForm'));
-            formData.append('id', "<?php echo $dealerId; ?>");
-
-            axios.post('../database/update_dealer.php', formData)
-                .then(response => {
-                    Swal.close();
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Dealer Updated',
-                        text: response.data.message,
-                    }).then(() => {
-                        window.location.href = '../admin_site_views/dealer.php';
-                    });
-                })
-                .catch(error => {
-                    Swal.close();
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: error.response.data.message,
-                    });
+        axios.post('../database/update_dealer.php', formData)
+            .then(response => {
+                Swal.close();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Dealer Updated',
+                    text: response.data.message,
+                }).then(() => {
+                    window.location.href = '../admin_site_views/dealer.php';
                 });
-        }
+            })
+            .catch(error => {
+                Swal.close();
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: error.response.data.message,
+                });
+            });
+    }
     </script>
 </head>
 
@@ -89,10 +89,18 @@ include 'header.php';
         <div class="flex items-start">
             <?php include 'sidebar.php'; ?>
             <div class="main-content w-full overflow-auto p-6">
-                <div class="container mx-auto p-2 rounded-lg">
-                    <h1 class="p-4 text-2xl font-bold mb-4">Edit Product</h1>
+                <div class="container mx-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">Edit Dealer</h2>
+                        <a href="dealer.php">
+                            <button
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
+                                Back
+                            </button>
+                        </a>
+                    </div>
                     <form id="editDealerForm" onsubmit="editDealerBtn(event)">
-                        <div class="p-4 space-y-2">
+                        <div class="mb-6">
                             <label class=" font-md text-slate-500">
                                 Dealer Name
                             </label>
@@ -100,7 +108,7 @@ include 'header.php';
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                 type="text" id="name" name="name" autocomplete="off" required></input>
                         </div>
-                        <div class="p-4 space-y-2">
+                        <div class="mb-6">
                             <label class=" font-md text-slate-500">
                                 Contact Number
                             </label>
@@ -108,7 +116,7 @@ include 'header.php';
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                 type="text" id="contact" name="contact" autocomplete="off" required></input>
                         </div>
-                        <div class="p-4 space-y-2">
+                        <div class="mb-6">
                             <label class=" font-md text-slate-500">
                                 Address
                             </label>
@@ -116,7 +124,7 @@ include 'header.php';
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                 id="address" name="address" autocomplete="off" required></textarea>
                         </div>
-                        <div class="p-4 space-y-2">
+                        <div class="mb-6">
                             <label class=" font-md text-slate-500">
                                 Google Map
                             </label>
@@ -124,7 +132,7 @@ include 'header.php';
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                 type="text" id="map" name="map" autocomplete="off" required></input>
                         </div>
-                        <div class="p-4 space-y-2">
+                        <div class="mb-6">
                             <label class=" font-md text-slate-500">
                                 Dealer Image
                             </label>
@@ -154,6 +162,7 @@ include 'header.php';
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </body>
 

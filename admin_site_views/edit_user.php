@@ -1,15 +1,4 @@
 <?php
-session_start();
-
-// Check if the user is logged in
-if (!isset($_SESSION['user_id'])) {
-    // Redirect to the login page if not logged in
-    header("Location: login.php");
-    exit();
-}
-?>
-
-<?php
     include '../database/db_connection.php';
 
     $userId = $_GET['id'];
@@ -34,60 +23,60 @@ if (!isset($_SESSION['user_id'])) {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('name').value = "<?php echo $name; ?>";
-            document.getElementById('username').value = "<?php echo $username; ?>";
-            document.getElementById('role').value = "<?php echo $role; ?>";
-            document.getElementById('password').value = "<?php echo $password; ?>";
-            document.getElementById('conpassword').value = "<?php echo $password; ?>";
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('name').value = "<?php echo $name; ?>";
+        document.getElementById('username').value = "<?php echo $username; ?>";
+        document.getElementById('role').value = "<?php echo $role; ?>";
+        document.getElementById('password').value = "<?php echo $password; ?>";
+        document.getElementById('conpassword').value = "<?php echo $password; ?>";
+    });
+
+    function editUserBtn(event) {
+        event.preventDefault();
+
+        const password = document.getElementById('password').value;
+        const conpassword = document.getElementById('conpassword').value;
+
+        if (password !== conpassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Passwords do not match!',
+            });
+            return;
+        }
+
+        const formData = new FormData(document.getElementById('editUserForm'));
+        formData.append('id', "<?php echo $userId; ?>");
+
+        Swal.fire({
+            title: 'Updating User...',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
         });
 
-        function editUserBtn(event) {
-            event.preventDefault();
-
-            const password = document.getElementById('password').value;
-            const conpassword = document.getElementById('conpassword').value;
-
-            if (password !== conpassword) {
+        axios.post('../database/update_user.php', formData)
+            .then(response => {
+                Swal.close();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'User Updated',
+                    text: response.data.message,
+                }).then(() => {
+                    window.location.href = '../admin_site_views/user.php';
+                });
+            })
+            .catch(error => {
+                Swal.close();
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Passwords do not match!',
+                    text: error.response.data.message,
                 });
-                return;
-            }
-
-            const formData = new FormData(document.getElementById('editUserForm'));
-            formData.append('id', "<?php echo $userId; ?>");
-
-            Swal.fire({
-                title: 'Updating User...',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
             });
-
-            axios.post('../database/update_user.php', formData)
-                .then(response => {
-                    Swal.close();
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'User Updated',
-                        text: response.data.message,
-                    }).then(() => {
-                        window.location.href = '../admin_site_views/user.php';
-                    });
-                })
-                .catch(error => {
-                    Swal.close();
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: error.response.data.message,
-                    });
-                });
-        }
+    }
     </script>
 </head>
 
@@ -100,10 +89,18 @@ include 'header.php';
         <div class="flex items-start">
             <?php include 'sidebar.php'; ?>
             <div class="main-content w-full overflow-auto p-6">
-                <div class="container mx-auto p-2 rounded-lg">
-                    <h1 class="p-4 text-2xl font-bold mb-4">Edit Product</h1>
+                <div class="container mx-auto">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold">Edit User</h2>
+                        <a href="user.php">
+                            <button
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
+                                Back
+                            </button>
+                        </a>
+                    </div>
                     <form id="editUserForm" onsubmit="editUserBtn(event)">
-                        <div class="p-4 space-y-2">
+                        <div class="mb-6">
                             <label class="font-md text-slate-500" for="name">
                                 Full Name
                             </label>
@@ -111,7 +108,7 @@ include 'header.php';
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                 type="text" id="name" name="name" autocomplete="off" required>
                         </div>
-                        <div class="p-4 space-y-2">
+                        <div class="mb-6">
                             <label class="font-md text-slate-500" for="username">
                                 Username
                             </label>
@@ -119,7 +116,7 @@ include 'header.php';
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                 type="text" id="username" name="username" autocomplete="off" required>
                         </div>
-                        <div class="p-4 space-y-2">
+                        <div class="mb-6">
                             <label class="font-md text-slate-500" for="role">
                                 Role
                             </label>
@@ -131,7 +128,7 @@ include 'header.php';
                                 <option value="Viewer">Viewer</option>
                             </select>
                         </div>
-                        <div class="p-4 space-y-2">
+                        <div class="mb-6">
                             <label class="font-md text-slate-500" for="password">
                                 Password
                             </label>
@@ -139,7 +136,7 @@ include 'header.php';
                                 class="block border border-slate-100 shadow-sm w-full px-2 py-3 rounded-md focus:outline-none focus:border-red-500 focus:ring-1 ring-red-500 text-slate-500"
                                 type="password" id="password" name="password" autocomplete="off" required>
                         </div>
-                        <div class="p-4 space-y-2">
+                        <div class="mb-6">
                             <label class="font-md text-slate-500" for="conpassword">
                                 Confirm Password
                             </label>

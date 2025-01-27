@@ -27,10 +27,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("loading").style.display = "none";
-            document.getElementById("content").style.display = "block";
-        });
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("content").style.display = "block";
+    });
     </script>
 </head>
 
@@ -45,7 +45,7 @@
                 </div>
                 <div class="container-xl mx-auto" id="content" style="display: none;">
                     <div class="flex justify-between item-center">
-                        <h2 class="p-4 text-2xl font-bold">Dealer List</h2>
+                        <h2 class="py-4 text-2xl font-bold">Dealer List</h2>
                         <a href="new_dealer.php">
                             <button
                                 class="text-white bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline font-[sans-serif]">
@@ -53,29 +53,29 @@
                             </button>
                         </a>
                     </div>
-                    <table class="w-full text-left table-fixed min-w-max">
-                        <thead>
+                    <table class="w-full table-auto border-collapse">
+                        <thead class="text-left">
                             <tr>
                                 <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                    <p class="block text-sm font-normal leading-none text-slate-500">ID</p>
+                                    <p class="block text-sm font-bold leading-none text-slate-500">ID</p>
                                 </th>
                                 <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                    <p class="block text-sm font-normal leading-none text-slate-500">Name</p>
+                                    <p class="block text-sm font-bold leading-none text-slate-500">Name</p>
                                 </th>
                                 <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                    <p class="block text-sm font-normal leading-none text-slate-500">Contact</p>
+                                    <p class="block text-sm font-bold leading-none text-slate-500">Contact</p>
                                 </th>
                                 <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                    <p class="block text-sm font-normal leading-none text-slate-500">Address</p>
+                                    <p class="block text-sm font-bold leading-none text-slate-500">Address</p>
                                 </th>
                                 <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                    <p class="block text-sm font-normal leading-none text-slate-500">Image</p>
+                                    <p class="block text-sm font-bold leading-none text-slate-500">Image</p>
                                 </th>
                                 <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                    <p class="block text-sm font-normal leading-none text-slate-500">Google Map</p>
+                                    <p class="block text-sm font-bold leading-none text-slate-500">Google Map</p>
                                 </th>
                                 <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                    <p class="block text-sm font-normal leading-none text-slate-500">Action</p>
+                                    <p class="block text-sm font-bold leading-none text-slate-500">Action</p>
                                 </th>
                             </tr>
                         </thead>
@@ -83,25 +83,28 @@
                             <?php if ($result->num_rows > 0): ?>
                             <?php while ($row = $result->fetch_assoc()): ?>
                             <tr class="hover:bg-slate-50">
-                                <td class="px-4 border-b border-slate-200 w-0.5/5">
+                                <td class="px-4 border-b border-slate-200 w-0.5/6">
                                     <p class="block text-xs text-slate-800"><?= htmlspecialchars($row["id"]) ?></p>
                                 </td>
-                                <td class="px-4 border-b border-slate-200 w-1/5">
+                                <td class="px-4 border-b border-slate-200 w-1/6">
                                     <p class="block text-xs text-slate-800"><?= htmlspecialchars($row["name"]) ?></p>
                                 </td>
-                                <td class="px-4 border-b border-slate-200 w-1/5">
+                                <td class="px-4 border-b border-slate-200 w-1/6">
                                     <p class="block text-xs text-slate-800"><?= htmlspecialchars($row["contact"]) ?></p>
                                 </td>
-                                <td class="px-4 border-b border-slate-200 w-1/5">
-                                    <p class="block text-xs text-slate-800 truncate"><?= htmlspecialchars($row["address"]) ?></p>
+                                <td class="px-4 border-b border-slate-200 w-1/6">
+                                    <p class="block text-xs text-slate-800 truncate">
+                                        <?= htmlspecialchars($row["address"]) ?></p>
                                 </td>
-                                <td class="px-4 border-b border-slate-200 w-1/5">
-                                    <img src="../images_dealer/<?= htmlspecialchars($row["image"]) ?>" alt="Dealer Image" class="w-16 h-16 object-cover">
+                                <td class="px-4 border-b border-slate-200 w-0.5/6">
+                                    <img src="../images_dealer/<?= htmlspecialchars($row["image"]) ?>"
+                                        class="w-14 h-14 object-cover">
                                 </td>
-                                <td class="px-4 border-b border-slate-200 w-1/5">
-                                    <p class="block text-xs text-slate-800 truncate"><?= htmlspecialchars($row["map"]) ?></p>
+                                <td class="px-4 border-b border-slate-200 w-1/6">
+                                    <p class="block text-xs text-slate-800 truncate">
+                                        <?= htmlspecialchars($row["map"]) ?></p>
                                 </td>
-                                <td class="px-4 border-b border-slate-200">
+                                <td class="px-4 border-b border-slate-200 w-1/6">
                                     <button class="mr-4">
                                         <a href="edit_dealer.php?id=<?= htmlspecialchars($row["id"]) ?>">
                                             <svg xmlns="http://www.w3.org/2000/svg"
@@ -140,6 +143,29 @@
                             <?php endif; ?>
                         </tbody>
                     </table>
+                    <div class="flex justify-between items-center mt-4">
+                        <p class="text-sm text-gray-500">Showing <?= $offset + 1 ?> to
+                            <?= min($offset + $limit, $total_records) ?> of <?= $total_records ?> entries
+                        </p>
+                        <div class="flex space-x-2">
+                            <?php if ($page > 1): ?>
+                            <a href="?page=<?= $page - 1 ?>&limit=<?= $limit ?>">
+                                <button
+                                    class="bg-gray-200 text-gray-600 text-xs font-bold py-2 px-4 rounded hover:bg-red-500 hover:text-white w-20">
+                                    Previous
+                                </button>
+                            </a>
+                            <?php endif; ?>
+                            <?php if ($page < $total_pages): ?>
+                            <a href="?page=<?= $page + 1 ?>&limit=<?= $limit ?>">
+                                <button
+                                    class="bg-gray-200 text-gray-600 text-xs font-bold py-2 px-4 rounded hover:bg-red-700 hover:text-white w-20">
+                                    Next
+                                </button>
+                            </a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

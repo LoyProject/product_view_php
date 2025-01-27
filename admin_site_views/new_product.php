@@ -9,73 +9,73 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function displayFileName(input) {
-            const file = input.files[0];
-            const previewImage = document.getElementById('preview-image');
+    function displayFileName(input) {
+        const file = input.files[0];
+        const previewImage = document.getElementById('preview-image');
 
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function (e) {
-                    previewImage.src = e.target.result;
-                    previewImage.classList.remove('hidden');
-                };
-                reader.readAsDataURL(file);
-            }
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                previewImage.src = e.target.result;
+                previewImage.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        }
+    }
+
+    function addProduct(event) {
+        event.preventDefault();
+        const formData = new FormData(document.getElementById(event.target.id));
+
+        const imageInput = document.getElementById('image');
+        if (!imageInput.files.length) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'Please upload an image.'
+            });
+            return;
         }
 
-        function addProduct(event) {
-            event.preventDefault();
-            const formData = new FormData(document.getElementById(event.target.id));
+        Swal.fire({
+            title: 'Adding Product...',
+            text: 'Please wait while the product is being added.',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
 
-            const imageInput = document.getElementById('image');
-            if (!imageInput.files.length) {
+        axios.post('../database/insert_product.php', formData)
+            .then(response => {
+                Swal.close();
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Product Added',
+                    text: 'The product has been added successfully!'
+                });
+                resetImagePreview();
+            })
+            .catch(error => {
+                Swal.close();
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'Please upload an image.'
+                    text: 'There was an error adding the product. Please try again.'
                 });
-                return;
-            }
-
-            Swal.fire({
-                title: 'Adding Product...',
-                text: 'Please wait while the product is being added.',
-                allowOutsideClick: false,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
             });
+    }
 
-            axios.post('../database/insert_product.php', formData)
-                .then(response => {
-                    Swal.close();
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Product Added',
-                        text: 'The product has been added successfully!'
-                    });
-                    resetImagePreview();
-                })
-                .catch(error => {
-                    Swal.close();
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error',
-                        text: 'There was an error adding the product. Please try again.'
-                    });
-                });
-        }
+    function resetImagePreview() {
+        const previewImage = document.getElementById('preview-image');
+        const fileNameLabel = document.getElementById('file-name');
+        const uploadIcon = document.getElementById('upload-icon');
 
-        function resetImagePreview() {
-            const previewImage = document.getElementById('preview-image');
-            const fileNameLabel = document.getElementById('file-name');
-            const uploadIcon = document.getElementById('upload-icon');
-
-            document.getElementById('addProductForm').reset();
-            previewImage.classList.add('hidden');
-            fileNameLabel.style.display = 'block';
-            uploadIcon.style.display = 'block';
-        }
+        document.getElementById('addProductForm').reset();
+        previewImage.classList.add('hidden');
+        fileNameLabel.style.display = 'block';
+        uploadIcon.style.display = 'block';
+    }
     </script>
 </head>
 
@@ -89,9 +89,10 @@
             <div class="main-content w-full overflow-auto p-6">
                 <div class="container mx-auto">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold">Create New Product</h2>
+                        <h2 class="text-2xl font-bold">Create New</h2>
                         <a href="product.php">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
+                            <button
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
                                 Back
                             </button>
                         </a>
@@ -105,7 +106,8 @@
                         </div>
 
                         <div class="mb-6">
-                            <label for="description" class="block text-gray-700 font-medium mb-2">Product Description</label>
+                            <label for="description" class="block text-gray-700 font-medium mb-2">Product
+                                Description</label>
                             <textarea id="description" name="description" required autocomplete="off"
                                 class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
                         </div>
@@ -127,8 +129,8 @@
                                 <span id="file-name" class="text-gray-400 text-center">
                                     <strong>Upload Image</strong><br>Only .png, .jpeg, .jpg files are allowed.
                                 </span>
-                                <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png"
-                                    class="hidden" onchange="displayFileName(this); document.getElementById('file-name').style.display = 'none'; document.getElementById('upload-icon').style.display = 'none';">
+                                <input type="file" id="image" name="image" accept=".jpg, .jpeg, .png" class="hidden"
+                                    onchange="displayFileName(this); document.getElementById('file-name').style.display = 'none'; document.getElementById('upload-icon').style.display = 'none';">
                                 <img id="preview-image" class="hidden px-2 w-full h-48 object-contain rounded">
                             </label>
                         </div>
