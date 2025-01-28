@@ -6,6 +6,7 @@
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $name = $_POST['name'];
         $description = $_POST['description'];
+        $category_id = intval($_POST['category']);
         $image = time() . '-' . $_FILES['image']['name'];
         $target_dir = "../images/";
         $target_file = $target_dir . time() . '-' . basename($_FILES["image"]["name"]);
@@ -39,8 +40,8 @@
             exit;
         }
 
-        $stmt = $conn->prepare("INSERT INTO products (name, description, image) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $name, $description, $image);
+        $stmt = $conn->prepare("INSERT INTO products (name, description, image, category_id) VALUES (?, ?, ?, ?)");
+        $stmt->bind_param("sssi", $name, $description, $image, $category_id);
 
         if ($stmt->execute()) {
             $response['status'] = 'success';

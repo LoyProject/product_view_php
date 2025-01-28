@@ -4,11 +4,11 @@
     $productId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
     if ($productId > 0) {
-        $sql = "SELECT name, description, image FROM products WHERE id = ?";
+        $sql = "SELECT name, description, category_id, image FROM products WHERE id = ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("i", $productId);
         $stmt->execute();
-        $stmt->bind_result($name, $description, $image);
+        $stmt->bind_result($name, $description, $categoryId, $image);
         $stmt->fetch();
         $stmt->close();
     } else {
@@ -32,6 +32,8 @@
         document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('name').value = "<?php echo htmlspecialchars($name, ENT_QUOTES); ?>";
             document.getElementById('description').value = "<?php echo htmlspecialchars($description, ENT_QUOTES); ?>";
+            document.getElementById('category').classList.toggle('text-gray-500', "<?php echo $categoryId; ?>" === '');
+            document.getElementById('category').value = "<?php echo htmlspecialchars($categoryId, ENT_QUOTES); ?>";
 
             const previewImage = document.getElementById('preview-image');
             if ("<?php echo $image; ?>") {
@@ -134,6 +136,28 @@
                             <label for="description" class="block text-gray-700 font-medium mb-2">Product Description</label>
                             <textarea id="description" name="description" required autocomplete="off"
                                 class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
+                        </div>
+
+                        <div class="mb-6">
+                            <label for="category" class="block text-gray-700 font-medium mb-2">Product Category</label>
+                            <select id="category" name="category" required class="w-full text-gray-500 border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" onchange="this.classList.toggle('text-gray-500', this.value === '')">
+                                <option value="" class="text-gray-500">Select a category</option>
+                                <?php
+                                    include '../database/db_connection.php';
+
+                                    $sql = "SELECT id, name FROM categories";
+                                    $result = $conn->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
+                                            echo '<option value="' . $row["id"] . '">' . $row["name"] . '</option>';
+                                        }
+                                    } else {
+                                        echo '<option value="">No categories available</option>';
+                                    }
+                                    $conn->close();
+                                ?>
+                            </select>
                         </div>
 
                         <div class="mb-6">

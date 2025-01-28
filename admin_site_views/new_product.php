@@ -9,73 +9,73 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-    function displayFileName(input) {
-        const file = input.files[0];
-        const previewImage = document.getElementById('preview-image');
+        function displayFileName(input) {
+            const file = input.files[0];
+            const previewImage = document.getElementById('preview-image');
 
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                previewImage.src = e.target.result;
-                previewImage.classList.remove('hidden');
-            };
-            reader.readAsDataURL(file);
-        }
-    }
-
-    function addProduct(event) {
-        event.preventDefault();
-        const formData = new FormData(document.getElementById(event.target.id));
-
-        const imageInput = document.getElementById('image');
-        if (!imageInput.files.length) {
-            Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'Please upload an image.'
-            });
-            return;
-        }
-
-        Swal.fire({
-            title: 'Adding Product...',
-            text: 'Please wait while the product is being added.',
-            allowOutsideClick: false,
-            didOpen: () => {
-                Swal.showLoading();
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    previewImage.src = e.target.result;
+                    previewImage.classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
             }
-        });
+        }
 
-        axios.post('../database/insert_product.php', formData)
-            .then(response => {
-                Swal.close();
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Product Added',
-                    text: 'The product has been added successfully!'
-                });
-                resetImagePreview();
-            })
-            .catch(error => {
-                Swal.close();
+        function addProduct(event) {
+            event.preventDefault();
+            const formData = new FormData(document.getElementById(event.target.id));
+
+            const imageInput = document.getElementById('image');
+            if (!imageInput.files.length) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error',
-                    text: 'There was an error adding the product. Please try again.'
+                    text: 'Please upload an image.'
                 });
+                return;
+            }
+
+            Swal.fire({
+                title: 'Adding Product...',
+                text: 'Please wait while the product is being added.',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
             });
-    }
 
-    function resetImagePreview() {
-        const previewImage = document.getElementById('preview-image');
-        const fileNameLabel = document.getElementById('file-name');
-        const uploadIcon = document.getElementById('upload-icon');
+            axios.post('../database/insert_product.php', formData)
+                .then(response => {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Product Added',
+                        text: 'The product has been added successfully!'
+                    });
+                    resetImagePreview();
+                })
+                .catch(error => {
+                    Swal.close();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'There was an error adding the product. Please try again.'
+                    });
+                });
+        }
 
-        document.getElementById('addProductForm').reset();
-        previewImage.classList.add('hidden');
-        fileNameLabel.style.display = 'block';
-        uploadIcon.style.display = 'block';
-    }
+        function resetImagePreview() {
+            const previewImage = document.getElementById('preview-image');
+            const fileNameLabel = document.getElementById('file-name');
+            const uploadIcon = document.getElementById('upload-icon');
+
+            document.getElementById('addProductForm').reset();
+            previewImage.classList.add('hidden');
+            fileNameLabel.style.display = 'block';
+            uploadIcon.style.display = 'block';
+        }
     </script>
 </head>
 
@@ -106,10 +106,31 @@
                         </div>
 
                         <div class="mb-6">
-                            <label for="description" class="block text-gray-700 font-medium mb-2">Product
-                                Description</label>
+                            <label for="description" class="block text-gray-700 font-medium mb-2">Product Description</label>
                             <textarea id="description" name="description" required autocomplete="off"
                                 class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"></textarea>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label for="category" class="block text-gray-700 font-medium mb-2">Product Category</label>
+                            <select id="category" name="category" required class="w-full text-gray-500 border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" onchange="this.classList.toggle('text-gray-500', this.value === '')">
+                                <option value="" class="text-gray-500">Select a category</option>
+                                <?php
+                                    include '../database/db_connection.php';
+
+                                    $sql = "SELECT id, name FROM categories";
+                                    $result = $conn->query($sql);
+
+                                    if ($result->num_rows > 0) {
+                                        while($row = $result->fetch_assoc()) {
+                                            echo '<option value="' . $row["id"] . '">' . $row["name"] . '</option>';
+                                        }
+                                    } else {
+                                        echo '<option value="">No categories available</option>';
+                                    }
+                                    $conn->close();
+                                ?>
+                            </select>
                         </div>
 
                         <div class="mb-6">

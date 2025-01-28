@@ -33,6 +33,20 @@
         </ul>
         <ul class="space-y-2 mb-2">
             <li>
+                <a href="category.php"
+                    class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
+                        viewBox="0 0 24 24">
+                        <path
+                            d="M3 3h18v2H3V3zm0 6h18v2H3V9zm0 6h18v2H3v-2zm0 6h18v2H3v-2z"
+                            data-original="#000000" />
+                        </svg>
+                    <span>Categories</span>
+                </a>
+            </li>
+        </ul>
+        <ul class="space-y-2 mb-2">
+            <li>
                 <a href="product.php"
                     class="text-gray-800 text-sm flex items-center hover:bg-gray-100 rounded-md px-4 py-2 transition-all">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-[18px] h-[18px] mr-3"
@@ -89,7 +103,7 @@
         </ul>
 
         <div class="absolute bottom-4 left-4 text-sm text-gray-500">
-            <p>&copy; 2025 Power by Loy Team.   </p>
+            <p>&copy; 2025 Power by Loy Team.</p>
         </div>
     </div>
 </nav>

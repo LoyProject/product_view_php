@@ -6,7 +6,7 @@
         $page = isset($_GET['page']) ? max(intval($_GET['page']), 1) : 1;
         $offset = ($page - 1) * $limit;
 
-        $total_sql = "SELECT COUNT(*) as total FROM products";
+        $total_sql = "SELECT COUNT(*) as total FROM categories";
         $total_result = $conn->query($total_sql);
 
         if (!$total_result) {
@@ -17,7 +17,7 @@
         $total_records = $total_row['total'];
         $total_pages = ceil($total_records / $limit);
 
-        $sql = "SELECT products.id, products.name, products.description, products.image, categories.name AS category_name FROM products LEFT JOIN categories ON products.category_id = categories.id ORDER BY products.id DESC LIMIT ? OFFSET ?;";
+        $sql = "SELECT id, name, description FROM categories ORDER BY id DESC LIMIT ? OFFSET ?";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param('ii', $limit, $offset);
         $stmt->execute();
@@ -34,25 +34,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+    <title>Categories</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script>
-        function toggleText(button) {
-            const p = button.previousElementSibling;
-            if (button.textContent === 'See more') {
-                p.style.maxHeight = 'none';
-                p.style.overflow = 'visible';
-                button.textContent = 'See less';
-            } else {
-                p.style.maxHeight = '3em';
-                p.style.overflow = 'hidden';
-                button.textContent = 'See more';
-            }
-        }
-    </script>
-
 </head>
 
 <body>
@@ -65,8 +50,8 @@
             <div class="main-content w-full overflow-auto p-6">
                 <div class="container-xl mx-auto">
                     <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold">Product List</h2>
-                        <a href="new_product.php">
+                        <h2 class="text-2xl font-bold">Category List</h2>
+                        <a href="new_category.php">
                             <button class="bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700">
                                 Add New
                             </button>
@@ -86,12 +71,6 @@
                                     <p class="block text-sm font-bold leading-none text-slate-500">Description</p>
                                 </th>
                                 <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                    <p class="block text-sm font-bold leading-none text-slate-500">Category</p>
-                                </th>
-                                <th class="p-4 border-b border-slate-300 bg-slate-50">
-                                    <p class="block text-sm font-bold leading-none text-slate-500">Image</p>
-                                </th>
-                                <th class="p-4 border-b border-slate-300 bg-slate-50">
                                     <p class="block text-sm font-bold leading-none text-slate-500">Action</p>
                                 </th>
                             </tr>
@@ -100,11 +79,11 @@
                             <?php if ($result->num_rows > 0): ?>
                             <?php while ($row = $result->fetch_assoc()): ?>
                             <tr class="hover:bg-gray-100">
-                                <td class="px-4 text-xs border-b border-slate-200 w-0.5/6"> <?= $row['id'] ?> </td>
-                                <td class="px-4 text-xs border-b border-slate-200 w-1/6">
+                                <td class="px-4 py-2 text-xs border-b border-slate-200"><?= $row['id'] ?></td>
+                                <td class="px-4 py-2 text-xs border-b border-slate-200">
                                     <?= htmlspecialchars($row['name']) ?>
                                 </td>
-                                <td class="px-4 text-xs border-b border-slate-200 w-2/6">
+                                <td class="px-4 py-2 text-xs border-b border-slate-200">
                                     <p class="block text-slate-800 truncate"
                                         style="max-height: 3em; overflow: hidden; white-space: normal;">
                                         <?= $row["description"] ?>
@@ -114,19 +93,11 @@
                                         onclick="toggleText(this)">See more</button>
                                     <?php endif; ?>
                                 </td>
-                                <td class="px-4 text-xs border-b border-slate-200 w-1/6">
-                                    <?= htmlspecialchars($row["category_name"]) ?>
-                                </td>
-                                <td class="px-4 border-b border-slate-200 w-1/6">
-                                    <img src="../images/<?= htmlspecialchars($row["image"]) ?>"
-                                        class="w-14 h-14 object-cover">
-                                </td>
-                                <td class="px-4 border-b border-slate-200 w-0.5/6">
+                                <td class="px-4 py-2 border-b border-slate-200">
                                     <button class="mr-4">
-                                        <a href="edit_product.php?id=<?= htmlspecialchars($row["id"]) ?>">
+                                        <a href="edit_category.php?id=<?= htmlspecialchars($row["id"]) ?>">
                                             <svg xmlns="http://www.w3.org/2000/svg"
-                                                class="w-5 fill-blue-500 hover:fill-blue-700"
-                                                viewBox="0 0 348.882 348.882">
+                                                class="w-5 fill-blue-500 hover:fill-blue-700" viewBox="0 0 348.882 348.882">
                                                 <path
                                                     d="m333.988 11.758-.42-.383A43.363 43.363 0 0 0 304.258 0a43.579 43.579 0 0 0-32.104 14.153L116.803 184.231a14.993 14.993 0 0 0-3.154 5.37l-18.267 54.762c-2.112 6.331-1.052 13.333 2.835 18.729 3.918 5.438 10.23 8.685 16.886 8.685h.001c2.879 0 5.693-.592 8.362-1.76l52.89-23.138a14.985 14.985 0 0 0 5.063-3.626L336.771 73.176c16.166-17.697 14.919-45.247-2.783-61.418zM130.381 234.247l10.719-32.134.904-.99 20.316 18.556-.904.99-31.035 13.578zm184.24-181.304L182.553 197.53l-20.316-18.556L294.305 34.386c2.583-2.828 6.118-4.386 9.954-4.386 3.365 0 6.588 1.252 9.082 3.53l.419.383c5.484 5.009 5.87 13.546.861 19.03z"
                                                     data-original="#000000" />
@@ -137,8 +108,8 @@
                                         </a>
                                     </button>
                                     <button class="mr-4">
-                                        <a href="delete_product.php?id=<?= htmlspecialchars($row["id"]) ?>"
-                                            onclick="return confirm('Are you sure you want to delete this product?');">
+                                        <a href="delete_category.php?id=<?= htmlspecialchars($row["id"]) ?>"
+                                            onclick="return confirm('Are you sure you want to delete this category?');">
                                             <svg xmlns="http://www.w3.org/2000/svg"
                                                 class="w-5 fill-red-500 hover:fill-red-700" viewBox="0 0 24 24">
                                                 <path
@@ -155,12 +126,11 @@
                             <?php endwhile; ?>
                             <?php else: ?>
                             <tr>
-                                <td colspan="6" class="text-center p-4">No products found</td>
+                                <td colspan="4" class="text-center p-4">No categories found</td>
                             </tr>
                             <?php endif; ?>
                         </tbody>
                     </table>
-
 
                     <div class="flex justify-between items-center mt-4">
                         <p class="text-sm text-gray-500">Showing <?= $offset + 1 ?> to
