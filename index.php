@@ -51,25 +51,25 @@ include('client_site_views/header.php');
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
-                    echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full max-w-sm rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2 flex flex-col">';
+                    echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2 flex flex-col">';
                     echo '<div>';
                     echo '<img src="images/' . htmlspecialchars($row["image"]) . '" class="w-full h-52 object-cover rounded-lg" />';
                     echo '</div>';
-                    echo '<div class="pt-6 text-center">';
-                    echo '<h3 class="text-xl font-bold">' . htmlspecialchars($row["name"]) . '</h3>';
+                    echo '<div class="pt-6 text-start px-2">';
+                    echo '<h3 class="text-xl font-bold font-[sans-serif]">' . htmlspecialchars($row["name"]) . '</h3>';
                     echo '</div>';
-                    echo '<div class="text-start flex-grow">';
+                    echo '<div class="text-start flex-grow px-2">';
                     echo '<article class="text-wrap">';
                     echo '<p class="mt-3 text-sm text-gray-500 leading-relaxed break-words">' . htmlspecialchars($row["description"]) . '</p>';
                     echo '</article>';
                     echo '</div>';
-                    echo '<div class="mt-4">';
-                    echo '<a href="client_site_views/product-detail.php?id=' . htmlspecialchars($row["id"]) . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-red-300 outline-none hover:border-red-500 hover:text-red-500">View</a>';
+                    echo '<div class="p-2">';
+                    echo '<a href="client_site_views/product-detail.php?id=' . htmlspecialchars($row["id"]) . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-md bg-gray-200 text-gray-500 text-xs tracking-wider font-semibold outline-none hover:bg-gray-400 hover:text-white">View</a>';
                     echo '</div>';
                     echo '</div>';
                 }
             }
-            exit();
+            exit(); 
         }
     ?>
 
