@@ -100,6 +100,7 @@
             const uploadIcon = document.getElementById('upload-icon');
 
             document.getElementById('editProductForm').reset();
+            document.getElementById('category').classList.toggle('text-gray-500', true);
             previewImage.classList.add('hidden');
             fileNameLabel.style.display = 'block';
             uploadIcon.style.display = 'block';
