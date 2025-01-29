@@ -1,12 +1,29 @@
+<?php
+// Detect the base path dynamically
+$scriptPath = dirname($_SERVER['SCRIPT_NAME']);
+$depth = substr_count($scriptPath, '/');
+$basePath = ($depth > 1) ? '../' : '';
+
+// Set the logo folder path using forward slashes for the web
+$logoPath = $basePath . 'images_logo_header/';
+
+// Specify the logo filename
+$logoFilename = 'small-logo.png';
+
+// The absolute path on the server filesystem is not needed for the web URL. 
+// Instead, use the relative path for the web.
+$logoFullPath = $logoPath . $logoFilename;
+?>
+
 <nav class="bg-gray-50 fixed w-full z-20 top-0 left-0 border-b">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="https://flowbite.com/" class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="https://readymadeui.com/readymadeui.svg" class="h-8" alt="Flowbite Logo">
+            <img src="<?= htmlspecialchars($logoFullPath) ?>" class="h-8">
         </a>
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <button data-collapse-toggle="navbar-sticky" type="button"
                 class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                aria-controls="navbar-sticky" aria-expanded="false">
+                aria-controls="navbar-sticky" aria-expanded="false" onclick="toggleMenu()">
                 <span class="sr-only">Open main menu</span>
                 <svg class="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                     viewBox="0 0 17 14">
@@ -46,7 +63,7 @@
 <script>
 function toggleMenu() {
     const navLinks = document.getElementById('navbar-sticky');
-
+    navLinks.classList.toggle('hidden');
 }
 
 // Highlight the menu item based on the current URL
