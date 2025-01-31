@@ -81,9 +81,9 @@
         <div class="max-w-md w-full">
             <?php
                 include '../database/db_connection.php';
-                if ($resultLogo = $conn->query("SELECT * FROM logo")) {
+                if ($resultLogo = $conn->query("SELECT logo_footer FROM companies")) {
                     $rowLogo = $resultLogo->fetch_assoc();
-                    echo '<img src="../images_logo/' . $rowLogo['image'] . '" alt="logo" class="w-40 mb-8 mx-auto block" />';
+                    echo '<img src="../images_logo/' . $rowLogo['logo_footer'] . '" alt="logo" class="w-40 mb-8 mx-auto block" />';
                 }
                 $conn->close();
             ?>

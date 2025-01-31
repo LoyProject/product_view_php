@@ -11,11 +11,10 @@
     <div class='flex flex-wrap items-center justify-between gap-4 w-full relative'>
         <?php
             include '../database/db_connection.php';
-            if ($resultLogo = $conn->query("SELECT * FROM logo")) {
+            if ($resultLogo = $conn->query("SELECT * FROM companies")) {
                 $rowLogo = $resultLogo->fetch_assoc();
-                echo '<a href="dashboard.php" class="flex items-center gap-2">';
-                echo '<img src="../images_logo/' . $rowLogo['image'] . '" alt="logo" class="w-12"/>';
-                echo '<span class="text-xl font-bold text-red-500"> ' . strtoupper('leelawadeefactory') . ' </span>';
+                echo '<a href="dashboard.php">';
+                echo '<img src="../images_logo/' . $rowLogo['logo_header'] . '" alt="logo" class="w-48"/>';
                 echo '</a>';
             }
             $conn->close();
