@@ -30,10 +30,10 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('name').value = "<?php echo htmlspecialchars($name, ENT_QUOTES); ?>";
-            document.getElementById('contact').value = "<?php echo htmlspecialchars($contact, ENT_QUOTES); ?>";
-            document.getElementById('address').value = "<?php echo htmlspecialchars($address, ENT_QUOTES); ?>";
-            document.getElementById('map').value = "<?php echo htmlspecialchars($map, ENT_QUOTES); ?>";
+            document.getElementById('name').value = "<?php echo $name; ?>";
+            document.getElementById('contact').value = "<?php echo $contact; ?>";
+            document.getElementById('address').value = "<?php echo $address; ?>";
+            document.getElementById('map').value = "<?php echo $map; ?>";
 
             const previewImage = document.getElementById('preview-image');
             if ("<?php echo $image; ?>") {

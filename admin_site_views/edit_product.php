@@ -28,20 +28,16 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('name').value = "<?php echo htmlspecialchars($name, ENT_QUOTES); ?>";
-            document.getElementById('description').value = "<?php echo htmlspecialchars($description, ENT_QUOTES); ?>";
-            document.getElementById('category').classList.toggle('text-gray-500', "<?php echo $categoryId; ?>" === '');
-            document.getElementById('category').value = "<?php echo htmlspecialchars($categoryId, ENT_QUOTES); ?>";
-
-            const previewImage = document.getElementById('preview-image');
-            if ("<?php echo $image; ?>") {
-                previewImage.src = "../images/<?php echo $image; ?>";
-                previewImage.classList.remove('hidden');
-                document.getElementById('file-name').style.display = 'none'; 
-                document.getElementById('upload-icon').style.display = 'none';
-            }
+        $(document).ready(function () {
+            $('#category').select2({
+                placeholder: "",
+                allowClear: true, 
+                width: '100%',
+            });
         });
 
         function displayFileName(input) {
@@ -100,7 +96,8 @@
             const uploadIcon = document.getElementById('upload-icon');
 
             document.getElementById('editProductForm').reset();
-            document.getElementById('category').classList.toggle('text-gray-500', true);
+            $('#category').val(null).trigger('change');
+
             previewImage.classList.add('hidden');
             fileNameLabel.style.display = 'block';
             uploadIcon.style.display = 'block';
@@ -110,6 +107,56 @@
 
 <body>
     <?php include 'header.php'; ?>
+
+    <style>
+        .select2-container--default .select2-selection--single {
+            height: 45px !important; 
+            display: flex !important;
+            align-items: center !important;
+            border: 1px solid #d1d5db !important; 
+            border-radius: 0.375rem !important;   
+            padding-left: 1rem !important;     
+            padding-right: 1rem !important;
+            padding-top: 0.5rem !important;
+            padding-bottom: 0.5rem !important;
+        }
+
+        .select2-selection__rendered {
+            color:rgb(0, 0, 0) !important;            
+            line-height: normal !important;
+            padding: 0 !important;
+        }
+
+        .select2-selection__clear {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #9ca3af;
+            font-weight: bold;
+        }
+
+        .select2-selection__arrow {
+            display: none !important;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('name').value = "<?php echo $name; ?>";
+            document.getElementById('description').value = "<?php echo $description; ?>";
+            document.getElementById('category').value = "<?php echo $categoryId; ?>";
+
+            const previewImage = document.getElementById('preview-image');
+            if ("<?php echo $image; ?>") {
+                previewImage.src = "../images/<?php echo $image; ?>";
+                previewImage.classList.remove('hidden');
+                document.getElementById('file-name').style.display = 'none'; 
+                document.getElementById('upload-icon').style.display = 'none';
+            }
+        });
+    </script>
 
     <div class="relative font-sans pt-[70px] min-h-screen">
         <div class="flex items-start">
@@ -141,8 +188,8 @@
 
                         <div class="mb-6">
                             <label for="category" class="block text-gray-700 font-medium mb-2">Product Category</label>
-                            <select id="category" name="category" required class="w-full text-gray-500 border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500" onchange="this.classList.toggle('text-gray-500', this.value === '')">
-                                <option value="" class="text-gray-500">Select a category</option>
+                            <select id="category" name="category" required class="w-full">
+                                <option value="" class="text-gray-500 h-24"></option>
                                 <?php
                                     include '../database/db_connection.php';
 

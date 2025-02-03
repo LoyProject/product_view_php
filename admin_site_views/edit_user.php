@@ -30,11 +30,11 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            document.getElementById('name').value = "<?php echo htmlspecialchars($name, ENT_QUOTES); ?>";
-            document.getElementById('role').value = "<?php echo htmlspecialchars($role, ENT_QUOTES); ?>";
-            document.getElementById('username').value = "<?php echo htmlspecialchars($username, ENT_QUOTES); ?>";
-            document.getElementById('password').value = "<?php echo htmlspecialchars($password, ENT_QUOTES); ?>";
-            document.getElementById('confirm_password').value = "<?php echo htmlspecialchars($password, ENT_QUOTES); ?>";
+            document.getElementById('name').value = "<?php echo $name; ?>";
+            document.getElementById('role').value = "<?php echo $role; ?>";
+            document.getElementById('username').value = "<?php echo $username; ?>";
+            document.getElementById('password').value = "<?php echo $password; ?>";
+            document.getElementById('confirm_password').value = "<?php echo $password; ?>";
         });
 
         function editUser(event) {
