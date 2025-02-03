@@ -13,12 +13,39 @@ if (file_exists($databasePath)) {
 }
 
 $logoPath = $basePath . 'images_logo/';
-$resultLogo = $conn->query("SELECT * FROM logo");
+$resultLogo = $conn->query("SELECT logo_footer AS image FROM companies");
 
 if ($resultLogo && $rowLogo = $resultLogo->fetch_assoc()) {
     $logoFullPath = $logoPath . $rowLogo['image'];
 } else {
     $logoFullPath = $logoPath . 'default-logo.png';
+}
+
+// Fetch address
+$resultAddress = $conn->query("SELECT address FROM companies");
+
+if ($resultAddress && $rowAddress = $resultAddress->fetch_assoc()) {
+    $companyAddress = $rowAddress['address'];
+} else {
+    $companyAddress = 'Address not found';
+}
+
+// Fetch email
+$resultEmail = $conn->query("SELECT email FROM companies");
+
+if ($resultEmail && $rowEmail = $resultEmail->fetch_assoc()) {
+    $companyEmail = $rowEmail['email'];
+} else {
+    $companyEmail = 'Email not found';
+}
+
+// Fetch phone number
+$resultPhone = $conn->query("SELECT contact FROM companies");
+
+if ($resultPhone && $rowPhone = $resultPhone->fetch_assoc()) {
+    $companyPhone = $rowPhone['contact'];
+} else {
+    $companyPhone = 'Contact not found';
 }
 
 $conn->close();
@@ -35,16 +62,17 @@ $conn->close();
             <div class="lex items-start justify-start md:justify-center">
                 <div class="flex flex-col items-start space-y-2">
                     <h4 class="font-bold font-[sans-serif] text-red-500">Address</h4>
-                    <p class="text-gray-500 text-sm font-[sans-serif] hover:text-red-500">#12/7, Khlong luang District,
-                        Pathum Thai 12120,
-                        Thailand</p>
+                    <p class="text-gray-500 text-sm font-[sans-serif] hover:text-red-500">
+                        <?= htmlspecialchars($companyAddress) ?></p>
                 </div>
             </div>
             <div class="flex items-start justify-start md:justify-center">
                 <div class="flex flex-col items-start space-y-2">
                     <h4 class="font-bold font-[sans-serif] text-red-500">Contact Us</h4>
-                    <p class="text-gray-500 text-sm font-[sans-serif] hover:text-red-500">contact@example.com</p>
-                    <p class="text-gray-500 text-sm font-[sans-serif] hover:text-red-500">+85512 345 678</p>
+                    <p class="text-gray-500 text-sm font-[sans-serif] hover:text-red-500">
+                        <?= htmlspecialchars($companyEmail) ?></p>
+                    <p class="text-gray-500 text-sm font-[sans-serif] hover:text-red-500">
+                        <?= htmlspecialchars($companyPhone) ?></p>
                 </div>
             </div>
         </div>

@@ -8,11 +8,10 @@
     <title> Loy Team Project </title>
 </head>
 
-<?php
-include('client_site_views/header.php');
-?>
 
 <body class="bg-gray-100 white:bg-gray-900">
+
+    <?php include('client_site_views/header.php'); ?>
 
     <script>
     document.getElementById("open-modal-service-btn").addEventListener("click", function(event) {
