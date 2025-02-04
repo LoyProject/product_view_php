@@ -33,14 +33,14 @@
             document.getElementById('name').value = "<?php echo $name; ?>";
             document.getElementById('role').value = "<?php echo $role; ?>";
             document.getElementById('username').value = "<?php echo $username; ?>";
-            document.getElementById('password').value = "<?php echo htmlspecialchars($password); ?>";
-            document.getElementById('confirm_password').value = "<?php echo htmlspecialchars($password); ?>";
+            document.getElementById('password').value = "<?php echo $password; ?>";
+            document.getElementById('confirm_password').value = "<?php echo $password; ?>";
         });
 
         function editAccount(event) {
             event.preventDefault();
 
-            const formData = new FormData(document.getElementById('editAccountForm'));
+            const formData = new FormData(document.getElementById(event.target.id));
             formData.append('id', "<?php echo $userId; ?>");
 
             const password = formData.get('password');
@@ -121,7 +121,7 @@
 
                         <div class="mb-6 hidden">
                             <label for="role" class="block text-gray-700 font-medium mb-2">Role</label>
-                            <select id="role" name="role" disabled
+                            <select id="role" name="role"
                                 class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
                                 <option value="Admin">Admin</option>
                                 <option value="Editor">Editor</option>
@@ -130,14 +130,15 @@
                         </div>
 
                         <div class="mb-6">
-                            <label for="password" class="block text-gray-700 font-medium mb-2">Password</label>
-                            <input type="text" id="password" name="password" required autocomplete="off"
+                            <label for="password" class="block text-gray-700 font-normal mb-2">Password</label>
+                            <input type="password" id="password" name="password" required autocomplete="off"
                                 class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
+                            <span class="text-xs text-red-500">Delete all text before insert new password.</span>
                         </div>
 
                         <div class="mb-6">
                             <label for="confirm_password" class="block text-gray-700 font-medium mb-2">Confirm Password</label>
-                            <input type="text" id="confirm_password" name="confirm_password" required autocomplete="off"
+                            <input type="password" id="confirm_password" name="confirm_password" required autocomplete="off"
                                 class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
                         </div>
 
