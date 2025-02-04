@@ -21,7 +21,7 @@ include 'header.php';
             <?php
                 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     $product_id = intval($_GET['id']);
-                    $stmt = $conn->prepare("SELECT image, name,description FROM products WHERE id = ?");
+                    $stmt = $conn->prepare("SELECT p.image, p.name, p.description, c.name as category_name FROM products p JOIN categories c ON p.category_id = c.id WHERE p.id = ?");
                     $stmt->bind_param("i", $product_id);
                     $stmt->execute();
                     $result = $stmt->get_result();
@@ -44,22 +44,12 @@ include 'header.php';
                             </div>
                             <hr class="border-gray-200">
                             <div class="flex justify-between items-center">
-                                <p class="font-[sans-serif]">Application</p>
-                                <p class="text-gray-500 font-[sans-serif]">COOLANT</p>
-                            </div>
-                            <hr class="border-gray-100">
-                            <div class="flex justify-between items-center">
-                                <p class="font-[sans-serif]">Product Type</p>
-                                <p class="text-gray-500 font-[sans-serif]">--</p>
-                            </div>
-                            <hr class="border-gray-100">
-                            <div class="flex justify-between items-center">
-                                <p class="font-[sans-serif]">Quality</p>
-                                <p class="text-gray-500 font-[sans-serif]">5 Little</p>
+                                <p class="font-[sans-serif]">Category</p>
+                                <p class="text-gray-500 font-[sans-serif]"> <?php echo ($data['category_name']) ?></p>
                             </div>
                             <hr class="border-gray-200">
                             <div>
-                                <h2 class="font-[sans-serif]">Products Description</h2>
+                                <h2 class="font-[sans-serif]">Description</h2>
                                 <article class="text-wrap">
                                     <p class="text-sm text-gray-500 leading-relaxed break-words font-[sans-serif]">
                                         <?php echo($data['description'])?></p>
@@ -101,7 +91,7 @@ include 'header.php';
                                 echo '</article>';
                                 echo '</div>';
                                 echo '<div class="p-2">';
-                                echo '<a href="client_site_views/product-detail.php?id=' . htmlspecialchars($row["id"]) . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-md bg-gray-200 text-gray-500 text-xs tracking-wider font-semibold outline-none hover:bg-gray-400 hover:text-white">View</a>';
+                                echo '<a href="product-detail.php?id=' . htmlspecialchars($row["id"]) . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-md bg-gray-200 text-gray-500 text-xs tracking-wider font-semibold outline-none hover:bg-gray-400 hover:text-white">View</a>';
                                 echo '</div>';
                                 echo '</div>';
                             }
