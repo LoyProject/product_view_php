@@ -47,13 +47,24 @@
                         </svg>
                     </div>
                     <div class="dropdown-menu relative flex shrink-0 group">
+                        <?php
+                            include '../database/db_connection.php';
+                            $userId = $_SESSION['user_id'];
+                            $resultUser = $conn->query("SELECT * FROM users WHERE id = $userId");
+                            $rowUser = $resultUser->fetch_assoc();
+                            echo '<div class="mr-3 text-right">';
+                            echo '<p class="text-gray-800 text-sm">' . $rowUser['full_name'] . '</p>';
+                            echo '<p class="text-gray-500 text-xs">' . $rowUser['role'] . '</p>';
+                            echo '</div>';
+                            $conn->close();
+                        ?>
                         <img src="https://readymadeui.com/team-1.webp" alt="profile-pic"
-                            class="w-9 h-9 max-lg:w-16 max-lg:h-16 rounded-full border-2 border-gray-300 cursor-pointer" />
+                        class="w-9 h-9 max-lg:w-16 max-lg:h-16 rounded-full border-2 border-gray-300 cursor-pointer" />
 
                         <div
                             class="dropdown-content hidden group-hover:block shadow-md p-2 bg-white rounded-md absolute top-9 right-0 w-56">
                             <div class="w-full">
-                                <a href="javascript:void(0)"
+                                <a href="account.php?id=<?= $rowUser['id'] ?>"
                                     class="text-sm text-gray-800 cursor-pointer flex items-center p-2 rounded-md hover:bg-gray-100 dropdown-item transition duration-300 ease-in-out">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 mr-3 fill-current"
                                         viewBox="0 0 512 512">

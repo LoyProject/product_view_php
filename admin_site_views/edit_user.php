@@ -73,7 +73,7 @@
                         text: response.data.message,
                     }).then(() => {
                         document.getElementById('editUserForm').reset();
-                        window.location.href = '../admin_site_views/users.php';
+                        window.location.href = '../admin_site_views/user.php';
                     });
                 })
                 .catch(error => {
