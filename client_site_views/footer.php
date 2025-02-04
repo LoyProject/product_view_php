@@ -51,7 +51,7 @@ if ($resultPhone && $rowPhone = $resultPhone->fetch_assoc()) {
 $conn->close();
 ?>
 
-<footer class="font-sans tracking-wide bg-gray-200 text-black px-10 pt-12 pb-6">
+<footer class="font-sans tracking-wide bg-white text-black px-10 pt-12 pb-6">
     <div class="container-xl mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="flex items-center justify-center">

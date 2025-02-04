@@ -24,9 +24,9 @@ if ($resultLogo && $rowLogo = $resultLogo->fetch_assoc()) {
 $conn->close();
 ?>
 
-<nav class="bg-gray-50 fixed w-full z-20 top-0 left-0 border-b">
+<nav class="bg-[#f8f9ff] fixed w-full z-20 top-0 left-0 border-b">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="../index.php" class="flex items-center space-x-3 rtl:space-x-reverse">
+        <a href="<?= $basePath ?>index.php" class="flex items-center space-x-3 rtl:space-x-reverse">
             <img src="<?= htmlspecialchars($logoFullPath) ?>" class="h-8">
         </a>
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -45,14 +45,19 @@ $conn->close();
             <ul id="menu-list"
                 class="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
                 <li>
-                    <a href="../index.php"
-                        class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500"
+                    <a href="<?= $basePath ?>index.php"
+                        class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500 font-[sans-serif]"
                         onclick="handleMenuClick(event)" aria-current="page">Home</a>
                 </li>
                 <li>
-                    <a href="client_site_views/dealer.php"
-                        class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500"
-                        onclick="handleMenuClick(event)">Dealer</a>
+                    <a href="<?= $basePath ?>client_site_views/product.php"
+                        class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500 font-[sans-serif]"
+                        onclick="handleMenuClick(event)">Products</a>
+                </li>
+                <li>
+                    <a href="<?= $basePath ?>client_site_views/dealer.php"
+                        class="block py-2 px-3 text-black rounded hover:text-red-500 md:p-0 dark:text-black dark:hover:text-red-500 font-[sans-serif]"
+                        onclick="handleMenuClick(event)">Dealers</a>
                 </li>
             </ul>
         </div>

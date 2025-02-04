@@ -10,9 +10,9 @@
 
 
 
-<body>
-    <?php include('header.php'); ?>
-    <?php
+<body class="bg-[#f8f9ff]">
+    <?php 
+    include('header.php');
     include('../database/db_connection.php');
 
     if (isset($_GET['offset']) && isset($_GET['limit'])) {
@@ -107,41 +107,41 @@
     </div>
 
     <script>
-        let offset = 5; // Initial offset (after the first 5 items)
-        const limit = 5; // Number of items to load
+    let offset = 5; // Initial offset (after the first 5 items)
+    const limit = 5; // Number of items to load
 
-        document.addEventListener("DOMContentLoaded", () => {
-            const loadMoreButton = document.getElementById('load-more');
+    document.addEventListener("DOMContentLoaded", () => {
+        const loadMoreButton = document.getElementById('load-more');
 
-            if (loadMoreButton) {
-                loadMoreButton.addEventListener('click', function () {
-                    const button = this;
-                    button.disabled = true; // Temporarily disable the button
-                    button.innerText = "Loading...";
+        if (loadMoreButton) {
+            loadMoreButton.addEventListener('click', function() {
+                const button = this;
+                button.disabled = true; // Temporarily disable the button
+                button.innerText = "Loading...";
 
-                    fetch(`dealer.php?offset=${offset}&limit=${limit}`)
-                        .then(response => response.text())
-                        .then(data => {
-                            if (data.trim() === "") {
-                                button.innerText = "No More Dealers";
-                                button.disabled = true;
-                            } else {
-                                document.getElementById('dealer-grid').innerHTML += data;
-                                button.innerText = "Load More";
-                                button.disabled = false;
-                                offset += limit; // Increase offset for the next batch
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Error loading dealers:", error);
+                fetch(`dealer.php?offset=${offset}&limit=${limit}`)
+                    .then(response => response.text())
+                    .then(data => {
+                        if (data.trim() === "") {
+                            button.innerText = "No More Dealers";
+                            button.disabled = true;
+                        } else {
+                            document.getElementById('dealer-grid').innerHTML += data;
                             button.innerText = "Load More";
                             button.disabled = false;
-                        });
-                });
-            } else {
-                console.error("'Load More' button not found.");
-            }
-        });
+                            offset += limit; // Increase offset for the next batch
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error loading dealers:", error);
+                        button.innerText = "Load More";
+                        button.disabled = false;
+                    });
+            });
+        } else {
+            console.error("'Load More' button not found.");
+        }
+    });
     </script>
     <?php include 'footer.php' ?>
 </body>
