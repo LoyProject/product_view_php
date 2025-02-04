@@ -9,12 +9,25 @@
         $password = $_POST['password'];
         $active = 1;
 
-        // Hash the password before saving to the database
-        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
-
-        $sql = "UPDATE users SET full_name=?, role=?, username=?, password=?, active=? WHERE id=?";
+        $sql = "SELECT password FROM users WHERE id = ?";
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssii", $name, $role, $username, $hashedPassword, $active, $id);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+        $currentHashedPassword = $row['password'];
+        $stmt->close();
+
+        if ($password === $currentHashedPassword) {
+            $sql = "UPDATE users SET full_name=?, role=?, username=?, active=? WHERE id=?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("sssii", $name, $role, $username, $active, $id);
+        } else {
+            $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+            $sql = "UPDATE users SET full_name=?, role=?, username=?, password=?, active=? WHERE id=?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("ssssii", $name, $role, $username, $hashedPassword, $active, $id);
+        }
 
         if ($stmt->execute()) {
             echo "User updated successfully.";
