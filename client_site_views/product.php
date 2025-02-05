@@ -6,32 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.tailwindcss.com"></script>
     <title>Products</title>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("open-modal-service-btn").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            document.getElementById("open-modal-service").classList.remove("hidden");
+        });
+
+        document.getElementById("close-modal-service-btn").addEventListener("click", function() {
+            document.getElementById("open-modal-service").classList.add("hidden");
+        });
+
+        document.getElementById("open-modal-contact-btn").addEventListener("click", function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            document.getElementById("open-modal-contact").classList.remove("hidden");
+        });
+
+        document.getElementById("close-modal-contact-btn").addEventListener("click", function() {
+            document.getElementById("open-modal-contact").classList.add("hidden");
+        });
+    });
+    </script>
 </head>
 
 
 <body class="bg-[#f8f9ff]">
 
     <?php include('header.php'); ?>
-
-    <script>
-    document.getElementById("open-modal-service-btn").addEventListener("click", function(event) {
-        event.preventDefault(); // Prevent default link behavior
-        document.getElementById("open-modal-service").classList.remove("hidden");
-    });
-
-    document.getElementById("close-modal-service-btn").addEventListener("click", function() {
-        document.getElementById("open-modal-service").classList.add("hidden");
-    });
-
-    document.getElementById("open-modal-contact-btn").addEventListener("click", function(event) {
-        event.preventDefault(); // Prevent default link behavior
-        document.getElementById("open-modal-contact").classList.remove("hidden");
-    });
-
-    document.getElementById("close-modal-contact-btn").addEventListener("click", function() {
-        document.getElementById("open-modal-contact").classList.add("hidden");
-    });
-    </script>
 
     <?php
     include('../database/db_connection.php');
@@ -73,80 +74,108 @@
     ?>
 
     <div class="px-8 mb-8 mt-24 container-md mx-auto">
-        <div class="rounded-lg">
-            <div
-                class="flex rounded-md border-2 border-gray-100 focus-within:border-red-500 hover:border-red-500 overflow-hidden w-full font-[sans-serif]">
-                <form method="GET" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" class="w-full flex">
-                    <input type="text" name="keyword" placeholder="Search Something..."
-                        value="<?php echo htmlspecialchars($keyword ?? ''); ?>"
-                        class="w-full h-16 outline-none bg-white text-gray-600 text-sm px-4 py-3 border-transparent" />
-                    <button type="submit"
-                        class="w-52 flex items-center justify-center bg-red-500 px-5 hover:bg-red-600">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192.904 192.904" width="16px"
-                            class="fill-white">
-                            <path
-                                d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z">
-                            </path>
-                        </svg>
-                    </button>
-                </form>
-            </div>
-            <div>
-                <h3 class="text-2xl font-semibold mt-8">Products</h3>
-            </div>
-            <hr class="mt-4 border-gray-200" />
-            <div class="mt-2">
-                <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-2 w-full"></div>
-            </div>
 
-            <script>
-            let offset = 0;
-            const limit = 10;
-            const keyword = new URLSearchParams(window.location.search).get('keyword') || '';
+        <div
+            class="flex rounded-md border-2 border-gray-100 focus-within:border-red-500 hover:border-red-500 overflow-hidden w-full font-[sans-serif]">
+            <form method="GET" action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" class="w-full flex">
+                <input type="text" name="keyword" placeholder="Search Something..."
+                    value="<?php echo htmlspecialchars($keyword ?? ''); ?>"
+                    class="w-full h-16 outline-none bg-white text-gray-600 text-sm px-4 py-3 border-transparent" />
+                <button type="submit" class="w-52 flex items-center justify-center bg-red-500 px-5 hover:bg-red-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192.904 192.904" width="16px"
+                        class="fill-white">
+                        <path
+                            d="m190.707 180.101-47.078-47.077c11.702-14.072 18.752-32.142 18.752-51.831C162.381 36.423 125.959 0 81.191 0 36.422 0 0 36.423 0 81.193c0 44.767 36.422 81.187 81.191 81.187 19.688 0 37.759-7.049 51.831-18.751l47.079 47.078a7.474 7.474 0 0 0 5.303 2.197 7.498 7.498 0 0 0 5.303-12.803zM15 81.193C15 44.694 44.693 15 81.191 15c36.497 0 66.189 29.694 66.189 66.193 0 36.496-29.692 66.187-66.189 66.187C44.693 147.38 15 117.689 15 81.193z">
+                        </path>
+                    </svg>
+                </button>
+            </form>
+        </div>
+        <div>
+            <h3 class="text-2xl font-semibold mt-8">Products</h3>
+        </div>
+        <hr class="mt-4 border-gray-200" />
+        <div class="grid grid-cols-1 sm:grid-cols-6 gap-8">
+            <div class="col-span-1 h-auto">
+                <div class="mt-6">
+                    <?php
+                    $category_sql = "SELECT id, name FROM categories";
+                    $category_result = $conn->query($category_sql);
 
-            document.addEventListener("DOMContentLoaded", () => {
-                const loadMoreButton = document.getElementById('load-more');
+                    if ($category_result->num_rows > 0) {
+                        echo '<div class="container h-auto w-full bg-white shadow-md rounded-lg p-4">';
+                        echo '<ul class="list-disc pl-5">';
+                        echo '<li class="mb-2">';
+                        echo '<a href="client_site_views/category.php" class="text-blue-500 hover:underline">All Categories</a>';
+                        echo '</li>';
+                        while ($category_row = $category_result->fetch_assoc()) {
+                            echo '<li class="mb-2">';
+                            echo '<a href="client_site_views/category.php?id=' . htmlspecialchars($category_row["id"]) . '" class="text-blue-500 hover:underline">' . htmlspecialchars($category_row["name"]) . '</a>';
+                            echo '</li>';
+                        }
+                        echo '</ul>';
+                        echo '</div>';
+                    } else {
+                        echo '<div class="container h-auto w-full bg-white shadow-md rounded-lg p-4">';
+                        echo '<p class="text-gray-500">No categories found.</p>';
+                        echo '</div>';
+                    }
+                    ?>
+                </div>
+            </div>
+            <div class="col-span-5 h-auto">
+                <div class="mt-2">
+                    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-5 gap-2 w-full"></div>
+                </div>
+                <script>
+                let offset = 0;
+                const limit = 10;
+                const keyword = new URLSearchParams(window.location.search).get('keyword') || '';
 
-                function loadProducts() {
-                    fetch(
-                            `<?php echo $_SERVER['PHP_SELF']; ?>?offset=${offset}&limit=${limit}&keyword=${keyword}`
-                        )
-                        .then(response => response.text())
-                        .then(data => {
-                            if (data.trim() === "") {
-                                loadMoreButton.innerText = "No More Products";
-                                loadMoreButton.disabled = true;
-                            } else {
-                                document.getElementById('product-grid').innerHTML += data;
-                                offset += limit;
+                document.addEventListener("DOMContentLoaded", () => {
+                    const loadMoreButton = document.getElementById('load-more');
+
+                    function loadProducts() {
+                        fetch(
+                                `<?php echo $_SERVER['PHP_SELF']; ?>?offset=${offset}&limit=${limit}&keyword=${keyword}`
+                            )
+                            .then(response => response.text())
+                            .then(data => {
+                                if (data.trim() === "") {
+                                    loadMoreButton.innerText = "No More Products";
+                                    loadMoreButton.disabled = true;
+                                } else {
+                                    document.getElementById('product-grid').innerHTML += data;
+                                    offset += limit;
+                                    loadMoreButton.innerText = "Load More";
+                                    loadMoreButton.disabled = false;
+                                }
+                            })
+                            .catch(error => {
+                                console.error("Error loading products:", error);
                                 loadMoreButton.innerText = "Load More";
                                 loadMoreButton.disabled = false;
-                            }
-                        })
-                        .catch(error => {
-                            console.error("Error loading products:", error);
-                            loadMoreButton.innerText = "Load More";
-                            loadMoreButton.disabled = false;
-                        });
-                }
+                            });
+                    }
 
-                loadProducts(); // Initial Load
+                    loadProducts(); // Initial Load
 
-                loadMoreButton.addEventListener('click', function() {
-                    this.disabled = true;
-                    this.innerText = "Loading...";
-                    loadProducts();
+                    loadMoreButton.addEventListener('click', function() {
+                        this.disabled = true;
+                        this.innerText = "Loading...";
+                        loadProducts();
+                    });
                 });
-            });
-            </script>
+                </script>
 
-            <div class="mt-8">
-                <div class="container mx-auto">
-                    <div class="flex justify-center">
-                        <button id="load-more" type="button"
-                            class="px-5 py-2.5 w-52 rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-none outline-none hover:border-red-500 hover:text-red-500">
-                            Load More
-                        </button>
+                <div class="mt-8">
+                    <div class="container mx-auto">
+                        <div class="flex justify-center">
+                            <button id="load-more" type="button"
+                                class="px-5 py-2.5 w-52 rounded-lg text-red-300 text-sm tracking-wider font-semibold border-2 border-none outline-none hover:border-red-500 hover:text-red-500">
+                                Load More
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
