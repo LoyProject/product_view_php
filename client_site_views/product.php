@@ -32,9 +32,8 @@
 
 <body class="bg-[#f8f9ff]">
 
-    <?php include('header.php'); ?>
-
-    <?php
+    <?php 
+    include('header.php');
     include('../database/db_connection.php');
 
     if (isset($_GET['offset']) && isset($_GET['limit'])) {
@@ -52,20 +51,29 @@
         if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
                 echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2 flex flex-col">';
-                echo '<div>';
-                echo '<img src="images/' . htmlspecialchars($row["image"]) . '" class="w-full h-52 object-cover rounded-lg" />';
-                echo '</div>';
-                echo '<div class="pt-6 text-start px-2">';
-                echo '<h3 class="text-xl font-bold font-[sans-serif]">' . htmlspecialchars($row["name"]) . '</h3>';
-                echo '</div>';
-                echo '<div class="text-start flex-grow px-2">';
-                echo '<article class="text-wrap">';
-                echo '<p class="mt-3 text-sm text-gray-500 leading-relaxed break-words">' . htmlspecialchars($row["description"]) . '</p>';
-                echo '</article>';
-                echo '</div>';
-                echo '<div class="p-2">';
-                echo '<a href="client_site_views/product_detail.php?id=' . htmlspecialchars($row["id"]) . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-md bg-gray-200 text-gray-500 text-xs tracking-wider font-semibold outline-none hover:bg-gray-400 hover:text-white">View</a>';
-                echo '</div>';
+                    echo '<div>';
+                        echo '<img src="images/' . htmlspecialchars($row["image"]) . '" class="w-full h-52 object-cover rounded-lg" />';
+                    echo '</div>';
+                    echo '<div class="pt-6 text-start px-2">';
+                        echo '<h3 class="text-xl font-bold font-[sans-serif]">' . htmlspecialchars($row["name"]) . '</h3>';
+                        echo '<div class="container mx-auto w-12 bg-red-100">';
+                        echo '</div>';
+                    echo '</div>';
+                    echo '<div class="text-start flex-grow px-2">';
+                        echo '<article class="text-wrap">';
+                            echo '<p class="mt-3 text-sm text-gray-500 leading-relaxed break-words">' . htmlspecialchars($row["description"]) . '</p>';
+                        echo '</article>';
+                    echo '</div>';
+                    echo '<div class="p-2 grid grid-cols-1 sm:grid-cols-6 gap-8">';
+                        echo '<div class="col-span-1">';
+                            echo '<div class="container mx-auto w-12 bg-red-100 py-2.5 rounded-sm text-center text-xs">';
+                                echo 'hello';
+                            echo '</div>';
+                        echo '</div>';
+                        echo '<div class="col-span-5">';
+                            echo '<a href="client_site_views/product_detail.php?id=' . htmlspecialchars($row["id"]) . '" class="w-full py-2.5 inline-block text-center rounded-sm bg-gray-200 text-gray-500 text-xs tracking-wider font-[sans-serif] outline-none hover:bg-gray-400 hover:text-white">View</a>';
+                        echo '</div>';
+                    echo '</div>';
                 echo '</div>';
             }
         }
@@ -103,14 +111,14 @@
                     $category_result = $conn->query($category_sql);
 
                     if ($category_result->num_rows > 0) {
-                        echo '<div class="container h-auto w-full bg-white shadow-md rounded-lg p-4">';
+                        echo '<div class="container h-auto w-full bg-white rounded-lg p-4">';
                         echo '<ul class="list-disc pl-5">';
-                        echo '<li class="mb-2">';
-                        echo '<a href="client_site_views/category.php" class="text-blue-500 hover:underline">All Categories</a>';
+                        echo '<li class="block mb-2">';
+                        echo '<a href="client_site_views/category.php" class="font-[sans-serif] text-red-500 hover:text-red-600 text-gray-500">All Categories</a>';
                         echo '</li>';
                         while ($category_row = $category_result->fetch_assoc()) {
-                            echo '<li class="mb-2">';
-                            echo '<a href="client_site_views/category.php?id=' . htmlspecialchars($category_row["id"]) . '" class="text-blue-500 hover:underline">' . htmlspecialchars($category_row["name"]) . '</a>';
+                            echo '<li class="block mb-2 px-2">';
+                            echo '<a href="client_site_views/category.php?id=' . htmlspecialchars($category_row["id"]) . '"class="font-[sans-serif] text-gray-500 hover:text-red-600 text-gray-500">' . htmlspecialchars($category_row["name"]) . '</a>';
                             echo '</li>';
                         }
                         echo '</ul>';
@@ -157,9 +165,7 @@
                                 loadMoreButton.disabled = false;
                             });
                     }
-
-                    loadProducts(); // Initial Load
-
+                    loadProducts();
                     loadMoreButton.addEventListener('click', function() {
                         this.disabled = true;
                         this.innerText = "Loading...";
