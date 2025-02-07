@@ -57,7 +57,7 @@ include 'header.php';
                                 </article>
                             </div>
                             <div class="mt-auto">
-                                <a href="../"
+                                <a href="product.php"
                                     class="block px-2 max-w-[150px] py-3 bg-red-500 hover:bg-red-600 text-white text-md font-[sans-serif] rounded text-center">Back
                                 </a>
                             </div>
