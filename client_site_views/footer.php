@@ -51,34 +51,72 @@ if ($resultPhone && $rowPhone = $resultPhone->fetch_assoc()) {
 $conn->close();
 ?>
 
-<footer class="font-sans tracking-wide bg-white text-black px-10 pt-12 pb-6">
-    <div class="container-xl mx-auto">
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <div class="flex items-center justify-center">
+<footer class="font-sans tracking-wide bg-gray-100 text-black px-6 md:px-6 lg:px-16 py-8">
+    <div class="container mx-auto">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <!-- Logo & Address -->
+            <div class="flex flex-col items-start space-y-4">
                 <a href="#" class="flex items-center">
-                    <img src="<?= htmlspecialchars($logoFullPath) ?>" alt="logo" class="w-48" />
+                    <img src="<?= htmlspecialchars($logoFullPath) ?>" alt="logo" class="w-24 md:w-28" />
                 </a>
-            </div>
-            <div class="lex items-start justify-start md:justify-center">
-                <div class="flex flex-col items-start space-y-2">
-                    <h4 class="font-bold font-[sans-serif] text-red-500">Address</h4>
-                    <p class="text-gray-500 text-sm font-[sans-serif] hover:text-red-500">
-                        <?= htmlspecialchars($companyAddress) ?></p>
+                <div>
+                    <h4 class="font-bold text-red-500">Address</h4>
+                    <p class="text-gray-600 text-sm hover:text-red-500 transition-all">
+                        <?= htmlspecialchars($companyAddress) ?>
+                    </p>
                 </div>
             </div>
-            <div class="flex items-start justify-start md:justify-center">
-                <div class="flex flex-col items-start space-y-2">
-                    <h4 class="font-bold font-[sans-serif] text-red-500">Contact Us</h4>
-                    <p class="text-gray-500 text-sm font-[sans-serif] hover:text-red-500">
-                        <?= htmlspecialchars($companyEmail) ?></p>
-                    <p class="text-gray-500 text-sm font-[sans-serif] hover:text-red-500">
-                        <?= htmlspecialchars($companyPhone) ?></p>
+
+            <!-- Empty Space (Optional: You can add social media links here) -->
+            <div class="flex flex-col items-start space-y-2">
+                <h4 class="font-bold text-red-500">Follow Us</h4>
+                <div class="flex space-x-4">
+                    <a href="https://www.facebook.com" target="_blank"
+                        class="text-gray-600 hover:text-red-500 transition-all">
+                        <i class="fab fa-facebook-f"></i> Facebook
+                    </a>
+                    <a href="https://www.telegram.com" target="_blank"
+                        class="text-gray-600 hover:text-red-500 transition-all">
+                        <i class="fab fa-telegram-plane"></i> Telegram
+                    </a>
+                    <a href="https://www.youtube.com" target="_blank"
+                        class="text-gray-600 hover:text-red-500 transition-all">
+                        <i class="fab fa-youtube"></i> YouTube
+                    </a>
                 </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <div class="flex flex-col items-start space-y-2">
+                <h4 class="font-bold text-red-500">Our Pages</h4>
+                <nav class="flex flex-col space-y-1">
+                    <a href="<?= $basePath ?>index.php"
+                        class="text-gray-600 text-sm hover:text-red-500 transition-all">Home</a>
+                    <a href="<?= $basePath ?>product.php"
+                        class="text-gray-600 text-sm hover:text-red-500 transition-all">Products</a>
+                    <a href="<?= $basePath ?>dealer.php"
+                        class="text-gray-600 text-sm hover:text-red-500 transition-all">Dealer</a>
+                </nav>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="flex flex-col items-start space-y-2">
+                <h4 class="font-bold text-red-500">Contact Us</h4>
+                <p class="text-gray-600 text-sm hover:text-red-500 transition-all">
+                    <?= htmlspecialchars($companyEmail) ?>
+                </p>
+                <p class="text-gray-600 text-sm hover:text-red-500 transition-all">
+                    <?= htmlspecialchars($companyPhone) ?>
+                </p>
             </div>
         </div>
     </div>
+
+    <!-- Divider Line -->
     <hr class="mt-8 border-gray-300" />
-    <div class="mt-4">
-        <p class='text-gray-500 text-sm'>©2025 Loy Team. All rights reserved.</p>
+
+    <!-- Copyright Section -->
+    <div class="mt-4 text-center">
+        <p class="text-gray-500 text-sm">©2025 Loy Team. All rights reserved.</p>
     </div>
 </footer>
