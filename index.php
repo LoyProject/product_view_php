@@ -15,13 +15,11 @@
         <div class="relative">
             <div class="px-4 sm:px-10">
                 <div class="mt-16 max-w-4xl mx-auto text-center relative z-10">
-                    <h1 class="md:text-6xl text-4xl font-extrabold mb-6 md:!leading-[75px]">Build Landing Pages with
-                        Typeform
-                        Integration</h1>
+                    <h1 class="md:text-6xl text-4xl font-extrabold mb-6 md:!leading-[75px]">Leelawadeefactory</h1>
                     <p class="text-base">Embark on a gastronomic journey with our curated dishes, delivered promptly to
-                        your
-                        doorstep. Elevate your dining experience today. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit.</p>
+                        your doorstep. Elevate your dining experience today. Lorem ipsum dolor sit amet, consectetur
+                        adipiscing elit.
+                    </p>
                     <div class="mt-10">
                         <a href="client_site_views/product.php"
                             class='px-6 py-3 rounded-xl text-white bg-red-500 transition-all hover:bg-red-600 font-[sans-serif]'>Explore
@@ -34,7 +32,8 @@
         </div>
 
         <div class="px-4 sm:px-10">
-            <div class="mt-32 max-w-7xl mx-auto">
+
+            <!-- <div class="mt-32 max-w-7xl mx-auto">
                 <div class="mb-16 max-w-2xl text-center mx-auto">
                     <h2 class="md:text-4xl text-3xl font-extrabold mb-6">Our Features</h2>
                     <p class="mt-6">Qui elit labore in nisi dolore tempor anim laboris ipsum ad ad consequat id. Dolore
@@ -163,7 +162,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- <div class="mt-32">
                 <div class="mb-16 text-center">
@@ -696,7 +695,6 @@
                 </div>
             </div> -->
 
-
             <!-- <div class="bg-red-100 py-20 sm:px-6 px-4 rounded-md mt-32">
                 <div class="max-w-4xl w-full mx-auto text-center">
                     <h2 class="md:text-4xl text-3xl font-extrabold">Subscribe Our Newsletter</h2>
@@ -712,7 +710,6 @@
                     </div>
                 </div>
             </div> -->
-
 
         </div>
     </div>
