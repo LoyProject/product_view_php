@@ -27,10 +27,10 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            document.getElementById("loading").style.display = "none";
-            document.getElementById("content").style.display = "block";
-        });
+    document.addEventListener("DOMContentLoaded", function() {
+        document.getElementById("loading").style.display = "none";
+        document.getElementById("content").style.display = "block";
+    });
     </script>
 </head>
 
@@ -137,7 +137,7 @@
                             <?php endwhile; ?>
                             <?php else: ?>
                             <tr>
-                                <td colspan="6" class="p-4 border-b border-slate-200 text-center">No records found</td>
+                                <td colspan="7" class="p-4 border-b border-slate-200 text-center">No records found</td>
                             </tr>
                             <?php endif; ?>
                         </tbody>

@@ -51,6 +51,8 @@ if ($resultPhone && $rowPhone = $resultPhone->fetch_assoc()) {
 $conn->close();
 ?>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
 <footer class="font-sans tracking-wide bg-gray-100 text-black px-6 md:px-6 lg:px-16 py-8">
     <div class="container mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -73,15 +75,15 @@ $conn->close();
                 <div class="flex space-x-4">
                     <a href="https://www.facebook.com" target="_blank"
                         class="text-gray-600 hover:text-red-500 transition-all">
-                        <i class="fab fa-facebook-f"></i> Facebook
+                        <i class="fab fa-facebook-f text-blue-600"></i>
                     </a>
                     <a href="https://www.telegram.com" target="_blank"
                         class="text-gray-600 hover:text-red-500 transition-all">
-                        <i class="fab fa-telegram-plane"></i> Telegram
+                        <i class="fab fa-telegram-plane text-blue-500"></i>
                     </a>
                     <a href="https://www.youtube.com" target="_blank"
                         class="text-gray-600 hover:text-red-500 transition-all">
-                        <i class="fab fa-youtube"></i> YouTube
+                        <i class="fab fa-youtube text-red-600"></i>
                     </a>
                 </div>
             </div>

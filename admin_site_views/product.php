@@ -39,18 +39,18 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function toggleText(button) {
-            const p = button.previousElementSibling;
-            if (button.textContent === 'See more') {
-                p.style.maxHeight = 'none';
-                p.style.overflow = 'visible';
-                button.textContent = 'See less';
-            } else {
-                p.style.maxHeight = '3em';
-                p.style.overflow = 'hidden';
-                button.textContent = 'See more';
-            }
+    function toggleText(button) {
+        const p = button.previousElementSibling;
+        if (button.textContent === 'See more') {
+            p.style.maxHeight = 'none';
+            p.style.overflow = 'visible';
+            button.textContent = 'See less';
+        } else {
+            p.style.maxHeight = '3em';
+            p.style.overflow = 'hidden';
+            button.textContent = 'See more';
         }
+    }
     </script>
 
 </head>

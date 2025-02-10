@@ -1,21 +1,21 @@
 <?php
-    include '../database/db_connection.php';
+include '../database/db_connection.php';
 
-    $userId = isset($_GET['id']) ? intval($_GET['id']) : 0;
+$userId = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
-    if ($userId > 0) {
-        $sql = "SELECT full_name, role, username, password FROM users WHERE id = ?";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("i", $userId);
-        $stmt->execute();
-        $stmt->bind_result($name, $role, $username, $password);
-        $stmt->fetch();
-        $stmt->close();
-    } else {
-        die("Invalid account ID.");
-    }
+if ($userId > 0) {
+    $sql = "SELECT full_name, role, username, password FROM users WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $stmt->bind_result($name, $role, $username, $password);
+    $stmt->fetch();
+    $stmt->close();
+} else {
+    die("Invalid account ID.");
+}
 
-    $conn->close();
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -99,8 +99,9 @@
                 <div class="container mx-auto">
                     <div class="flex justify-between items-center mb-6">
                         <h2 class="text-2xl font-bold">Account</h2>
-                        <a href="dashboard.php">
-                            <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
+                        <a href="product.php">
+                            <button
+                                class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none">
                                 Back
                             </button>
                         </a>
@@ -137,8 +138,10 @@
                         </div>
 
                         <div class="mb-6">
-                            <label for="confirm_password" class="block text-gray-700 font-medium mb-2">Confirm Password</label>
-                            <input type="password" id="confirm_password" name="confirm_password" required autocomplete="off"
+                            <label for="confirm_password" class="block text-gray-700 font-medium mb-2">Confirm
+                                Password</label>
+                            <input type="password" id="confirm_password" name="confirm_password" required
+                                autocomplete="off"
                                 class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
                         </div>
 

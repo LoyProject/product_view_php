@@ -1,23 +1,23 @@
 <?php
-    session_start();
+session_start();
 
-    if (!isset($_SESSION['user_id'])) {
-        header("Location: login.php");
-        exit();
-    }
+if (!isset($_SESSION['user_id'])) {
+    header("Location: login.php");
+    exit();
+}
 ?>
 
 <div class='flex shadow-md py-1 px-4 sm:px-7 bg-white min-h-[70px] tracking-wide z-[110] fixed top-0 w-full'>
     <div class='flex flex-wrap items-center justify-between gap-4 w-full relative'>
         <?php
-            include '../database/db_connection.php';
-            if ($resultLogo = $conn->query("SELECT * FROM companies")) {
-                $rowLogo = $resultLogo->fetch_assoc();
-                echo '<a href="dashboard.php">';
-                echo '<img src="../images_logo/' . $rowLogo['logo_header'] . '" alt="logo" class="w-48"/>';
-                echo '</a>';
-            }
-            $conn->close();
+        include '../database/db_connection.php';
+        if ($resultLogo = $conn->query("SELECT * FROM companies")) {
+            $rowLogo = $resultLogo->fetch_assoc();
+            echo '<a href="product.php">';
+            echo '<img src="../images_logo/' . $rowLogo['logo_header'] . '" alt="logo" class="w-48"/>';
+            echo '</a>';
+        }
+        $conn->close();
         ?>
         <div id="collapseMenu"
             class='max-lg:hidden lg:!block max-lg:before:fixed max-lg:before:bg-black max-lg:before:opacity-50 max-lg:before:inset-0 max-lg:before:z-50'>
@@ -48,18 +48,18 @@
                     </div>
                     <div class="dropdown-menu relative flex shrink-0 group">
                         <?php
-                            include '../database/db_connection.php';
-                            $userId = $_SESSION['user_id'];
-                            $resultUser = $conn->query("SELECT * FROM users WHERE id = $userId");
-                            $rowUser = $resultUser->fetch_assoc();
-                            echo '<div class="mr-3 text-right">';
-                            echo '<p class="text-gray-800 text-sm">' . $rowUser['full_name'] . '</p>';
-                            echo '<p class="text-gray-500 text-xs">' . $rowUser['role'] . '</p>';
-                            echo '</div>';
-                            $conn->close();
+                        include '../database/db_connection.php';
+                        $userId = $_SESSION['user_id'];
+                        $resultUser = $conn->query("SELECT * FROM users WHERE id = $userId");
+                        $rowUser = $resultUser->fetch_assoc();
+                        echo '<div class="mr-3 text-right">';
+                        echo '<p class="text-gray-800 text-sm">' . $rowUser['full_name'] . '</p>';
+                        echo '<p class="text-gray-500 text-xs">' . $rowUser['role'] . '</p>';
+                        echo '</div>';
+                        $conn->close();
                         ?>
                         <img src="https://readymadeui.com/team-1.webp" alt="profile-pic"
-                        class="w-9 h-9 max-lg:w-16 max-lg:h-16 rounded-full border-2 border-gray-300 cursor-pointer" />
+                            class="w-9 h-9 max-lg:w-16 max-lg:h-16 rounded-full border-2 border-gray-300 cursor-pointer" />
 
                         <div
                             class="dropdown-content hidden group-hover:block shadow-md p-2 bg-white rounded-md absolute top-9 right-0 w-56">
@@ -100,49 +100,49 @@
 </div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    // header
-    var toggleOpen = document.getElementById('toggleOpen');
-    var toggleClose = document.getElementById('toggleClose');
-    var collapseMenu = document.getElementById('collapseMenu');
+    document.addEventListener('DOMContentLoaded', () => {
+        // header
+        var toggleOpen = document.getElementById('toggleOpen');
+        var toggleClose = document.getElementById('toggleClose');
+        var collapseMenu = document.getElementById('collapseMenu');
 
-    function handleClick() {
-        if (collapseMenu.style.display === 'block') {
-            collapseMenu.style.display = 'none';
-        } else {
-            collapseMenu.style.display = 'block';
-        }
-    }
-
-    toggleOpen.addEventListener('click', handleClick);
-    toggleClose.addEventListener('click', handleClick);
-
-    // sidebar
-    let sidebarToggleBtn = document.getElementById('toggle-sidebar');
-    let sidebar = document.getElementById('sidebar');
-    let sidebarCollapseMenu = document.getElementById('sidebar-collapse-menu');
-
-    sidebarToggleBtn.addEventListener('click', () => {
-        if (!sidebarCollapseMenu.classList.contains('open')) {
-            sidebarCollapseMenu.classList.add('open');
-            sidebarCollapseMenu.style.cssText = 'width: 250px; visibility: visible; opacity: 1;';
-            sidebarToggleBtn.style.cssText = 'left: 236px;';
-        } else {
-            sidebarCollapseMenu.classList.remove('open');
-            sidebarCollapseMenu.style.cssText = 'width: 32px; visibility: hidden; opacity: 0;';
-            sidebarToggleBtn.style.cssText = 'left: 10px;';
+        function handleClick() {
+            if (collapseMenu.style.display === 'block') {
+                collapseMenu.style.display = 'none';
+            } else {
+                collapseMenu.style.display = 'block';
+            }
         }
 
-    });
-});
+        toggleOpen.addEventListener('click', handleClick);
+        toggleClose.addEventListener('click', handleClick);
 
-function logout() {
-    axios.get('../database/logout.php')
-        .then(response => {
-            window.location.href = 'login.php';
-        })
-        .catch(error => {
-            console.error('Logout error:', error);
+        // sidebar
+        let sidebarToggleBtn = document.getElementById('toggle-sidebar');
+        let sidebar = document.getElementById('sidebar');
+        let sidebarCollapseMenu = document.getElementById('sidebar-collapse-menu');
+
+        sidebarToggleBtn.addEventListener('click', () => {
+            if (!sidebarCollapseMenu.classList.contains('open')) {
+                sidebarCollapseMenu.classList.add('open');
+                sidebarCollapseMenu.style.cssText = 'width: 250px; visibility: visible; opacity: 1;';
+                sidebarToggleBtn.style.cssText = 'left: 236px;';
+            } else {
+                sidebarCollapseMenu.classList.remove('open');
+                sidebarCollapseMenu.style.cssText = 'width: 32px; visibility: hidden; opacity: 0;';
+                sidebarToggleBtn.style.cssText = 'left: 10px;';
+            }
+
         });
-}
+    });
+
+    function logout() {
+        axios.get('../database/logout.php')
+            .then(response => {
+                window.location.href = 'login.php';
+            })
+            .catch(error => {
+                console.error('Logout error:', error);
+            });
+    }
 </script>
