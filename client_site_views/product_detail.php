@@ -95,7 +95,7 @@ include 'header.php';
                                 echo '</article>';  
                             echo '</div>';
                             echo '<div class="p-2">';
-                                echo '<a href="product_detail.php?id=' . htmlspecialchars($row["id"]) . '" class="mt-6 px-5 py-2.5 w-full inline-block text-center rounded-md bg-gray-200 text-gray-500 text-xs tracking-wider font-semibold outline-none hover:bg-gray-400 hover:text-white">View</a>';
+                                echo '<a href="product_detail.php?id=' . htmlspecialchars($row["id"]) . '" class="w-full py-2.5 inline-block text-center rounded-sm bg-red-100 text-red-500 text-xs font-bold tracking-wider font-[sans-serif] outline-none hover:bg-red-400 hover:text-white">View</a>';
                             echo '</div>';
                         echo '</div>';
                     }
