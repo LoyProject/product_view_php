@@ -156,7 +156,7 @@
             <form method="GET" class="mb-6 flex flex-col sm:flex-row">
                 <input type="text" name="search" value="<?= htmlspecialchars($search) ?>"
                     placeholder="Search by name, category, description"
-                    class="w-full sm:flex-1 p-4 border-2 border-red-500 rounded-md mb-4 sm:mb-0 sm:mr-4">
+                    class="w-full sm:flex-1 p-4 border-2 rounded-md mb-4 sm:mb-0 sm:mr-4 focus:border-red-500 focus:outline-none focus:ring-1 focus:ring-red-500">
                 <button type="submit"
                     class="w-full sm:w-24 text-center border-2 bg-red-500 text-white p-2 rounded-md mb-4 sm:mb-0 sm:mr-4">Search
                 </button>
@@ -186,7 +186,7 @@
                 </div>
                 <?php endwhile; ?>
                 <?php else: ?>
-                <p class="text-center text-gray-500 text-sm font-semibold mt-6">No products available.</p>
+                <p class="text-gray-500 text-sm font-semibold">No products available.</p>
                 <?php endif; ?>
             </div>
 

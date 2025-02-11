@@ -1,6 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
 
+<?php
+// Detect the base path dynamically
+$scriptPath = dirname($_SERVER['SCRIPT_NAME']);
+$depth = substr_count($scriptPath, '/');
+$basePath = ($depth > 1) ? '../' : '';
+
+// Include database connection
+$databasePath = $basePath . 'database/db_connection.php';
+if (file_exists($databasePath)) {
+    include $databasePath;
+} else {
+    die("Error: Database connection file not found at " . $databasePath);
+}
+
+$logoPath = $basePath . 'images_logo/';
+$companyDetailsQuery = "SELECT name, description, location, image1, image2, image3 FROM companies";
+$result = $conn->query($companyDetailsQuery);
+
+if ($result && $row = $result->fetch_assoc()) {
+    $companyName = $row['name'];
+    $companyDescription = $row['description'];
+    $companyLocation = $row['location'];
+    $image1 = $logoPath . $row['image1'];
+    $image2 = $logoPath . $row['image2'];
+    $image3 = $logoPath . $row['image3'];
+} else {
+    $companyName = 'Name not found';
+    $companyDescription = 'Description not found';
+    $companyLocation = 'Location not found';
+    $image1 = $logoPath . 'default-image1.png';
+    $image2 = $logoPath . 'default-image2.png';
+    $image3 = $logoPath . 'default-image3.png';
+}
+
+$conn->close();
+?>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,32 +52,40 @@
         <div class="relative">
             <div class="px-4 sm:px-10">
                 <div class="mt-32 max-w-4xl mx-auto text-center relative z-10">
-                    <h1 class="md:text-6xl text-4xl font-extrabold mb-6 md:!leading-[75px]">Leelawadeefactory</h1>
-                    <p class="text-base">Embark on a gastronomic journey with our curated dishes, delivered promptly to
-                        your doorstep. Elevate your dining experience today. Lorem ipsum dolor sit amet, consectetur
-                        adipiscing elit.
-                    </p>
+                    <h1 class="md:text-6xl text-4xl font-extrabold mb-6 md:!leading-[75px]">
+                        <?= htmlspecialchars($companyName) ?></h1>
+                    <p class="text-2xl font-[sans-serif]"><?= htmlspecialchars($companyDescription) ?></p>
                     <div class="mt-16 container-md mx-auto">
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                            <div class="h-64 w-full bg-blue-100 rounded-md">
-                                <img src="https://www.businesstoday.com.my/wp-content/uploads/2020/04/000_Hkg10169771-1280x819.jpg"
-                                    alt="" class="object-cover h-full w-full rounded-md">
+                            <div class="w-full rounded-md">
+                                <img src="<?= htmlspecialchars($image1) ?>"
+                                    class="object-cover h-full w-full rounded-md">
                             </div>
-                            <div class="h-64 w-full bg-blue-100 rounded-md">
-                                <img src="https://www.businesstoday.com.my/wp-content/uploads/2020/04/000_Hkg10169771-1280x819.jpg"
-                                    alt="" class="object-cover h-full w-full rounded-md">
+                            <div class="w-full rounded-md">
+                                <img src="<?= htmlspecialchars($image2) ?>"
+                                    class="object-cover h-full w-full rounded-md">
                             </div>
-                            <div class=" h-64w-full bg-blue-100 rounded-md">
-                                <img src="https://www.businesstoday.com.my/wp-content/uploads/2020/04/000_Hkg10169771-1280x819.jpg"
-                                    alt="" class="object-cover h-full w-full rounded-md">
+                            <div class="w-full rounded-md">
+                                <img src="<?= htmlspecialchars($image3) ?>"
+                                    class="object-cover h-full w-full rounded-md">
                             </div>
                         </div>
                     </div>
-                    <div class="mt-24">
-                        <a href="client_site_views/product.php"
-                            class='px-6 py-3 rounded-md text-white font-bold bg-red-500 transition-all hover:bg-red-600 font-[sans-serif]'>Explore
-                            products
-                        </a>
+                    <div class="mt-16 container-md mx-auto flex items-center justify-center">
+                        <div class="flex flex-row gap-4">
+                            <div class="mt-24">
+                                <button
+                                    class="p-4 rounded-md text-white font-bold bg-red-500 transition-all hover:bg-red-600 font-[sans-serif] w-48">
+                                    <a href="client_site_views/product.php">Explore Products</a>
+                                </button>
+                            </div>
+                            <div class="mt-24">
+                                <button
+                                    class="p-4 rounded-md text-white font-bold bg-yellow-500 transition-all hover:bg-yellow-600 font-[sans-serif] w-48">
+                                    <a href="<?= htmlspecialchars($companyLocation) ?>">Visit Shop</a>
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -48,8 +93,7 @@
         </div>
 
         <div class="px-4 sm:px-10 py-4">
-
-            <div class="mt-32 max-w-7xl mx-auto">
+            <!-- <div class="mt-32 max-w-7xl mx-auto">
                 <div class="mb-16 max-w-2xl text-center mx-auto">
                     <h2 class="md:text-4xl text-3xl font-extrabold mb-6">Our Features</h2>
                     <p class="mt-6">Qui elit labore in nisi dolore tempor anim laboris ipsum ad ad consequat id.
@@ -110,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <!-- <div class="mt-32">
                 <div class="mb-16 text-center">

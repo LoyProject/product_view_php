@@ -13,39 +13,25 @@ if (file_exists($databasePath)) {
 }
 
 $logoPath = $basePath . 'images_logo/';
-$resultLogo = $conn->query("SELECT logo_footer AS image FROM companies");
+$companyDetailsQuery = "SELECT logo_footer AS image, address, email, contact, facebook, telegram, youtube FROM companies";
+$result = $conn->query($companyDetailsQuery);
 
-if ($resultLogo && $rowLogo = $resultLogo->fetch_assoc()) {
-    $logoFullPath = $logoPath . $rowLogo['image'];
+if ($result && $row = $result->fetch_assoc()) {
+    $logoFullPath = $logoPath . $row['image'];
+    $companyAddress = $row['address'];
+    $companyEmail = $row['email'];
+    $companyPhone = $row['contact'];
+    $facebookLink = $row['facebook'];
+    $telegramLink = $row['telegram'];
+    $youtubeLink = $row['youtube'];
 } else {
     $logoFullPath = $logoPath . 'default-logo.png';
-}
-
-// Fetch address
-$resultAddress = $conn->query("SELECT address FROM companies");
-
-if ($resultAddress && $rowAddress = $resultAddress->fetch_assoc()) {
-    $companyAddress = $rowAddress['address'];
-} else {
     $companyAddress = 'Address not found';
-}
-
-// Fetch email
-$resultEmail = $conn->query("SELECT email FROM companies");
-
-if ($resultEmail && $rowEmail = $resultEmail->fetch_assoc()) {
-    $companyEmail = $rowEmail['email'];
-} else {
     $companyEmail = 'Email not found';
-}
-
-// Fetch phone number
-$resultPhone = $conn->query("SELECT contact FROM companies");
-
-if ($resultPhone && $rowPhone = $resultPhone->fetch_assoc()) {
-    $companyPhone = $rowPhone['contact'];
-} else {
     $companyPhone = 'Contact not found';
+    $facebookLink = 'https://www.facebook.com';
+    $telegramLink = 'https://www.telegram.com';
+    $youtubeLink = 'https://www.youtube.com';
 }
 
 $conn->close();
@@ -73,15 +59,15 @@ $conn->close();
             <div class="flex flex-col items-start space-y-2">
                 <h4 class="font-bold text-red-500">Follow Us</h4>
                 <div class="flex space-x-4">
-                    <a href="https://www.facebook.com" target="_blank"
+                    <a href="<?= htmlspecialchars($facebookLink) ?>" target="_blank"
                         class="text-gray-600 hover:text-red-500 transition-all">
                         <i class="fab fa-facebook-f text-blue-600"></i>
                     </a>
-                    <a href="https://www.telegram.com" target="_blank"
+                    <a href="<?= htmlspecialchars($telegramLink) ?>" target="_blank"
                         class="text-gray-600 hover:text-red-500 transition-all">
                         <i class="fab fa-telegram-plane text-blue-500"></i>
                     </a>
-                    <a href="https://www.youtube.com" target="_blank"
+                    <a href="<?= htmlspecialchars($youtubeLink) ?>" target="_blank"
                         class="text-gray-600 hover:text-red-500 transition-all">
                         <i class="fab fa-youtube text-red-600"></i>
                     </a>
