@@ -53,7 +53,7 @@ $conn->close();
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-<footer class="font-sans tracking-wide bg-gray-100 text-black px-6 md:px-6 lg:px-16 py-8">
+<footer class="font-sans tracking-wide bg-white text-black px-6 md:px-6 lg:px-16 py-4">
     <div class="container mx-auto">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             <!-- Logo & Address -->
@@ -94,9 +94,9 @@ $conn->close();
                 <nav class="flex flex-col space-y-1">
                     <a href="<?= $basePath ?>index.php"
                         class="text-gray-600 text-sm hover:text-red-500 transition-all">Home</a>
-                    <a href="<?= $basePath ?>product.php"
+                    <a href="<?= $basePath ?>client_site_views/product.php"
                         class="text-gray-600 text-sm hover:text-red-500 transition-all">Products</a>
-                    <a href="<?= $basePath ?>dealer.php"
+                    <a href="<?= $basePath ?>client_site_views/dealer.php"
                         class="text-gray-600 text-sm hover:text-red-500 transition-all">Dealer</a>
                 </nav>
             </div>
