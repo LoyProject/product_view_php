@@ -91,20 +91,18 @@
     <title>Products</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", function() {
             const menuToggle = document.getElementById("menuToggle");
-            const closeMenu = document.getElementById("closeMenu");
+            
             const menuDrawer = document.getElementById("menuDrawer");
 
-            menuToggle.addEventListener("click", function () {
+            menuToggle.addEventListener("click", function() {
                 menuDrawer.classList.toggle("-translate-x-full");
             });
 
-            closeMenu.addEventListener("click", function () {
-                menuDrawer.classList.add("-translate-x-full");
-            });
+            
 
-            document.addEventListener("click", function (event) {
+            document.addEventListener("click", function(event) {
                 if (!menuDrawer.contains(event.target) && !menuToggle.contains(event.target)) {
                     menuDrawer.classList.add("-translate-x-full");
                 }
@@ -127,11 +125,8 @@
 
         <!-- Category Drawer (Mobile) / Sidebar (Desktop) -->
         <div id="menuDrawer"
-            class="absolute md:relative md:block top-0 left-0 w-72 md:w-1/3 lg:w-1/4 xl:w-1/5 h-screen md:h-auto bg-white 
+            class="absolute md:relative md:block md:top-0 left-0 w-72 md:w-1/3 lg:w-1/4 xl:w-1/5 h-screen md:h-auto bg-white 
                 transform -translate-x-full transition-transform md:translate-x-0 md:overflow-y-auto p-4 z-10 rounded-lg mr-4">
-            
-            <!-- Close Button for Mobile -->
-            <button id="closeMenu" class="md:hidden absolute top-4 right-4 text-red-500 text-2xl">&times;</button>
 
             <h1 class="p-4 text-2xl font-bold hidden md:block">Categories</h1>
             <div class="bg-gray-50 rounded-lg">
@@ -145,8 +140,7 @@
                     </li>
                     <?php while ($cat = mysqli_fetch_assoc($categoryResult)): ?>
                     <li class="px-2 py-2">
-                        <a href="product.php?category=<?= $cat['id'] ?>"
-                            class="block py-2 px-6 font-bold rounded-lg hover:bg-gray-200 
+                        <a href="product.php?category=<?= $cat['id'] ?>" class="block py-2 px-6 font-bold rounded-lg hover:bg-gray-200 
                                 <?= $categoryFilter == $cat['id'] ? 'text-white bg-red-500 hover:bg-red-500' : 'text-gray-700' ?> 
                                 truncate overflow-hidden whitespace-nowrap">
                             <?= htmlspecialchars($cat['name']) ?>
@@ -165,57 +159,60 @@
                 <input type="text" name="search" value="<?= htmlspecialchars($search) ?>"
                     placeholder="Search by name, category, description"
                     class="w-full sm:w-3/4 p-4 border-2 border-red-500 rounded-md">
-                <button type="submit" class="w-full sm:w-24 text-center bg-red-500 text-white p-4 rounded-md">Search</button>
+                <button type="submit"
+                    class="w-full sm:w-24 text-center bg-red-500 text-white p-4 rounded-md">Search</button>
                 <a href="product.php" class="w-full sm:w-24 text-center bg-gray-500 text-white p-4 rounded-md">Clear</a>
             </form>
 
             <!-- Product Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <?php if ($result->num_rows > 0): ?>
-                    <?php while ($product = $result->fetch_assoc()): ?>
-                    <div class="bg-white shadow-md border p-2 w-full rounded-lg overflow-hidden hover:border-red-500 border-2 flex flex-col">
-                        <img src="../images/<?= htmlspecialchars($product['image']) ?>" class="w-full h-52 object-cover rounded-lg" />
-                        <div class="pt-4 px-2">
-                            <h3 class="text-lg font-bold"><?= htmlspecialchars($product['name']) ?></h3>
-                            <p class="text-xs text-red-500 font-bold"><?= htmlspecialchars($product['category_name']) ?></p>
-                            <p class="mt-3 text-xs text-gray-500"><?= htmlspecialchars($product['description']) ?></p>
-                        </div>
-                        <div class="p-2 mt-4">
-                            <a href="product_detail.php?id=<?= htmlspecialchars($product['id']) ?>"
-                                class="w-full py-2 text-center block rounded-sm bg-red-100 text-red-500 text-xs font-bold hover:bg-red-400 hover:text-white">
-                                View
-                            </a>
-                        </div>
+                <?php while ($product = $result->fetch_assoc()): ?>
+                <div
+                    class="bg-white shadow-md border p-2 w-full rounded-lg overflow-hidden hover:border-red-500 border-2 flex flex-col">
+                    <img src="../images/<?= htmlspecialchars($product['image']) ?>"
+                        class="w-full h-52 object-cover rounded-lg" />
+                    <div class="pt-4 px-2">
+                        <h3 class="text-lg font-bold"><?= htmlspecialchars($product['name']) ?></h3>
+                        <p class="text-xs text-red-500 font-bold"><?= htmlspecialchars($product['category_name']) ?></p>
+                        <p class="mt-3 text-xs text-gray-500"><?= htmlspecialchars($product['description']) ?></p>
                     </div>
-                    <?php endwhile; ?>
+                    <div class="p-2 mt-4">
+                        <a href="product_detail.php?id=<?= htmlspecialchars($product['id']) ?>"
+                            class="w-full py-2 text-center block rounded-sm bg-red-100 text-red-500 text-xs font-bold hover:bg-red-400 hover:text-white">
+                            View
+                        </a>
+                    </div>
+                </div>
+                <?php endwhile; ?>
                 <?php else: ?>
-                    <p class="text-center text-gray-500 text-sm font-semibold mt-6">No products available.</p>
+                <p class="text-center text-gray-500 text-sm font-semibold mt-6">No products available.</p>
                 <?php endif; ?>
             </div>
 
             <!-- Pagination -->
             <div class="mt-6 flex flex-wrap justify-center gap-2">
                 <?php if ($totalPages > 1): ?>
-                    <?php if ($page > 1): ?>
-                        <a href="product.php?page=1&search=<?= urlencode($search) ?>&category=<?= urlencode($categoryFilter) ?>"
-                            class="px-4 py-2 border bg-gray-200 rounded">First</a>
-                        <a href="product.php?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>&category=<?= urlencode($categoryFilter) ?>"
-                            class="px-4 py-2 border bg-gray-200 rounded">Prev</a>
-                    <?php endif; ?>
+                <?php if ($page > 1): ?>
+                <a href="product.php?page=1&search=<?= urlencode($search) ?>&category=<?= urlencode($categoryFilter) ?>"
+                    class="px-4 py-2 border bg-gray-200 rounded">First</a>
+                <a href="product.php?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>&category=<?= urlencode($categoryFilter) ?>"
+                    class="px-4 py-2 border bg-gray-200 rounded">Prev</a>
+                <?php endif; ?>
 
-                    <?php for ($i = max(1, $page - 2); $i <= min($totalPages, $page + 2); $i++): ?>
-                        <a href="product.php?page=<?= $i ?>&search=<?= urlencode($search) ?>&category=<?= urlencode($categoryFilter) ?>"
-                            class="px-4 py-2 border <?= $i == $page ? 'bg-red-500 text-white' : 'bg-gray-200' ?> rounded">
-                            <?= $i ?>
-                        </a>
-                    <?php endfor; ?>
+                <?php for ($i = max(1, $page - 2); $i <= min($totalPages, $page + 2); $i++): ?>
+                <a href="product.php?page=<?= $i ?>&search=<?= urlencode($search) ?>&category=<?= urlencode($categoryFilter) ?>"
+                    class="px-4 py-2 border <?= $i == $page ? 'bg-red-500 text-white' : 'bg-gray-200' ?> rounded">
+                    <?= $i ?>
+                </a>
+                <?php endfor; ?>
 
-                    <?php if ($page < $totalPages): ?>
-                        <a href="product.php?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>&category=<?= urlencode($categoryFilter) ?>"
-                            class="px-4 py-2 border bg-gray-200 rounded">Next</a>
-                        <a href="product.php?page=<?= $totalPages ?>&search=<?= urlencode($search) ?>&category=<?= urlencode($categoryFilter) ?>"
-                            class="px-4 py-2 border bg-gray-200 rounded">Last</a>
-                    <?php endif; ?>
+                <?php if ($page < $totalPages): ?>
+                <a href="product.php?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>&category=<?= urlencode($categoryFilter) ?>"
+                    class="px-4 py-2 border bg-gray-200 rounded">Next</a>
+                <a href="product.php?page=<?= $totalPages ?>&search=<?= urlencode($search) ?>&category=<?= urlencode($categoryFilter) ?>"
+                    class="px-4 py-2 border bg-gray-200 rounded">Last</a>
+                <?php endif; ?>
                 <?php endif; ?>
             </div>
         </div>
