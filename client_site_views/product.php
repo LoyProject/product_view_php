@@ -91,23 +91,21 @@
     <title>Products</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const menuToggle = document.getElementById("menuToggle");
-            
-            const menuDrawer = document.getElementById("menuDrawer");
+    document.addEventListener("DOMContentLoaded", function() {
+        const menuToggle = document.getElementById("menuToggle");
 
-            menuToggle.addEventListener("click", function() {
-                menuDrawer.classList.toggle("-translate-x-full");
-            });
+        const menuDrawer = document.getElementById("menuDrawer");
 
-            
-
-            document.addEventListener("click", function(event) {
-                if (!menuDrawer.contains(event.target) && !menuToggle.contains(event.target)) {
-                    menuDrawer.classList.add("-translate-x-full");
-                }
-            });
+        menuToggle.addEventListener("click", function() {
+            menuDrawer.classList.toggle("-translate-x-full");
         });
+
+        document.addEventListener("click", function(event) {
+            if (!menuDrawer.contains(event.target) && !menuToggle.contains(event.target)) {
+                menuDrawer.classList.add("-translate-x-full");
+            }
+        });
+    });
     </script>
 </head>
 
@@ -128,8 +126,8 @@
             class="absolute md:relative md:block md:top-0 left-0 w-72 md:w-1/3 lg:w-1/4 xl:w-1/5 h-screen md:h-auto bg-white 
                 transform -translate-x-full transition-transform md:translate-x-0 md:overflow-y-auto p-4 z-10 rounded-lg mr-4">
 
-            <h1 class="p-4 text-2xl font-bold hidden md:block">Categories</h1>
-            <div class="bg-gray-50 rounded-lg">
+            <h1 class="text-2xl font-bold hidden md:block">Categories</h1>
+            <div class="bg-gray-50 rounded-lg mt-4">
                 <ul class="py-4 px-2">
                     <li class="px-2 py-2">
                         <a href="product.php"
@@ -155,15 +153,17 @@
         <!-- Right Section (Product Listings) -->
         <div class="w-full md:w-4/5 pl-6 p-4 bg-white rounded-lg">
             <h1 class="text-2xl font-bold mb-4">Products</h1>
-            <form method="GET" class="flex flex-col sm:flex-row gap-4 mb-6">
+            <form method="GET" class="mb-6 flex flex-col sm:flex-row">
                 <input type="text" name="search" value="<?= htmlspecialchars($search) ?>"
                     placeholder="Search by name, category, description"
-                    class="w-full sm:w-3/4 p-4 border-2 border-red-500 rounded-md">
+                    class="w-full sm:flex-1 p-4 border-2 border-red-500 rounded-md mb-4 sm:mb-0 sm:mr-4">
                 <button type="submit"
-                    class="w-full sm:w-24 text-center bg-red-500 text-white p-4 rounded-md">Search</button>
-                <a href="product.php" class="w-full sm:w-24 text-center bg-gray-500 text-white p-4 rounded-md">Clear</a>
+                    class="w-full sm:w-24 text-center border-2 bg-red-500 text-white p-2 rounded-md mb-4 sm:mb-0 sm:mr-4">Search
+                </button>
+                <button class="w-full sm:w-24 text-center border-2 bg-gray-500 text-white p-2 rounded-md mb-4 sm:mb-0">
+                    <a href="product.php">Clear</a>
+                </button>
             </form>
-
             <!-- Product Grid -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <?php if ($result->num_rows > 0): ?>
