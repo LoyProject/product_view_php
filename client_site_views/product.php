@@ -168,25 +168,29 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 <?php if ($result->num_rows > 0): ?>
                 <?php while ($product = $result->fetch_assoc()): ?>
-                <div
-                    class="bg-white shadow-md border p-2 w-full rounded-lg overflow-hidden hover:border-red-500 border-2 flex flex-col">
-                    <img src="../images/<?= htmlspecialchars($product['image']) ?>"
-                        class="w-full h-52 object-cover rounded-lg" />
-                    <div class="pt-4 px-2">
-                        <h3 class="text-lg font-bold"><?= htmlspecialchars($product['name']) ?></h3>
-                        <p class="text-xs text-red-500 font-bold"><?= htmlspecialchars($product['category_name']) ?></p>
-                        <p class="mt-3 text-xs text-gray-500"><?= htmlspecialchars($product['description']) ?></p>
+                    <div class="bg-white shadow-md border p-2 w-full rounded-lg overflow-hidden hover:border-red-500 flex flex-col">
+                        <img src="../images/<?= htmlspecialchars($product['image']) ?>" 
+                            class="w-full h-52 object-cover rounded-lg" 
+                            alt="<?= htmlspecialchars($product['name']) ?>" />
+
+                        <div class="pt-4 px-2 flex-grow">
+                            <h3 class="text-lg font-bold"><?= htmlspecialchars($product['name']) ?></h3>
+                            <p class="text-xs text-red-500 font-bold"><?= htmlspecialchars($product['category_name']) ?></p>
+                            <p class="mt-3 text-xs text-gray-500"><?= htmlspecialchars($product['description']) ?></p>
+                            <br>
+                        </div>
+
+                        <div class="p-2 mt-auto">
+                            <a href="product_detail.php?id=<?= htmlspecialchars($product['id']) ?>"
+                                class="w-full py-2 text-center block rounded-md bg-red-100 text-red-500 text-xs font-bold 
+                                    transition duration-300 hover:bg-red-500 hover:text-white shadow-md">
+                                View
+                            </a>
+                        </div>
                     </div>
-                    <div class="p-2 mt-4">
-                        <a href="product_detail.php?id=<?= htmlspecialchars($product['id']) ?>"
-                            class="w-full py-2 text-center block rounded-sm bg-red-100 text-red-500 text-xs font-bold hover:bg-red-400 hover:text-white">
-                            View
-                        </a>
-                    </div>
-                </div>
                 <?php endwhile; ?>
                 <?php else: ?>
-                <p class="text-gray-500 text-sm font-semibold">No products available.</p>
+                    <p class="text-gray-500 text-sm font-semibold">No products available.</p>
                 <?php endif; ?>
             </div>
 
