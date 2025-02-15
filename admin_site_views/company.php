@@ -1,10 +1,10 @@
 <?php
     include '../database/db_connection.php';
 
-    $sql = "SELECT name, contact, address, email, description, location, facebook, telegram, youtube, logo_header, logo_footer, image1, image2, image3 FROM companies WHERE id = 1";
+    $sql = "SELECT name, contact, address, email, description, location, facebook, telegram, youtube, logo_header, logo_footer, image1, image2, image3, slideshow_images FROM companies WHERE id = 1";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
-    $stmt->bind_result($name, $contact, $address, $email, $description, $location, $facebook, $telegram, $youtube, $logoHeader, $logoFooter, $image1, $image2, $image3);
+    $stmt->bind_result($name, $contact, $address, $email, $description, $location, $facebook, $telegram, $youtube, $logoHeader, $logoFooter, $image1, $image2, $image3, $slideshow_images_json);
     $stmt->fetch();
     $stmt->close();
 
@@ -65,6 +65,24 @@
                 document.getElementById('preview-image3').classList.remove('hidden');
                 document.getElementById('file-name3').style.display = 'none';
                 document.getElementById('upload-icon3').style.display = 'none';
+            }
+            if ("<?php echo addslashes($slideshow_images_json); ?>") {
+                const slideshowImages = JSON.parse("<?php echo addslashes($slideshow_images_json); ?>");
+                const previewContainer = document.getElementById('slideshow-preview');
+                previewContainer.innerHTML = '';
+
+                if (slideshowImages.length > 0) {
+                    previewContainer.classList.remove('hidden');
+                    document.getElementById('file-name-slideshow').style.display = 'none';
+                    document.getElementById('upload-icon-slideshow').style.display = 'none';
+                }
+
+                slideshowImages.forEach(image => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = "../images_slideshow/" + image;
+                    imgElement.className = "w-full h-28 object-contain rounded border";
+                    previewContainer.appendChild(imgElement);
+                });
             }
         });
 
@@ -174,9 +192,10 @@
         }
 
         function previewSlideshowImages(event) {
-            const previewContainer = document.getElementById('slideshow-preview');
-
             const files = event.target.files;
+            const previewContainer = document.getElementById('slideshow-preview');
+            previewContainer.innerHTML = '';
+
             if (files.length > 0) {
                 previewContainer.classList.remove('hidden');
                 document.getElementById('file-name-slideshow').style.display = 'none';
@@ -312,14 +331,14 @@
                                     <span id="file-name-slideshow" class="text-gray-400 text-center">
                                         <strong>Upload Multiple Images</strong><br>Only .png, .jpeg, .jpg files are allowed.
                                     </span>
-                                    <input type="file" id="slideshow-images" name="slideshow-images[]" accept=".jpg, .jpeg, .png" multiple
+                                    <input type="file" id="slideshow-images" name="slideshow_images[]" accept=".jpg, .jpeg, .png" multiple
                                         class="hidden" onchange="previewSlideshowImages(event);">
                                     <div id="slideshow-preview" class="hidden grid grid-cols-3 gap-4 max-h-48 overflow-y-auto p-2"></div>
                                 </label>
                             </div>
 
                             <div class="mb-6">
-                                <label for="images" class="block text-gray-700 font-medium mb-2">Upload Images (Max 3)</label>
+                                <div class="block text-gray-700 font-medium mb-2">Upload Images (Max 3)</div>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div class="border-2 border-dashed border-gray-300 shadow-sm rounded cursor-pointer flex flex-col justify-center items-center h-32"
                                         onclick="document.getElementById('image1').click()">
