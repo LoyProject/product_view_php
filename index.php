@@ -2,40 +2,45 @@
 <html lang="en">
 
 <?php
-// Detect the base path dynamically
-$scriptPath = dirname($_SERVER['SCRIPT_NAME']);
-$depth = substr_count($scriptPath, '/');
-$basePath = ($depth > 1) ? '../' : '';
+    $scriptPath = dirname($_SERVER['SCRIPT_NAME']);
+    $depth = substr_count($scriptPath, '/');
+    $basePath = ($depth > 1) ? '../' : '';
 
-// Include database connection
-$databasePath = $basePath . 'database/db_connection.php';
-if (file_exists($databasePath)) {
-    include $databasePath;
-} else {
-    die("Error: Database connection file not found at " . $databasePath);
-}
+    $databasePath = $basePath . 'database/db_connection.php';
+    if (file_exists($databasePath)) {
+        include $databasePath;
+    } else {
+        die("Error: Database connection file not found at " . $databasePath);
+    }
 
-$logoPath = $basePath . 'images_logo/';
-$companyDetailsQuery = "SELECT name, description, location, image1, image2, image3 FROM companies";
-$result = $conn->query($companyDetailsQuery);
+    $logoPath = $basePath . 'images_logo/';
+    $slideshowPath = $basePath . 'images_slideshow/';
+    $companyDetailsQuery = "SELECT name, description, location, image1, image2, image3, slideshow_images FROM companies";
+    $result = $conn->query($companyDetailsQuery);
 
-if ($result && $row = $result->fetch_assoc()) {
-    $companyName = $row['name'];
-    $companyDescription = $row['description'];
-    $companyLocation = $row['location'];
-    $image1 = $logoPath . $row['image1'];
-    $image2 = $logoPath . $row['image2'];
-    $image3 = $logoPath . $row['image3'];
-} else {
-    $companyName = 'Name not found';
-    $companyDescription = 'Description not found';
-    $companyLocation = 'Location not found';
-    $image1 = $logoPath . 'default-image1.png';
-    $image2 = $logoPath . 'default-image2.png';
-    $image3 = $logoPath . 'default-image3.png';
-}
+    if ($result && $row = $result->fetch_assoc()) {
+        $companyName = $row['name'];
+        $companyDescription = $row['description'];
+        $companyLocation = $row['location'];
+        $image1 = $logoPath . $row['image1'];
+        $image2 = $logoPath . $row['image2'];
+        $image3 = $logoPath . $row['image3'];
+        $slideshowImages = explode(',', $row['slideshow_images']);
+    } else {
+        $companyName = 'Name not found';
+        $companyDescription = 'Description not found';
+        $companyLocation = 'Location not found';
+        $image1 = $logoPath . 'default-image1.png';
+        $image2 = $logoPath . 'default-image2.png';
+        $image3 = $logoPath . 'default-image3.png';
+        $slideshowImages = [
+            'default-slide1.png',
+            'default-slide2.png',
+            'default-slide3.png'
+        ];
+    }
 
-$conn->close();
+    $conn->close();
 ?>
 
 <head>
@@ -55,39 +60,17 @@ $conn->close();
                 <div id="default-carousel" class="relative w-full mt-24 relative z-10" data-carousel="slide">
                     <!-- Carousel wrapper -->
                     <div class="relative h-auto overflow-hidden rounded-lg md:h-96">
-                        <!-- Item 1 (Make this one visible by default) -->
-                        <div class="absolute inset-0 flex duration-700 ease-in-out" data-carousel-item="active">
-                            <img src="https://www.motul.com/_next/image?url=https%3A%2F%2Fstaging-cms.motul.com%2Fimages%2Frnd1_3f95546785.PNG&w=1920&q=75"
-                                class="block w-full h-full object-cover" alt="Slide 1">
+                        <?php foreach ($slideshowImages as $index => $slideImage): ?>
+                        <div class="<?= $index === 0 ? 'absolute inset-0 flex duration-700 ease-in-out' : 'hidden absolute inset-0 flex duration-700 ease-in-out' ?>" data-carousel-item="<?= $index === 0 ? 'active' : '' ?>">
+                            <img src="<?= htmlspecialchars($slideshowPath . $slideImage) ?>" class="block w-full h-full object-cover" alt="Slide <?= $index + 1 ?>">
                         </div>
-                        <!-- Item 2 -->
-                        <div class="hidden absolute inset-0 flex duration-700 ease-in-out" data-carousel-item>
-                            <img src="https://www.motul.com/_next/image?url=https%3A%2F%2Fstaging-cms.motul.com%2Fimages%2Fcarousel_experiences_233279977f.jpeg&w=1920&q=75"
-                                class="block w-full h-full object-cover" alt="Slide 2">
-                        </div>
-                        <!-- Item 3 -->
-                        <div class="hidden absolute inset-0 flex duration-700 ease-in-out" data-carousel-item>
-                            <img src="https://www.motul.com/_next/image?url=https%3A%2F%2Fstaging-cms.motul.com%2Fimages%2Fcarousel_experiences_233279977f.jpeg&w=1920&q=75"
-                                class="block w-full h-full object-cover" alt="Slide 3">
-                        </div>
-                        <!-- Item 4 -->
-                        <div class="hidden absolute inset-0 flex duration-700 ease-in-out" data-carousel-item>
-                            <img src="https://www.motul.com/_next/image?url=https%3A%2F%2Fstaging-cms.motul.com%2Fimages%2Fprotecting_our_playground_9d299f2c4f.jpg&w=1920&q=75"
-                                class="block w-full h-full object-cover" alt="Slide 4">
-                        </div>
-                        <!-- Item 5 -->
-                        <div class="hidden absolute inset-0 flex duration-700 ease-in-out" data-carousel-item>
-                            <img src="https://www.motul.com/_next/image?url=https%3A%2F%2Fstaging-cms.motul.com%2Fimages%2Fprotecting_our_playground_9d299f2c4f.jpg&w=1920&q=75"
-                                class="block w-full h-full object-cover" alt="Slide 5">
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                     <!-- Slider indicators -->
                     <div class="absolute z-30 flex -translate-x-1/2 bottom-5 left-1/2 space-x-3 rtl:space-x-reverse">
-                        <button type="button" class="w-3 h-3 rounded-full bg-blue-500" aria-label="Slide 1" data-carousel-slide-to="0"></button>
-                        <button type="button" class="w-3 h-3 rounded-full bg-blue-500" aria-label="Slide 2" data-carousel-slide-to="1"></button>
-                        <button type="button" class="w-3 h-3 rounded-full bg-blue-500" aria-label="Slide 3" data-carousel-slide-to="2"></button>
-                        <button type="button" class="w-3 h-3 rounded-full bg-blue-500" aria-label="Slide 4" data-carousel-slide-to="3"></button>
-                        <button type="button" class="w-3 h-3 rounded-full bg-blue-500" aria-label="Slide 5" data-carousel-slide-to="4"></button>
+                        <?php foreach ($slideshowImages as $index => $slideImage): ?>
+                        <button type="button" class="w-3 h-3 rounded-full bg-blue-500" aria-label="Slide <?= $index + 1 ?>" data-carousel-slide-to="<?= $index ?>"></button>
+                        <?php endforeach; ?>
                     </div>
                     <!-- Slider controls -->
                     <button type="button"
