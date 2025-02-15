@@ -3,8 +3,13 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $id = $_POST['id'];
-        $name = $_POST['name'];
-        $description = $_POST['description'];
+
+        function clean_input($data) {
+            return trim(htmlspecialchars($data, ENT_QUOTES, 'UTF-8'));
+        }
+
+        $name = clean_input($_POST['name']);
+        $description = clean_input($_POST['description']);
 
         $sql = "UPDATE categories SET name = ?, description = ? WHERE id = ?";
         $stmt = $conn->prepare($sql);

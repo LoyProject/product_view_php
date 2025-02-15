@@ -4,9 +4,14 @@
     include 'db_connection.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = $_POST['name'];
-        $description = $_POST['description'];
+        function clean_input($data) {
+            return trim(htmlspecialchars($data, ENT_QUOTES, 'UTF-8'));
+        }
+
+        $name = clean_input($_POST['name']);
+        $description = clean_input($_POST['description']);
         $category_id = intval($_POST['category']);
+
         $image = time() . '-' . $_FILES['image']['name'];
         $target_dir = "../images/";
         $target_file = $target_dir . time() . '-' . basename($_FILES["image"]["name"]);

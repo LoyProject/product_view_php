@@ -3,15 +3,20 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $id = 1;
-        $name = $_POST['name'];
-        $contact = $_POST['contact'];
-        $address = $_POST['address'];
-        $email = $_POST['email'];
-        $description = $_POST['description'];
-        $location = $_POST['location'];
-        $facebook = $_POST['facebook'];
-        $telegram = $_POST['telegram'];
-        $youtube = $_POST['youtube'];
+
+        function clean_input($data) {
+            return trim(htmlspecialchars($data, ENT_QUOTES, 'UTF-8'));
+        }
+
+        $name = clean_input($_POST['name']);
+        $contact = clean_input($_POST['contact']);
+        $address = clean_input($_POST['address']);
+        $email = clean_input($_POST['email']);
+        $description = clean_input($_POST['description']);
+        $location = clean_input($_POST['location']);
+        $facebook = clean_input($_POST['facebook']);
+        $telegram = clean_input($_POST['telegram']);
+        $youtube = clean_input($_POST['youtube']);
 
         $target_dir = "../images_logo/";
         $image_header = isset($_FILES['image-header']['name']) ? $_FILES['image-header']['name'] : '';
