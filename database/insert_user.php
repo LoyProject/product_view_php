@@ -3,10 +3,14 @@
     include 'db_connection.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $fullname = $_POST['name'];
-        $role = $_POST['role'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        function clean_input($data) {
+            return trim(htmlspecialchars($data, ENT_QUOTES, 'UTF-8'));
+        }
+
+        $fullname = clean_input($_POST['name']);
+        $role = clean_input($_POST['role']);
+        $username = clean_input($_POST['username']);
+        $password = clean_input($_POST['password']);
         $active = 1;
 
         // Hash the password before saving it

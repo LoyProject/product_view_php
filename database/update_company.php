@@ -3,105 +3,88 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $id = 1;
-        $name = $_POST['name'];
-        $contact = $_POST['contact'];
-        $address = $_POST['address'];
-        $email = $_POST['email'];
-        $description = $_POST['description'];
-        $location = $_POST['location'];
-        $facebook = $_POST['facebook'];
-        $telegram = $_POST['telegram'];
-        $youtube = $_POST['youtube'];
+        
+        function clean_input($data) {
+            return trim(htmlspecialchars($data, ENT_QUOTES, 'UTF-8'));
+        }
 
-        $target_dir = "../images_logo/";
-        $image_header = isset($_FILES['image-header']['name']) ? $_FILES['image-header']['name'] : '';
-        $image_footer = isset($_FILES['image-footer']['name']) ? $_FILES['image-footer']['name'] : '';
-        $image1 = isset($_FILES['image1']['name']) ? $_FILES['image1']['name'] : '';
-        $image2 = isset($_FILES['image2']['name']) ? $_FILES['image2']['name'] : '';
-        $image3 = isset($_FILES['image3']['name']) ? $_FILES['image3']['name'] : '';
+        $companyName = clean_input($_POST['name']);
+        $contact = clean_input($_POST['contact']);
+        $address = clean_input($_POST['address']);
+        $email = clean_input($_POST['email']);
+        $description = clean_input($_POST['description']);
+        $location = clean_input($_POST['location']);
+        $facebook = clean_input($_POST['facebook']);
+        $telegram = clean_input($_POST['telegram']);
+        $youtube = clean_input($_POST['youtube']);
 
-        $update_image_header = null;
-        $update_image_footer = null;
-        $update_image1 = null;
-        $update_image2 = null;
-        $update_image3 = null;
+        $target_dir_logo = "../images_logo/";
+        $target_dir_slideshow = "../images_slideshow/";
 
-        if (!empty($image_header)) {
-            $target_file_header = $target_dir . time() . '-header-' . basename($image_header);
-            if (move_uploaded_file($_FILES['image-header']['tmp_name'], $target_file_header)) {
-                $update_image_header = basename($target_file_header);
+        function upload_single_image($file_input_name, $target_dir) {
+            if (!empty($_FILES[$file_input_name]['name'])) {
+                $filename = time() . '-' . basename($_FILES[$file_input_name]['name']);
+                $target_file = $target_dir . $filename;
+                
+                if (move_uploaded_file($_FILES[$file_input_name]['tmp_name'], $target_file)) {
+                    return $filename;
+                }
+            }
+            return null;
+        }
+
+        $update_image_header = upload_single_image('image-header', $target_dir_logo);
+        $update_image_footer = upload_single_image('image-footer', $target_dir_logo);
+        $update_image1 = upload_single_image('image1', $target_dir_logo);
+        $update_image2 = upload_single_image('image2', $target_dir_logo);
+        $update_image3 = upload_single_image('image3', $target_dir_logo);
+
+        $uploaded_slideshow_images = [];
+        if (!empty($_FILES['slideshow_images']['name'][0])) {
+            foreach ($_FILES['slideshow_images']['name'] as $key => $name) {
+                if (!empty($name)) {
+                    $random_string = bin2hex(random_bytes(4));
+                    $filename = time() . "-slideshow-" . $random_string . "-" . basename($name);
+                    $target_file = $target_dir_slideshow . $filename;
+                    
+                    if (move_uploaded_file($_FILES['slideshow_images']['tmp_name'][$key], $target_file)) {
+                        $uploaded_slideshow_images[] = $filename;
+                    }
+                }
             }
         }
 
-        if (!empty($image_footer)) {
-            $target_file_footer = $target_dir . time() . '-footer-' . basename($image_footer);
-            if (move_uploaded_file($_FILES['image-footer']['tmp_name'], $target_file_footer)) {
-                $update_image_footer = basename($target_file_footer);
-            }
-        }
-
-        if (!empty($image1)) {
-            $target_file1 = $target_dir . time() . '-image1-' . basename($image1);
-            if (move_uploaded_file($_FILES['image1']['tmp_name'], $target_file1)) {
-                $update_image1 = basename($target_file1);
-            }
-        }
-
-        if (!empty($image2)) {
-            $target_file2 = $target_dir . time() . '-image2-' . basename($image2);
-            if (move_uploaded_file($_FILES['image2']['tmp_name'], $target_file2)) {
-                $update_image2 = basename($target_file2);
-            }
-        }
-
-        if (!empty($image3)) {
-            $target_file3 = $target_dir . time() . '-image3-' . basename($image3);
-            if (move_uploaded_file($_FILES['image3']['tmp_name'], $target_file3)) {
-                $update_image3 = basename($target_file3);
-            }
-        }
-
-        $sql = "SELECT logo_header, logo_footer, image1, image2, image3 FROM companies WHERE id=1";
+        $sql = "SELECT slideshow_images FROM companies WHERE id=1";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
-        $stmt->bind_result($old_header, $old_footer, $old_image1, $old_image2, $old_image3);
+        $stmt->bind_result($old_slideshow_images_json);
         $stmt->fetch();
         $stmt->close();
 
-        if (!empty($update_image_header)) {
-            if (!empty($old_header)) {
-                unlink("../images_logo/" . $old_header);
-            }
-        }
+        $existing_slideshow_images = !empty($old_slideshow_images_json) ? json_decode($old_slideshow_images_json, true) : [];
+        $final_slideshow_images = array_merge($existing_slideshow_images, $uploaded_slideshow_images);
 
-        if (!empty($update_image_footer)) {
-            if (!empty($old_footer)) {
-                unlink("../images_logo/" . $old_footer);
-            }
-        }
+        $update_slideshow_images = !empty($final_slideshow_images) ? json_encode($final_slideshow_images) : null;
 
-        if (!empty($update_image1)) {
-            if (!empty($old_image1)) {
-                unlink("../images_logo/" . $old_image1);
-            }
-        }
-
-        if (!empty($update_image2)) {
-            if (!empty($old_image2)) {
-                unlink("../images_logo/" . $old_image2);
-            }
-        }
-
-        if (!empty($update_image3)) {
-            if (!empty($old_image3)) {
-                unlink("../images_logo/" . $old_image3);
-            }
-        }
-
-        $sql = "UPDATE companies SET name=?, contact=?, address=?, email=?, description=?, location=?, facebook=?, telegram=?, youtube=?, logo_header=IFNULL(?, logo_header), logo_footer=IFNULL(?, logo_footer), image1=IFNULL(?, image1), image2=IFNULL(?, image2), image3=IFNULL(?, image3) WHERE id=1";
+        $sql = "UPDATE companies SET 
+            name=?, contact=?, address=?, email=?, description=?, location=?, 
+            facebook=?, telegram=?, youtube=?, 
+            logo_header=IFNULL(?, logo_header), 
+            logo_footer=IFNULL(?, logo_footer), 
+            image1=IFNULL(?, image1), 
+            image2=IFNULL(?, image2), 
+            image3=IFNULL(?, image3),
+            slideshow_images=IFNULL(?, slideshow_images) 
+            WHERE id=1";
 
         $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ssssssssssssss", $name, $contact, $address, $email, $description, $location, $facebook, $telegram, $youtube, $update_image_header, $update_image_footer, $update_image1, $update_image2, $update_image3);
+        $stmt->bind_param("sssssssssssssss", 
+            $companyName, $contact, $address, $email, $description, $location, 
+            $facebook, $telegram, $youtube, 
+            $update_image_header, $update_image_footer, 
+            $update_image1, $update_image2, $update_image3, 
+            $update_slideshow_images
+        );
 
         if ($stmt->execute()) {
             echo "Company details updated successfully.";
@@ -110,7 +93,6 @@
         }
 
         $stmt->close();
+        $conn->close();
     }
-
-    $conn->close();
 ?>

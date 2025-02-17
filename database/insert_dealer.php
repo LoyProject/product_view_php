@@ -4,10 +4,15 @@
     include 'db_connection.php';
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-        $name = $_POST['name'];
-        $contact = $_POST['contact'];
-        $address = $_POST['address'];
-        $map = $_POST['map'];
+        function clean_input($data) {
+            return trim(htmlspecialchars($data, ENT_QUOTES, 'UTF-8'));
+        }
+
+        $name = clean_input($_POST['name']);
+        $contact = clean_input($_POST['contact']);
+        $address = clean_input($_POST['address']);
+        $map = clean_input($_POST['map']);
+        
         $image = time() . '-' . $_FILES['image']['name'];
         $target_dir = "../images_dealer/";
         $target_file = $target_dir . time() . '-' . basename($_FILES["image"]["name"]);

@@ -1,10 +1,10 @@
 <?php
     include '../database/db_connection.php';
 
-    $sql = "SELECT name, contact, address, email, description, location, facebook, telegram, youtube, logo_header, logo_footer, image1, image2, image3 FROM companies WHERE id = 1";
+    $sql = "SELECT name, contact, address, email, description, location, facebook, telegram, youtube, logo_header, logo_footer, image1, image2, image3, slideshow_images FROM companies WHERE id = 1";
     $stmt = $conn->prepare($sql);
     $stmt->execute();
-    $stmt->bind_result($name, $contact, $address, $email, $description, $location, $facebook, $telegram, $youtube, $logoHeader, $logoFooter, $image1, $image2, $image3);
+    $stmt->bind_result($name, $contact, $address, $email, $description, $location, $facebook, $telegram, $youtube, $logoHeader, $logoFooter, $image1, $image2, $image3, $slideshow_images_json);
     $stmt->fetch();
     $stmt->close();
 
@@ -65,6 +65,24 @@
                 document.getElementById('preview-image3').classList.remove('hidden');
                 document.getElementById('file-name3').style.display = 'none';
                 document.getElementById('upload-icon3').style.display = 'none';
+            }
+            if ("<?php echo addslashes($slideshow_images_json); ?>") {
+                const slideshowImages = JSON.parse("<?php echo addslashes($slideshow_images_json); ?>");
+                const previewContainer = document.getElementById('slideshow-preview');
+                previewContainer.innerHTML = '';
+
+                if (slideshowImages.length > 0) {
+                    previewContainer.classList.remove('hidden');
+                    document.getElementById('file-name-slideshow').style.display = 'none';
+                    document.getElementById('upload-icon-slideshow').style.display = 'none';
+                }
+
+                slideshowImages.forEach(image => {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = "../images_slideshow/" + image;
+                    imgElement.className = "w-full h-28 object-contain rounded border";
+                    previewContainer.appendChild(imgElement);
+                });
             }
         });
 
@@ -173,6 +191,29 @@
             }
         }
 
+        function previewSlideshowImages(event) {
+            const files = event.target.files;
+            const previewContainer = document.getElementById('slideshow-preview');
+            previewContainer.innerHTML = '';
+
+            if (files.length > 0) {
+                previewContainer.classList.remove('hidden');
+                document.getElementById('file-name-slideshow').style.display = 'none';
+                document.getElementById('upload-icon-slideshow').style.display = 'none';
+            }
+
+            Array.from(files).forEach(file => {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    const imgElement = document.createElement('img');
+                    imgElement.src = e.target.result;
+                    imgElement.className = "w-full h-28 object-contain rounded border";
+                    previewContainer.appendChild(imgElement);
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
         function resetImagePreview() {
             const previewImageHeader = document.getElementById('preview-image-header');
             const fileNameLabelHeader = document.getElementById('file-name-header');
@@ -189,23 +230,36 @@
             const previewImage3 = document.getElementById('preview-image3');
             const fileNameLabel3 = document.getElementById('file-name3');
             const uploadIcon3 = document.getElementById('upload-icon3');
+            const slideshowPreview = document.getElementById('slideshow-preview');
+            const fileNameSlideshow = document.getElementById('file-name-slideshow');
+            const uploadIconSlideshow = document.getElementById('upload-icon-slideshow');
 
             document.getElementById('editCompanyForm').reset();
             previewImageHeader.classList.add('hidden');
+            previewImageHeader.value = '';
             fileNameLabelHeader.style.display = 'block';
             uploadIconHeader.style.display = 'block';
             previewImageFooter.classList.add('hidden');
+            previewImageFooter.value = '';
             fileNameLabelFooter.style.display = 'block';
             uploadIconFooter.style.display = 'block';
             previewImage1.classList.add('hidden');
+            previewImage1.value = '';
             fileNameLabel1.style.display = 'block';
             uploadIcon1.style.display = 'block';
             previewImage2.classList.add('hidden');
+            previewImage2.value = '';
             fileNameLabel2.style.display = 'block';
             uploadIcon2.style.display = 'block';
             previewImage3.classList.add('hidden');
+            previewImage3.value = '';
             fileNameLabel3.style.display = 'block';
             uploadIcon3.style.display = 'block';
+            slideshowPreview.classList.add('hidden');
+            slideshowPreview.value = '';
+            slideshowPreview.innerHTML = '';
+            fileNameSlideshow.style.display = 'block';
+            uploadIconSlideshow.style.display = 'block';
         }
     </script>
 
@@ -226,14 +280,12 @@
 
                     <div class="container mx-auto">
                         <form id="editCompanyForm" onsubmit="editCompany(event)">
-                            <!-- Existing Fields -->
                             <div class="mb-6">
                                 <label for="name" class="block text-gray-700 font-medium mb-2">Name</label>
                                 <input type="text" id="name" name="name" required autocomplete="off"
                                     class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
                             </div>
 
-                            <!-- New Fields -->
                             <div class="mb-6">
                                 <label for="description" class="block text-gray-700 font-medium mb-2">Description</label>
                                 <textarea id="description" name="description" required autocomplete="off"
@@ -264,9 +316,29 @@
                                     class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
                             </div>
 
-                            <!-- Multiple Images Upload -->
                             <div class="mb-6">
-                                <label for="images" class="block text-gray-700 font-medium mb-2">Upload Images (Max 3)</label>
+                                <label for="slideshow-images" class="block text-gray-700 font-medium mb-2">Slideshow Images</label>
+                                <label for="slideshow-images"
+                                    class="block border-2 border-dashed border-gray-300 shadow-sm w-full h-52 rounded cursor-pointer flex flex-col justify-center items-center">
+                                    <div id="upload-icon-slideshow" class="text-gray-500 mb-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-11" viewBox="0 0 32 32">
+                                            <path d="M23.75 11.044a7.99 7.99 0 0 0-15.5-.009A8 8 0 0 0 9 27h3a1 1 0 0 0 0-2H9a6 6 0 0 1-.035-12 1.038 1.038 0 0 0 1.1-.854 5.991 5.991 0 0 1 11.862 0A1.08 1.08 0 0 0 23 13a6 6 0 0 1 0 12h-3a1 1 0 0 0 0 2h3a8 8 0 0 0 .75-15.956z"
+                                                fill="currentColor" />
+                                            <path d="M20.293 19.707a1 1 0 0 0 1.414-1.414l-5-5a1 1 0 0 0-1.414 0l-5 5a1 1 0 0 0 1.414 1.414L15 16.414V29a1 1 0 0 0 2 0V16.414z"
+                                                fill="currentColor" />
+                                        </svg>
+                                    </div>
+                                    <span id="file-name-slideshow" class="text-gray-400 text-center">
+                                        <strong>Upload Multiple Images</strong><br>Only .png, .jpeg, .jpg files are allowed.
+                                    </span>
+                                    <input type="file" id="slideshow-images" name="slideshow_images[]" accept=".jpg, .jpeg, .png" multiple
+                                        class="hidden" onchange="previewSlideshowImages(event);">
+                                    <div id="slideshow-preview" class="hidden grid grid-cols-3 gap-4 max-h-48 overflow-y-auto p-2"></div>
+                                </label>
+                            </div>
+
+                            <div class="mb-6">
+                                <div class="block text-gray-700 font-medium mb-2">Upload Images (Max 3)</div>
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div class="border-2 border-dashed border-gray-300 shadow-sm rounded cursor-pointer flex flex-col justify-center items-center h-32"
                                         onclick="document.getElementById('image1').click()">
@@ -328,7 +400,6 @@
                                 </div>
                             </div>
 
-                            <!-- Social Media Links -->
                             <div class="mb-6">
                                 <label for="facebook" class="block text-gray-700 font-medium mb-2">Facebook Link</label>
                                 <input type="url" id="facebook" name="facebook" autocomplete="off"
@@ -347,7 +418,6 @@
                                     class="w-full border border-gray-300 shadow-sm px-4 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500">
                             </div>
 
-                            <!-- Logo Header and Footer (Existing) -->
                             <div class="mb-6">
                                 <label for="image-header" class="block text-gray-700 font-medium mb-2">Logo Header</label>
                                 <label for="image-header"
@@ -394,7 +464,6 @@
                                 </label>
                             </div>
 
-                            <!-- Buttons -->
                             <div class="flex justify-end space-x-4">
                                 <button type="button" onclick="resetImagePreview()"
                                     class="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded focus:outline-none">

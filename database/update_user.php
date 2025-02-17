@@ -3,10 +3,15 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $id = $_POST['id'];
-        $name = $_POST['name'];
-        $role = $_POST['role'];
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+
+        function clean_input($data) {
+            return trim(htmlspecialchars($data, ENT_QUOTES, 'UTF-8'));
+        }
+
+        $name = clean_input($_POST['name']);
+        $role = clean_input($_POST['role']);
+        $username = clean_input($_POST['username']);
+        $password = clean_input($_POST['password']);
         $active = 1;
 
         $sql = "SELECT password FROM users WHERE id = ?";

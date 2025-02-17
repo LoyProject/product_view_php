@@ -8,9 +8,7 @@
     <title>Product Details</title>
 </head>
 
-<?php
-include 'header.php';
-?>
+<?php include 'header.php'; ?>
 
 <body class="bg-[#f8f9ff]">
     <?php include '../database/db_connection.php'; ?>
@@ -31,7 +29,8 @@ include 'header.php';
                 <div class="col-span-1 h-auto">
                     <div class="container flex justify-center items-center h-full w-full rounded-lg overflow-hidden">
                         <img src="../images/<?php echo ($data['image']) ?>"
-                            class="object-contain w-full max-h-[540px] mx-auto" />
+                            class="object-contain w-full max-h-[540px] mx-auto" 
+                            alt="<?php $data['name'] ?>"/>
                     </div>
                 </div>
                 <div class="col-span-1 h-auto">
@@ -69,44 +68,45 @@ include 'header.php';
     </div>
 
     <div class="px-8 mb-8 container-md mx-auto">
-        <h3 class="text-2xl font-semibold mt-8">Related Products</h3>
-        <hr>
+        <h3 class="text-2xl font-semibold mt-8 mb-2">Related Products</h3>
+        <hr class="mb-4">
         <div class="rounded-lg">
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2 w-full">
                 <?php
-                $sql = "SELECT p.id, p.name, p.description, p.image, c.name as category_name FROM products p JOIN categories c ON p.category_id = c.id WHERE p.id != $product_id ORDER BY RAND() LIMIT 5";
-                $result = $conn->query($sql);
-
-                if ($result->num_rows > 0) {
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<div class="bg-white shadow-[0_4px_12px_-5px_rgba(0,0,0,0.4)] border p-2 w-full rounded-lg font-[sans-serif] overflow-hidden mx-auto mt-4 hover:border-red-500 border-2 flex flex-col">';
-                            echo '<div>';
-                                echo '<img src="images/' . htmlspecialchars($row["image"]) . '" class="w-full h-52 object-cover rounded-lg" />';
-                            echo '</div>';
-                            echo '<div class="pt-6 text-start px-2">';
-                                echo '<h3 class="text-xl font-bold font-[sans-serif]">' . htmlspecialchars($row["name"]) . '</h3>';
-                            echo '</div>';
-                            echo '<div class="text-start px-2">';
-                                echo '<p class="mt-1 text-xs text-red-500 font-bold tracking-wider font-[sans-serif]">' . htmlspecialchars($row["category_name"]) . '</p>';
-                            echo '</div>';
-                            echo '<div class="text-start flex-grow px-2">';
-                                echo '<article class="text-wrap">';
-                                    echo '<p class="mt-3 text-sm text-gray-500 leading-relaxed break-words">' . htmlspecialchars($row["description"]) . '</p>';
-                                echo '</article>';  
-                            echo '</div>';
-                            echo '<div class="p-2">';
-                                echo '<a href="product_detail.php?id=' . htmlspecialchars($row["id"]) . '" class="w-full py-2.5 inline-block text-center rounded-sm bg-red-100 text-red-500 text-xs font-bold tracking-wider font-[sans-serif] outline-none hover:bg-red-400 hover:text-white">View</a>';
-                            echo '</div>';
-                        echo '</div>';
-                    }
-                }
+                    $sql = "SELECT p.id, p.name, p.description, p.image, c.name as category_name FROM products p JOIN categories c ON p.category_id = c.id WHERE p.id != $product_id ORDER BY RAND() LIMIT 5";
+                    $result = $conn->query($sql);
                 ?>
+                <?php if ($result->num_rows > 0): ?>
+                    <?php while ($product = $result->fetch_assoc()): ?>
+                        <div class="bg-white shadow-md border p-2 w-full rounded-lg overflow-hidden hover:border-red-500 flex flex-col">
+                            <img src="../images/<?= htmlspecialchars($product['image']) ?>" 
+                                class="w-full h-52 object-cover rounded-lg" 
+                                alt="<?= htmlspecialchars($product['name']) ?>" />
+
+                            <div class="pt-4 px-2 flex-grow">
+                                <h3 class="text-lg font-bold"><?= htmlspecialchars($product['name']) ?></h3>
+                                <p class="text-xs text-red-500 font-bold"><?= htmlspecialchars($product['category_name']) ?></p>
+                                <p class="mt-3 text-xs text-gray-500"><?= htmlspecialchars($product['description']) ?></p>
+                                <br>
+                            </div>
+
+                            <div class="p-2 mt-auto">
+                                <a href="product_detail.php?id=<?= htmlspecialchars($product['id']) ?>"
+                                    class="w-full py-2 text-center block rounded-md bg-red-100 text-red-500 text-xs font-bold 
+                                        transition duration-300 hover:bg-red-500 hover:text-white shadow-md">
+                                    View
+                                </a>
+                            </div>
+                        </div>
+                    <?php endwhile; ?>
+                <?php else: ?>
+                    <p class="text-gray-500 text-sm font-semibold">No products available.</p>
+                <?php endif; ?>
             </div>
         </div>
     </div>
-    <?php
-    include 'footer.php';
-    ?>
+
+    <?php include 'footer.php'; ?>
 
 </body>
 

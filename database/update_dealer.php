@@ -3,10 +3,16 @@
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $id = $_POST['id'];
-        $name = $_POST['name'];
-        $address = $_POST['address'];
-        $contact = $_POST['contact'];
-        $map = $_POST['map'];
+
+        function clean_input($data) {
+            return trim(htmlspecialchars($data, ENT_QUOTES, 'UTF-8'));
+        }
+
+        $name = clean_input($_POST['name']);
+        $address = clean_input($_POST['address']);
+        $contact = clean_input($_POST['contact']);
+        $map = clean_input($_POST['map']);
+        
         $image = $_FILES['image']['name'];
         $target_dir = "../images_dealer/";
         $target_file = $target_dir . time() . '-' . basename($image);
