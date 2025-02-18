@@ -15,34 +15,9 @@
         $image = time() . '-' . $_FILES['image']['name'];
         $target_dir = "../images/";
         $target_file = $target_dir . time() . '-' . basename($_FILES["image"]["name"]);
-        $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-
-        if (file_exists($target_file)) {
-            $response['status'] = 'error';
-            $response['message'] = 'Sorry, file already exists.';
-            echo json_encode($response);
-            exit;
-        }
-
-        if ($_FILES["image"]["size"] > 500000) {
-            $response['status'] = 'error';
-            $response['message'] = 'Sorry, your file is too large.';
-            echo json_encode($response);
-            exit;
-        }
-
-        if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg" && $imageFileType != "gif") {
-            $response['status'] = 'error';
-            $response['message'] = 'Sorry, only JPG, JPEG, PNG & GIF files are allowed.';
-            echo json_encode($response);
-            exit;
-        }
 
         if (!move_uploaded_file($_FILES["image"]["tmp_name"], $target_file)) {
-            $response['status'] = 'error';
-            $response['message'] = 'Sorry, there was an error uploading your file.';
-            echo json_encode($response);
-            exit;
+            die(json_encode(['status' => 'error', 'message' => 'File upload failed. Check folder permissions.']));
         }
 
         $stmt = $conn->prepare("INSERT INTO products (name, description, image, category_id) VALUES (?, ?, ?, ?)");

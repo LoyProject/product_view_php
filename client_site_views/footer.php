@@ -58,7 +58,7 @@ $conn->close();
             <!-- Empty Space (Optional: You can add social media links here) -->
             <div class="flex flex-col items-start space-y-2">
                 <h4 class="font-bold text-red-500">Follow Us</h4>
-                <div class="flex space-x-4">
+                <div class="flex space-x-6">
                     <a href="<?= htmlspecialchars($facebookLink) ?>" target="_blank"
                         class="text-gray-600 hover:text-red-500 transition-all">
                         <i class="fab fa-facebook-f text-blue-600"></i>
@@ -83,7 +83,7 @@ $conn->close();
                     <a href="<?= $basePath ?>client_site_views/product.php"
                         class="text-gray-600 text-sm hover:text-red-500 transition-all">Products</a>
                     <a href="<?= $basePath ?>client_site_views/dealer.php"
-                        class="text-gray-600 text-sm hover:text-red-500 transition-all">Dealer</a>
+                        class="text-gray-600 text-sm hover:text-red-500 transition-all">Dealers</a>
                 </nav>
             </div>
 
