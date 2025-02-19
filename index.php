@@ -62,7 +62,7 @@
             <div class="px-4 sm:px-10">
                 <div id="default-carousel" class="relative w-full mt-24 relative z-10" data-carousel="slide" data-carousel-interval="9000">
                     <!-- Carousel wrapper -->
-                    <div class="relative overflow-hidden rounded-lg h-48 sm:h-96" data-carousel-touch="true">
+                    <div class="relative overflow-hidden rounded-lg h-60 sm:h-[520px]" data-carousel-touch="true">
                         <?php foreach ($slideshowImages as $index => $slideImage): ?>
                         <div class="<?= $index === 0 ? 'block' : 'hidden' ?> absolute inset-0 flex duration-1000 ease-in-out" data-carousel-item="<?= $index === 0 ? 'active' : '' ?>">
                             <img src="<?= htmlspecialchars($slideshowPath . trim($slideImage)) ?>" class="block w-full h-full object-cover" alt="Slide <?= $index + 1 ?>">
@@ -93,8 +93,8 @@
                         </span>
                     </button>
                 </div>
-                <div class="mt-5 sm:mt-16 max-w-4xl mx-auto text-center relative z-10">
-                    <div class="mt-12 max-w-4xl mx-auto text-center relative z-10">
+                <div class="mt-5 sm:mt-12 max-w-4xl mx-auto text-center relative z-10">
+                    <div class="mt-5 max-w-4xl mx-auto text-center relative z-10">
                         <h1 class="md:text-6xl text-4xl font-extrabold mb-6 md:!leading-[75px]"><?= htmlspecialchars($companyName) ?></h1>
                         <p class="text-2xl font-[sans-serif]"><?= htmlspecialchars($companyDescription) ?></p>
                         <div class="mt-16 container-md mx-auto">
