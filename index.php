@@ -18,6 +18,30 @@
     $companyDetailsQuery = "SELECT name, description, location, image1, image2, image3, slideshow_images FROM companies";
     $result = $conn->query($companyDetailsQuery);
 
+    if ($result && $row = $result->fetch_assoc()) {
+        $companyName = $row['name'];
+        $companyDescription = $row['description'];
+        $companyLocation = $row['location'];
+        $image1 = $logoPath . $row['image1'];
+        $image2 = $logoPath . $row['image2'];
+        $image3 = $logoPath . $row['image3'];
+        $slideshowImages = json_decode($row['slideshow_images'], true);
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            $slideshowImages = ['default-slide1.png', 'default-slide2.png', 'default-slide3.png'];
+        }
+    } else {
+        $companyName = 'Name not found';
+        $companyDescription = 'Description not found';
+        $companyLocation = 'Location not found';
+        $image1 = $logoPath . 'default-image1.png';
+        $image2 = $logoPath . 'default-image2.png';
+        $image3 = $logoPath . 'default-image3.png';
+        $slideshowImages = [
+            'default-slide1.png',
+            'default-slide2.png',
+            'default-slide3.png'
+        ];
+    }
         if ($result && $row = $result->fetch_assoc()) {
             $companyName = $row['name'];
             $companyDescription = $row['description'];
@@ -105,11 +129,11 @@ $conn->close();
 <?php include 'client_site_views/header.php'; ?>
 
 <body class="max-w-[1920px] mx-auto bg-[#f8f9ff]">
-
     <div class="text-black text-[15px] mt-16 mb-8">
         <div class="relative">
             <div class="px-4 sm:px-10">
-                <div id="default-carousel" class="relative w-full mt-24 relative z-10" data-carousel="slide">
+                <div id="default-carousel" class="relative w-full mt-24 relative z-10" data-carousel="slide"
+                    data-carousel-interval="9000">
                     <!-- Carousel wrapper -->
                     <div id="slideshow" class="relative w-full overflow-hidden">
                         <!-- Set height to 120 -->
@@ -135,76 +159,75 @@ $conn->close();
 
                     <!-- Slider controls -->
                     <button type="button"
-                        class="absolute top-0 start-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group"
+                        class="absolute top-0 left-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none opacity-0 hover:opacity-100 transition-opacity duration-300"
                         data-carousel-prev>
                         <span
-                            class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30">
-                            <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="M5 1 1 5l4 4" />
+                            class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-500/30 group-hover:bg-gray-500/50 group-focus:ring-4 group-focus:ring-gray-500 group-focus:outline-none">
+                            <svg aria-hidden="true" class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7"></path>
                             </svg>
                             <span class="sr-only">Previous</span>
                         </span>
                     </button>
                     <button type="button"
-                        class="absolute top-0 end-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group"
+                        class="absolute top-0 right-0 z-30 flex items-center justify-center h-full px-4 cursor-pointer group focus:outline-none opacity-0 hover:opacity-100 transition-opacity duration-300"
                         data-carousel-next>
                         <span
-                            class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-white/30 dark:bg-gray-800/30">
-                            <svg class="w-4 h-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none"
-                                viewBox="0 0 6 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 9 4-4-4-4" />
+                            class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gray-500/30 group-hover:bg-gray-500/50 group-focus:ring-4 group-focus:ring-gray-500 group-focus:outline-none">
+                            <svg aria-hidden="true" class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7">
+                                </path>
                             </svg>
                             <span class="sr-only">Next</span>
                         </span>
                     </button>
                 </div>
-
-                <div class="mt-12 max-w-4xl mx-auto text-center relative z-10">
-                    <h1 class="md:text-6xl text-4xl font-extrabold mb-6 md:!leading-[75px]">
-                        <?= htmlspecialchars($companyName) ?></h1>
-                    <p class="text-2xl font-[sans-serif]"><?= htmlspecialchars($companyDescription) ?></p>
-                    <div class="mt-16 container-md mx-auto">
-                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                            <div class="w-full rounded-md">
-                                <img src="<?= htmlspecialchars($image1) ?>"
-                                    class="object-cover h-full w-full rounded-md">
-                            </div>
-                            <div class="w-full rounded-md">
-                                <img src="<?= htmlspecialchars($image2) ?>"
-                                    class="object-cover h-full w-full rounded-md">
-                            </div>
-                            <div class="w-full rounded-md">
-                                <img src="<?= htmlspecialchars($image3) ?>"
-                                    class="object-cover h-full w-full rounded-md">
+                <div class="mt-5 sm:mt-16 max-w-4xl mx-auto text-center relative z-10">
+                    <div class="mt-12 max-w-4xl mx-auto text-center relative z-10">
+                        <h1 class="md:text-6xl text-4xl font-extrabold mb-6 md:!leading-[75px]">
+                            <?= htmlspecialchars($companyName) ?></h1>
+                        <p class="text-2xl font-[sans-serif]"><?= htmlspecialchars($companyDescription) ?></p>
+                        <div class="mt-16 container-md mx-auto">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
+                                <div class="w-full rounded-md">
+                                    <img src="<?= htmlspecialchars($image1) ?>"
+                                        class="object-cover h-full w-full rounded-md">
+                                </div>
+                                <div class="w-full rounded-md">
+                                    <img src="<?= htmlspecialchars($image2) ?>"
+                                        class="object-cover h-full w-full rounded-md">
+                                </div>
+                                <div class="w-full rounded-md">
+                                    <img src="<?= htmlspecialchars($image3) ?>"
+                                        class="object-cover h-full w-full rounded-md">
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-16 container-md mx-auto flex items-center justify-center">
-                        <div class="flex flex-row gap-4">
-                            <div class="mt-24">
-                                <button
-                                    class="p-4 rounded-md text-white font-bold bg-red-500 transition-all hover:bg-red-600 font-[sans-serif] w-48">
-                                    <a href="client_site_views/product.php">Explore Products</a>
-                                </button>
-                            </div>
-                            <div class="mt-24">
-                                <button
-                                    class="p-4 rounded-md text-white font-bold bg-yellow-500 transition-all hover:bg-yellow-600 font-[sans-serif] w-48">
-                                    <a href="<?= htmlspecialchars($companyLocation) ?>">Visit Shop</a>
-                                </button>
+                        <div class="mt-10 sm:mt-16 container-md mx-auto flex items-center justify-center">
+                            <div class="my-10 sm:my-24 flex flex-col sm:flex-row gap-4">
+                                <a href="client_site_views/product.php">
+                                    <button
+                                        class="p-4 rounded-md text-white font-bold bg-red-500 transition-all hover:bg-red-600 font-[sans-serif] w-full sm:w-48">Explore
+                                        Products</button>
+                                </a>
+                                <a href="<?= htmlspecialchars($companyLocation) ?>" target="_blank">
+                                    <button
+                                        class="p-4 rounded-md text-white font-bold bg-yellow-500 transition-all hover:bg-yellow-600 font-[sans-serif] w-full sm:w-48">Visit
+                                        Shop</button>
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
+                <img src="https://readymadeui.com/bg-effect.svg" class="absolute inset-0 w-full h-full" />
             </div>
-            <img src="https://readymadeui.com/bg-effect.svg" class="absolute inset-0 w-full h-full" />
         </div>
-    </div>
 
-    <?php include('client_site_views/footer.php') ?>
+        <?php include('client_site_views/footer.php') ?>
+    </div>
 </body>
 
 </html>
