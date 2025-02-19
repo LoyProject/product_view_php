@@ -39,8 +39,29 @@
         $update_image2 = upload_single_image('image2', $target_dir_logo);
         $update_image3 = upload_single_image('image3', $target_dir_logo);
 
+        // Retrieve existing slideshow images from database
+        $sql = "SELECT slideshow_images FROM companies WHERE id=1";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $stmt->bind_result($old_slideshow_images_json);
+        $stmt->fetch();
+        $stmt->close();
+
+        $existing_slideshow_images = !empty($old_slideshow_images_json) ? json_decode($old_slideshow_images_json, true) : [];
+
+        // Upload new slideshow images if provided
         $uploaded_slideshow_images = [];
         if (!empty($_FILES['slideshow_images']['name'][0])) {
+            // Delete old images only if new ones are uploaded
+            if (!empty($existing_slideshow_images)) {
+                foreach ($existing_slideshow_images as $old_image) {
+                    $old_image_path = $target_dir_slideshow . $old_image;
+                    if (file_exists($old_image_path)) {
+                        unlink($old_image_path);
+                    }
+                }
+            }
+
             foreach ($_FILES['slideshow_images']['name'] as $key => $name) {
                 if (!empty($name)) {
                     $random_string = bin2hex(random_bytes(4));
@@ -54,17 +75,7 @@
             }
         }
 
-        $sql = "SELECT slideshow_images FROM companies WHERE id=1";
-        $stmt = $conn->prepare($sql);
-        $stmt->execute();
-        $stmt->bind_result($old_slideshow_images_json);
-        $stmt->fetch();
-        $stmt->close();
-
-        $existing_slideshow_images = !empty($old_slideshow_images_json) ? json_decode($old_slideshow_images_json, true) : [];
-        $final_slideshow_images = array_merge($existing_slideshow_images, $uploaded_slideshow_images);
-
-        $update_slideshow_images = !empty($final_slideshow_images) ? json_encode($final_slideshow_images) : null;
+        $update_slideshow_images = !empty($uploaded_slideshow_images) ? json_encode($uploaded_slideshow_images) : $old_slideshow_images_json;
 
         $sql = "UPDATE companies SET 
             name=?, contact=?, address=?, email=?, description=?, location=?, 
@@ -74,7 +85,7 @@
             image1=IFNULL(?, image1), 
             image2=IFNULL(?, image2), 
             image3=IFNULL(?, image3),
-            slideshow_images=IFNULL(?, slideshow_images) 
+            slideshow_images=? 
             WHERE id=1";
 
         $stmt = $conn->prepare($sql);
